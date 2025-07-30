@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instituto Girassol de Desenvolvimento Social - IGDS</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="logo">
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="#inicio" class="nav-link">Início</a></li>
+                        <li class="dropdown">
+                            <a href="#institucional" class="nav-link">Institucional <i
+                                    class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#sobre">Sobre nós</a></li>
+                                <li><a href="#diretoria">Diretoria</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#contadores">Contadores do Amanhã</a></li>
+                                <li><a href="#educacao">Educação C.J.</a></li>
+                                <li><a href="#jovem-falcao">Jovem Falcão</a></li>
+                                <li><a href="#conectando">Conectando Gerações</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#parceiros" class="nav-link">Parceiros</a></li>
+                        <li><a href="#noticias" class="nav-link">Notícias</a></li>
+                        <li><a href="#contato" class="nav-link">Contato</a></li>
+                        <li><a href="#doar" class="nav-link btn-donate">Doe Agora</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-background">
+            <!-- SUBSTITUA PELO CAMINHO DA SUA IMAGEM DE FUNDO NO CSS -->
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="container">
+                <div class="hero-text">
+                    <h1 class="hero-title">Transformando Realidades</h1>
+                    <p class="hero-subtitle">Nosso compromisso é transformar realidades por meio de uma educação
+                        inovadora! Junte-se a nós em busca de um mundo mais justo e solidário.</p>
+                    <div class="hero-buttons">
+                        <a href="#sobre" class="btn btn-primary">Conheça Nosso Trabalho</a>
+                        <a href="#doar" class="btn btn-secondary">
+                            <i class="fas fa-heart"></i> Doar Agora
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Valores Section -->
+    <section id="valores" class="values">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Educação & Desenvolvimento</span>
+                <h2 class="section-title">Nossos Valores & Crenças</h2>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="far fa-hand-peace"></i>
+                    </div>
+                    <h3>Transparência</h3>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="far fa-heart"></i>
+                    </div>
+                    <h3>Amor</h3>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="far fa-thumbs-up"></i>
+                    </div>
+                    <h3>Fortalecimento</h3>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="far fa-grin-beam"></i>
+                    </div>
+                    <h3>Protagonismo Juvenil</h3>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Participação</h3>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="far fa-laugh-wink"></i>
+                    </div>
+                    <h3>Desenvolvimento Humano</h3>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Solidariedade Social</h3>
+                </div>
+                <div class="value-item">
+                    <div class="value-icon">
+                        <i class="far fa-handshake"></i>
+                    </div>
+                    <h3>Responsabilidade</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projetos Section -->
+    <section id="projetos" class="projects">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Nossos Projetos</span>
+                <h2 class="section-title">Transformando Vidas</h2>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-number">01</div>
+                    <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
+                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_1" alt="Contadores do Amanhã" class="project-image"> -->
+                    <h3>Contadores do Amanhã</h3>
+                    <p><strong>Objetivo:</strong> Promover a leitura, a produção textual e o desenvolvimento de
+                        habilidades socioemocionais de crianças e adolescentes.</p>
+                    <ul class="project-goals">
+                        <li>Estimular o gosto pela leitura</li>
+                        <li>Incentivar a produção textual</li>
+                        <li>Formar contadores de histórias mirins</li>
+                        <li>Integrar as famílias ao processo educativo</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">02</div>
+                    <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
+                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_2" alt="Educação C.J." class="project-image"> -->
+                    <h3>Educação C.J.</h3>
+                    <p><strong>Objetivo:</strong> Promover a formação integral de crianças, adolescentes e jovens em
+                        situação de vulnerabilidade social.</p>
+                    <ul class="project-goals">
+                        <li>Oficinas lúdicas e pedagógicas</li>
+                        <li>Desenvolvimento técnico com robótica</li>
+                        <li>Envolvimento das famílias</li>
+                        <li>Diagnóstico situacional aprofundado</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">03</div>
+                    <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
+                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_3" alt="Jovem Falcão" class="project-image"> -->
+                    <h3>Jovem Falcão</h3>
+                    <p><strong>Objetivo:</strong> Contribuir para a promoção da garantia dos direitos dos adolescentes e
+                        jovens, desenvolvendo potencial humano e social.</p>
+                    <ul class="project-goals">
+                        <li>Qualificação técnica em tecnologia</li>
+                        <li>Desenvolvimento de habilidades emocionais</li>
+                        <li>Capacitação de educadores</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-number">04</div>
+                    <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
+                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_4" alt="Conectando Gerações" class="project-image"> -->
+                    <h3>Conectando Gerações</h3>
+                    <p><strong>Objetivo:</strong> Contribuir com o processo de envelhecimento ativo e saudável da pessoa
+                        idosa.</p>
+                    <ul class="project-goals">
+                        <li>Atividades psicossociais para idosos</li>
+                        <li>Inclusão digital</li>
+                        <li>Fortalecimento dos vínculos familiares</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission">
+        <div class="container">
+            <div class="mission-content">
+                <div class="mission-text">
+                    <span class="section-subtitle">Institucional</span>
+                    <div class="section-divider"></div>
+                    <h2>Nossa missão é impulsionar o processo de protagonismo juvenil por meio de uma educação
+                        inovadora, visando o desenvolvimento local.</h2>
+                    <div class="vision">
+                        <h4>Nossa visão:</h4>
+                        <p>Tornar-se uma agência de desenvolvimento social tanto por incentivar jovens a serem agentes
+                            de transformação de sua realidade como de sua comunidade e por multiplicar suas tecnologias
+                            sociais.</p>
+                    </div>
+                </div>
+                <div class="mission-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">60+</span>
+                        <span class="stat-label">Projetos executados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5K+</span>
+                        <span class="stat-label">Crianças, Adolescentes e Jovens Atendidos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">3K+</span>
+                        <span class="stat-label">Famílias Impactadas</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">18+</span>
+                        <span class="stat-label">Anos de experiência</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Parceiros Section -->
+    <section id="parceiros" class="partners">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-subtitle">Nossos Parceiros</span>
+                <h2 class="section-title">Apoiadores e Parceiros</h2>
+            </div>
+
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="partner-slide">
+                            <img src="midia/BocadaMataLogo.png" alt="Bocada Mata">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/CMDCALogo.png" alt="CMDCA">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/CMDCAALogo.png" alt="CMDCAA">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/AmbevLogo.png" alt="Ambev">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/AnadiaLogo.png" alt="Anadia">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/CMDPILogo.png" alt="CMDPI">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/CriancaEsperancaLogo.png" alt="Criança Esperança">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/FalconsUniversityLogo.png" alt="Falcons University">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/ItauSocialLogo.png" alt="Itaú Social">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/ProgramadeValorLogo.png" alt="Programa de Valor">
+                        </div>
+                        <div class="partner-slide">
+                            <img src="midia/SiemensLogo.png" alt="Siemens">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Controls -->
+                <button class="carousel-btn carousel-btn-prev" id="prevBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+                <button class="carousel-btn carousel-btn-next" id="nextBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Entre em Contato</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Telefone</h4>
+                            <p>(82) 99999-2784</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Endereço</h4>
+                            <p>Rua Major José Tenório da Silva - Padre Cícero<br>Boca da Mata - AL, CEP 57680-000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>contato@igds.org.br</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulário do Google Forms -->
+                <div class="contact-form">
+                    <h3>Envie uma Mensagem</h3>
+                    <div class="form-embed-wrapper">
+                        <iframe
+                            src="https://docs.google.com/forms/d/e/1FAIpQLSe2shPNoxIUxoKp6dvGRCQHdl0HFqf9eelMXre3jQ96oe0BRw/viewform?embedded=true"
+                            allowfullscreen loading="lazy">
+                            Carregando…
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO (pode ser a mesma do header) -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="footer-logo">
+                    <p>Nosso compromisso é transformar realidades por meio de uma educação inovadora!</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/institutogirassoldedesenvolvimentosocial" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/instituto_girassol/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@institutogirassoldedesenvo3702" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/9445583/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Projetos & Ações</h4>
+                    <ul>
+                        <li><a href="#contadores">Projeto Contadores do Amanhã</a></li>
+                        <li><a href="#educacao">Projeto Educação C.J.</a></li>
+                        <li><a href="#jovem-falcao">Projeto Jovem Falcão</a></li>
+                        <li><a href="#conectando">Projeto Conectando Gerações</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#transparencia">Transparência</a></li>
+                        <li><a href="#noticias">Notícias</a></li>
+                        <li><a href="#voluntario">Seja Voluntário</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Receba nossas novidades e atualizações</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Instituto Girassol de Desenvolvimento Social - IGDS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5582999992784" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
