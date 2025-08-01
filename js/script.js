@@ -1,3 +1,4 @@
+console.log("Script carregado!");
 // Mobile Navigation Toggle
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -25,6 +26,48 @@ window.addEventListener('scroll', () => {
         header.style.background = 'var(--white)';
         header.style.backdropFilter = 'none';
     }
+});
+
+// Back to top button
+const backToTopBtn = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopBtn.classList.add('show');
+    } else {
+        backToTopBtn.classList.remove('show');
+    }
+});
+
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+
+// Newsletter form handling
+const newsletterForm = document.querySelector('.newsletter-form');
+
+newsletterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const email = newsletterForm.querySelector('input[type="email"]').value;
+
+    if (!email) {
+        alert('Por favor, insira seu e-mail.');
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Por favor, insira um e-mail válido.');
+        return;
+    }
+
+    alert('Obrigado por se inscrever em nossa newsletter!');
+    newsletterForm.reset();
 });
 
 // Smooth scrolling for anchor links
@@ -96,84 +139,7 @@ document.querySelectorAll('.value-item, .project-card, .stats').forEach(el => {
     observer.observe(el);
 });
 
-// Back to top button
-const backToTopBtn = document.getElementById('backToTop');
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
-    }
-});
-
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
-
-// Contact form handling
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    // Get form data
-    const formData = new FormData(contactForm);
-    const data = Object.fromEntries(formData);
-
-    // Simple validation
-    if (!data.name || !data.email || !data.subject) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
-        return;
-    }
-
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(data.email)) {
-        alert('Por favor, insira um e-mail válido.');
-        return;
-    }
-
-    // Simulate form submission
-    const submitBtn = contactForm.querySelector('button[type="submit"]');
-    const originalText = submitBtn.textContent;
-
-    submitBtn.textContent = 'Enviando...';
-    submitBtn.disabled = true;
-
-    setTimeout(() => {
-        alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
-        contactForm.reset();
-        submitBtn.textContent = originalText;
-        submitBtn.disabled = false;
-    }, 2000);
-});
-
-// Newsletter form handling
-const newsletterForm = document.querySelector('.newsletter-form');
-
-newsletterForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const email = newsletterForm.querySelector('input[type="email"]').value;
-
-    if (!email) {
-        alert('Por favor, insira seu e-mail.');
-        return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Por favor, insira um e-mail válido.');
-        return;
-    }
-
-    alert('Obrigado por se inscrever em nossa newsletter!');
-    newsletterForm.reset();
-});
 
 // Parallax effect for hero section
 window.addEventListener('scroll', () => {
@@ -375,3 +341,19 @@ document.addEventListener("DOMContentLoaded", () => {
     setupCarousel();
 });
 
+const images = [
+    "midia/img/Entrada.png",
+    "midia/img/Contacao.png",
+];
+
+const heroBg = document.querySelector('.hero-background');
+let currentIndex = 0;
+
+function changeBackground() {
+    heroBg.style.backgroundImage = `url('${images[currentIndex]}')`;
+    currentIndex = (currentIndex + 1) % images.length;
+}
+
+// Troca a imagem a cada 5 segundos
+changeBackground(); // Chamada inicial
+setInterval(changeBackground, 5000);

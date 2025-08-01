@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre nós - Instituto Girassol de Desenvolvimento Social</title>
+    <link rel="stylesheet" href="css/sobre_nos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+   <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="logo">
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Início</a></li>
+                        <li><a href="sobre_nos.html" class="nav-link">Sobre</a></li>
+                        <li class="dropdown">
+                            <a href="#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#contadores">Contadores do Amanhã</a></li>
+                                <li><a href="#educacao">Educação C.J.</a></li>
+                                <li><a href="#jovem-falcao">Jovem Falcão</a></li>
+                                <li><a href="#conectando">Conectando Gerações</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#parceiros" class="nav-link">Parceiros</a></li>
+                        <li><a href="#noticias" class="nav-link">Notícias</a></li>
+                        <li><a href="#contato" class="nav-link">Contato</a></li>
+                        <li><a href="#doar" class="nav-link btn-donate">Doe Agora</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Slider -->
+        <section class="hero-slider">
+            <div class="slider-container">
+                <div class="slide active">
+                    <!-- Replace with your background image -->
+                    <div class="slide-bg" style="background-image: url('midia/img/Entrada.png')"></div>
+                    <div class="hero-overlay"></div>
+                    <div class="slide-content">
+                        <h1>Um pouco da nossa história</h1>
+                    </div>
+                </div>
+                
+                <div class="slide">
+                    <div class="slide-bg" style="background-color: var(--white)"></div>
+                    <div class="slide-content">
+                        <h2>Surgimento</h2>
+                        <p>O Instituto Girassol foi iniciado pelo Grupo Girassol, em fevereiro de 2003, no município de Boca da Mata. Este grupo era composto por cinco instituições: Promotoria de Justiça, Movimento Nacional de Meninos e Meninas de Rua, Universidade Federal de Alagoas, Rádio Comunitária e Secretaria Municipal de Educação, que há mais de cinco anos vinham desenvolvendo ações importantes voltadas para a efetivação da defesa de direitos de crianças e adolescentes no Estado de Alagoas, especialmente na cidade de Boca da Mata.</p>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <!-- Replace with your image -->
+                    <div class="slide-bg" style="background-image: url('images/instituto-2012.jpg')"></div>
+                    <div class="slide-content">
+                        <div class="slide-overlay"></div>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <div class="slide-bg" style="background-color: var(--white)"></div>
+                    <div class="slide-content">
+                        <p>Em 2004, esse grupo escreveu conjuntamente um projeto, para a Fundação KELLOGG, o qual foi aprovado, com o objetivo de promover ações que gerassem mudanças no contexto local do município, com a garantia dos direitos da infância e juventude. Assim o Projeto Girassol ampliou suas dimensões, tornando-se em 16 de fevereiro de 2006, no Instituto Girassol de Desenvolvimento Social, com a missão de "Impulsionar o processo de protagonismo juvenil, por meio de uma educação inovadora visando contribuir para o desenvolvimento local".</p>
+                    </div>
+                </div>
+
+                <div class="slide">
+                    <!-- Replace with your image -->
+                    <div class="slide-bg" style="background-image: url('images/instituto-2024.jpg')"></div>
+                    <div class="slide-content">
+                        <div class="slide-overlay"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slider Controls -->
+            <button class="slider-btn prev-btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn next-btn" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Slider Indicators -->
+            <div class="slider-indicators" id="sliderIndicators"></div>
+        </section>
+
+        <!-- Mission, Vision, Values -->
+        <section class="mvv-section">
+            <div class="container">
+                <div class="mvv-grid">
+                    <div class="mvv-card">
+                        <div class="mvv-icon">
+                            <i class="far fa-flag"></i>
+                        </div>
+                        <h3>Nossa missão</h3>
+                        <p>Impulsionar o processo de protagonismo juvenil por meio de uma educação inovadora, visando o desenvolvimento local.</p>
+                    </div>
+
+                    <div class="mvv-card">
+                        <div class="mvv-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Nossa visão</h3>
+                        <p>Tornar-se uma agência de desenvolvimento social tanto por incentivar jovens a serem agentes de transformação de sua realidade como de sua comunidade e por multiplicar suas tecnologias sociais.</p>
+                    </div>
+
+                    <div class="mvv-card">
+                        <div class="mvv-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <h3>Nossos Valores</h3>
+                        <p>Transparência, atuação articulada, fortalecimento do tecido social, responsabilidade, formação de novas lideranças juvenis, alinhamento, coesão e união da equipe, amor e compromisso, perseverança, desenvolvimento da capacidade reflexiva, solidariedade social, participação democrática, desenvolvimento humano, protagonismo juvenil e desenvolvimento local.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values and Beliefs -->
+        <section class="values-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Valores e Crenças</h2>
+                </div>
+                <div class="values-content">
+                    <p>O Instituto Girassol acredita que por meio de suas crenças e valores é que irá conseguir cumprir sua missão de ter um tecido social fortalecido e Boca da mata seja um território desenvolvido e sustentável. O Instituto Girassol de Desenvolvimento social acredita:</p>
+                    
+                    <div class="values-list">
+                        <div class="value-item">
+                            <strong>A transparência</strong> na utilização de recursos e das ações
+                        </div>
+                        <div class="value-item">
+                            <strong>A atuação articulada</strong> em prol do desenvolvimento de Boca da Mata
+                        </div>
+                        <div class="value-item">
+                            <strong>O fortalecimento</strong> do Tecido social local
+                        </div>
+                        <div class="value-item">
+                            <strong>A responsabilidade</strong> das ações desenvolvidas no município e no impacto das ações para o território
+                        </div>
+                        <div class="value-item">
+                            O incentivo ao processo de <strong>formação de novas lideranças juvenis</strong>
+                        </div>
+                        <div class="value-item">
+                            O <strong>alinhamento</strong>, <strong>coesão e união da equipe</strong> de educadores do Instituto
+                        </div>
+                        <div class="value-item">
+                            O <strong>amor, compromisso</strong> constante e <strong>seriedade</strong> no desenvolvimento das ações
+                        </div>
+                        <div class="value-item">
+                            A <strong>perseverança</strong> e firmeza no investimento e fortalecimento de Boca da Mata
+                        </div>
+                        <div class="value-item">
+                            O <strong>desenvolvimento</strong> da capacidade reflexiva dos jovens
+                        </div>
+                        <div class="value-item">
+                            A <strong>solidariedade social</strong>, condição do grupo que resulta da comunhão de atitudes e de sentimentos
+                        </div>
+                        <div class="value-item">
+                            A <strong>participação</strong> como essência da democracia, forma de organização e estímulo ao exercício prático de cidadania
+                        </div>
+                        <div class="value-item">
+                            O <strong>desenvolvimento humano</strong>, tendo como base o aprimoramento de saberes, atitudes, valores e habilidades pessoais
+                        </div>
+                        <div class="value-item">
+                            O investimento ao <strong>Protagonismo Juvenil</strong> – Do ponto de vista da Instituição protagonismo é: compartilhar nas atividades com crianças, adolescentes e jovens, uma série de informações que favoreçam a compreensão da sua atual situação no contexto social e a possibilidade de mudança a ser realizada por meio de sua participação
+                        </div>
+                        <div class="value-item">
+                            O <strong>Desenvolvimento Local</strong> – Um dos passos fundamentais para o desenvolvimento local, está em tornar realidade o aprendizado adquirido durante o processo educativo, elaborando ações e projetos participativos que representem alternativas capazes de melhorar as condições de vida de suas comunidades e região
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Logo Section -->
+        <section class="logo-section">
+            <div class="container">
+                <h2>Logo</h2>
+                <div class="logo-display">
+                    <!-- Replace with your logo path -->
+                    <img src="midia/IGDSLogo2.png" alt="Instituto Girassol Logo" class="main-logo">
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="container">
+                <div class="section-header">
+                    <h5>Equipe Girassol</h5>
+                    <h2>Educadores que fazem a diferença</h2>
+                </div>
+                
+                <div class="team-content">
+                    <div class="team-image">
+                        <!-- Replace with your team image -->
+                        <img src="midia/img/Entrada.png" alt="Participação da Equipe" class="team-img">
+                    </div>
+                    
+                    <div class="team-info">
+                        <div class="team-slider">
+                            <div class="team-slide active">
+                                <p>O Instituto Girassol de Desenvolvimento Social conta com uma equipe de educadores qualificados, comprometidos e apaixonados pelo que fazem. Mas eles não são apenas profissionais: eles são também exemplos de superação, transformação e protagonismo.</p>
+                            </div>
+                            
+                            <div class="team-slide">
+                                <p>Isso porque a maioria dos nossos educadores já foram atendidos pelo Instituto Girassol e conhecem a metodologia e a missão da organização. Eles sabem como é ser um jovem em situação de vulnerabilidade social e como é importante ter oportunidades de educação, qualificação e desenvolvimento.</p>
+                            </div>
+                            
+                            <div class="team-slide">
+                                <p>Por isso, eles se dedicam a oferecer o melhor para as crianças e jovens que atendemos, buscando sempre inovar, aprender e crescer. Além disso, os nossos educadores são das comunidades mais vulneráveis de Boca da Mata, o que lhes dá uma visão privilegiada das realidades e dificuldades enfrentadas pelos nossos atendidos.</p>
+                            </div>
+                            
+                            <div class="team-slide">
+                                <p>Eles conhecem como ninguém as necessidades, os sonhos e os potenciais dos jovens que querem mudar suas vidas. Eles são mais do que educadores: eles são inspiradores. Eles são a prova de que o Instituto Girassol faz a diferença na vida das pessoas e na sociedade. Eles são o nosso orgulho e a nossa motivação.</p>
+                            </div>
+                        </div>
+                        <div class="team-slider-controls">
+                            <button class="team-prev-btn" id="teamPrevBtn">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <button class="team-next-btn" id="teamNextBtn">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="team-indicators" id="teamIndicators"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO (pode ser a mesma do header) -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="footer-logo">
+                    <p>Nosso compromisso é transformar realidades por meio de uma educação inovadora!</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/institutogirassoldedesenvolvimentosocial" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/instituto_girassol/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@institutogirassoldedesenvo3702" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/9445583/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Projetos & Ações</h4>
+                    <ul>
+                        <li><a href="#contadores">Projeto Contadores do Amanhã</a></li>
+                        <li><a href="#educacao">Projeto Educação C.J.</a></li>
+                        <li><a href="#jovem-falcao">Projeto Jovem Falcão</a></li>
+                        <li><a href="#conectando">Projeto Conectando Gerações</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#transparencia">Transparência</a></li>
+                        <li><a href="#noticias">Notícias</a></li>
+                        <li><a href="#voluntario">Seja Voluntário</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Receba nossas novidades e atualizações</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Instituto Girassol de Desenvolvimento Social - IGDS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5582999992784" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/sobre_nos.js"></script>
+    
+</body>
+</html>

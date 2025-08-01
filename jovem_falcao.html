@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Jovem Falcão</title>
+    <link rel="stylesheet" href="css/jovem_falcao.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="logo">
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Início</a></li>
+                        <li><a href="sobre_nos.html" class="nav-link">Sobre</a></li>
+                        <li class="dropdown">
+                            <a href="#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="contadores_do_amanha.html">Contadores do Amanhã</a></li>
+                                <li><a href="#educacao">Educação C.J.</a></li>
+                                <li><a href="#jovem-falcao">Jovem Falcão</a></li>
+                                <li><a href="#conectando">Conectando Gerações</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#parceiros" class="nav-link">Parceiros</a></li>
+                        <li><a href="#noticias" class="nav-link">Notícias</a></li>
+                        <li><a href="#contato" class="nav-link">Contato</a></li>
+                        <li><a href="#doar" class="nav-link btn-donate">Doe Agora</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <img src="midia/img/EducacaoCJ/Capa.png" alt="Crianças participando do projeto" class="hero-bg-img">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Projeto<br>
+                    <span class="highlight">Jovem Falcão</span>
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Project Overview -->
+        <section class="project-overview">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-left">
+                        <div class="project-label">
+                            <span class="project-number">Projeto / 03</span>
+                            <div class="label-divider"></div>
+                        </div>
+                        <h2 class="section-title">
+                            Uma parceria do Instituto Girassol de Desenvolvimento Social e da Gerando Falcões para
+                            promover a educação e o protagonismo juvenil em Boca da Mata/AL
+                        </h2>
+                    </div>
+
+                    <div class="content-right">
+                        <div class="tabs-container">
+                            <div class="tabs-nav">
+                                <button class="tab-btn active" data-tab="projeto">O Projeto</button>
+                                <button class="tab-btn" data-tab="origem">Origem</button>
+                                <button class="tab-btn" data-tab="objetivos">Objetivos</button>
+                                <button class="tab-btn" data-tab="mais">Mais</button>
+                            </div>
+
+                            <div class="tabs-content">
+                                <div class="tab-panel active" id="projeto">
+                                    <p>
+                                        O <strong>Projeto Jovem Falcão</strong> é uma iniciativa realizada em parceria
+                                        entre o <strong>Instituto Girassol de Desenvolvimento Social</strong>, uma
+                                        organização com 17 anos de atuação na promoção do protagonismo juvenil e no
+                                        desenvolvimento local, por meio da educação não formal e complementar, e a
+                                        <strong>Gerando Falcões</strong>, rede que conecta organizações sociais em
+                                        periferias e favelas com o objetivo de acelerar o desenvolvimento social.
+                                    </p>
+                                    <p>
+                                        O projeto conta com o apoio da <strong>Telefônica</strong>, empresa referência
+                                        em telecomunicações e tecnologia, por meio do <strong>Conselho Municipal dos
+                                            Direitos da Criança e do Adolescente (CMDCA)</strong> de Boca da Mata/AL.
+                                    </p>
+                                </div>
+
+                                <div class="tab-panel" id="origem">
+                                    <p>
+                                        O <strong>Projeto Jovem Falcão</strong> surgiu a partir da necessidade de
+                                        fortalecer a juventude de Boca da Mata, município do interior de Alagoas com
+                                        cerca de 27 mil habitantes. Seu objetivo geral é contribuir para a promoção e
+                                        garantia dos direitos de adolescentes e jovens, além de fomentar o
+                                        desenvolvimento do potencial humano e social na região.
+                                    </p>
+                                </div>
+
+                                <div class="tab-panel" id="objetivos">
+                                    <p>
+                                        O projeto tem como objetivos específicos:
+                                    </p>
+                                    <ul>
+                                        <li>Estimular o desenvolvimento de habilidades técnicas por meio da qualificação
+                                            profissional em áreas como tecnologia, comunicação e empreendedorismo.</li>
+                                        <li>Incentivar o desenvolvimento e o fortalecimento de habilidades emocionais.
+                                        </li>
+                                        <li>Promover a qualificação dos educadores por meio de capacitações voltadas
+                                            para metodologias ativas.</li>
+                                    </ul>
+
+                                </div>
+
+                                <div class="tab-panel" id="mais">
+                                    <p>
+                                        O <strong>Projeto Jovem Falcão</strong> tem duração de seis meses e pretende
+                                        atender cerca de 100 adolescentes e jovens, com idades entre 14 e 24 anos,
+                                        residentes no município. A iniciativa contempla atividades presenciais na sede
+                                        da organização, atividades a distância por meio da plataforma Canvas e mentorias
+                                        com profissionais bem-sucedidos de grandes empresas de todo o Brasil.
+                                    </p>
+                                    <p>
+                                        O projeto também promove o acompanhamento das famílias dos participantes e
+                                        articulação com os atores da rede de garantia de direitos. Trata-se de uma ação
+                                        que fortalece a educação como um direito fundamental e como instrumento de
+                                        transformação social.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="project-label">
+                        <span class="project-number">Projeto Jovem Falcão em imagens</span>
+                        <div class="label-divider"></div>
+                    </div>
+                    <h2 class="section-title">
+                        Conheça o Projeto Jovem Falcão por meio das fotos dos cursos, oficinas e mentorias​.
+                    </h2>
+                </div>
+
+                <!-- Image Carousel -->
+                <div class="carousel-container">
+                    <div class="carousel" id="imageCarousel">
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/1.png" alt="Atividade do projeto - Imagem 1"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/2.png" alt="Atividade do projeto - Imagem 2"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/3.png" alt="Atividade do projeto - Imagem 3"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/4.png" alt="Atividade do projeto - Imagem 4"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/5.png" alt="Atividade do projeto - Imagem 5"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/6.png" alt="Atividade do projeto - Imagem 6"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/7.png" alt="Atividade do projeto - Imagem 7"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/8.png" alt="Atividade do projeto - Imagem 8"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/9.png" alt="Atividade do projeto - Imagem 9"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/10.png" alt="Atividade do projeto - Imagem 10"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/11.png" alt="Atividade do projeto - Imagem 11"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/EducacaoCJ/12.png" alt="Atividade do projeto - Imagem 12"
+                                    class="carousel-img">
+                            </div>
+                        </div>
+
+                        <button class="carousel-btn carousel-btn-prev" id="prevBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="carousel-btn carousel-btn-next" id="nextBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+
+                        <div class="carousel-indicators" id="indicators"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="timeline-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="project-label">
+                        <span class="project-number">Linha do Tempo</span>
+                        <div class="label-divider"></div>
+                    </div>
+                    <h2 class="section-title">
+                        Turmas do Projeto Jovem Falcão ao longo do tempo
+                    </h2>
+                </div>
+
+                <div class="timeline">
+                    <!-- Repita para todas as 8 turmas -->
+                    <div class="timeline-item">
+                        <img src="midia/img/JovemFalcao/turmas/1.png" alt="Turma 1" class="timeline-img"
+                            onclick="openLightbox(this)">
+                        <p class="timeline-caption">Turma 1</p>
+                    </div>
+                    <div class="timeline-item">
+                        <img src="midia/img/JovemFalcao/turmas/2.png" alt="Turma 2" class="timeline-img"
+                            onclick="openLightbox(this)">
+                        <p class="timeline-caption">Turma 2</p>
+                    </div>
+                    <div class="timeline-item">
+                        <img src="midia/img/JovemFalcao/turmas/3.png" alt="Turma 3" class="timeline-img"
+                            onclick="openLightbox(this)">
+                        <p class="timeline-caption">Turma 3</p>
+                    </div>
+                    <div class="timeline-item">
+                        <img src="midia/img/JovemFalcao/turmas/4.png" alt="Turma 4" class="timeline-img"
+                            onclick="openLightbox(this)">
+                        <p class="timeline-caption">Turma 4</p>
+                    </div>
+                    <div class="timeline-item">
+                        <img src="midia/img/JovemFalcao/turmas/5.png" alt="Turma 5" class="timeline-img"
+                            onclick="openLightbox(this)">
+                        <p class="timeline-caption">Turma 5</p>
+                    </div>
+                    <div class="timeline-item">
+                        <img src="midia/img/JovemFalcao/turmas/6.png" alt="Turma 6" class="timeline-img"
+                            onclick="openLightbox(this)">
+                        <p class="timeline-caption">Turma 6</p>
+                    </div>
+                    <div class="timeline-item">
+                        <img src="midia/img/JovemFalcao/turmas/7.png" alt="Turma 7" class="timeline-img"
+                            onclick="openLightbox(this)">
+                        <p class="timeline-caption">Turma 7</p>
+                    </div>
+                    <div class="timeline-item">
+                        <img src="midia/img/JovemFalcao/turmas/8.png" alt="Turma 8" class="timeline-img"
+                            onclick="openLightbox(this)">
+                        <p class="timeline-caption">Turma 8</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Lightbox -->
+            <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+                <img id="lightbox-img" src="" alt="Imagem ampliada">
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO (pode ser a mesma do header) -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="footer-logo">
+                    <p>Nosso compromisso é transformar realidades por meio de uma educação inovadora!</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/institutogirassoldedesenvolvimentosocial" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/instituto_girassol/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@institutogirassoldedesenvo3702" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/9445583/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Projetos & Ações</h4>
+                    <ul>
+                        <li><a href="#contadores">Projeto Contadores do Amanhã</a></li>
+                        <li><a href="#educacao">Projeto Educação C.J.</a></li>
+                        <li><a href="#jovem-falcao">Projeto Jovem Falcão</a></li>
+                        <li><a href="#conectando">Projeto Conectando Gerações</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#transparencia">Transparência</a></li>
+                        <li><a href="#noticias">Notícias</a></li>
+                        <li><a href="#voluntario">Seja Voluntário</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Receba nossas novidades e atualizações</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Instituto Girassol de Desenvolvimento Social - IGDS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5582999992784" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/jovem_falcao.js"></script>
+</body>
+
+</html>

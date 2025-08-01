@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Contadores do Amanhã</title>
+    <link rel="stylesheet" href="css/contadores_do_amanha.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="logo">
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Início</a></li>
+                        <li><a href="sobre_nos.html" class="nav-link">Sobre</a></li>
+                        <li class="dropdown">
+                            <a href="#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="contadores_do_amanha.html">Contadores do Amanhã</a></li>
+                                <li><a href="#educacao">Educação C.J.</a></li>
+                                <li><a href="#jovem-falcao">Jovem Falcão</a></li>
+                                <li><a href="#conectando">Conectando Gerações</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#parceiros" class="nav-link">Parceiros</a></li>
+                        <li><a href="#noticias" class="nav-link">Notícias</a></li>
+                        <li><a href="#contato" class="nav-link">Contato</a></li>
+                        <li><a href="#doar" class="nav-link btn-donate">Doe Agora</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <img src="midia/img/ContadoresDoAmanha/Capa.png" alt="Crianças participando do projeto" class="hero-bg-img">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Projeto<br>
+                    <span class="highlight">Contadores do Amanhã</span>
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Project Overview -->
+        <section class="project-overview">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-left">
+                        <div class="project-label">
+                            <span class="project-number">Projeto / 01</span>
+                            <div class="label-divider"></div>
+                        </div>
+                        <h2 class="section-title">
+                            Vamos conhecer um pouco sobre o projeto Contadores do Amanhã.
+                            Sua origem, objetivos e quais resultados esperados.
+                        </h2>
+                    </div>
+
+                    <div class="content-right">
+                        <div class="tabs-container">
+                            <div class="tabs-nav">
+                                <button class="tab-btn active" data-tab="projeto">O Projeto</button>
+                                <button class="tab-btn" data-tab="origem">Origem</button>
+                                <button class="tab-btn" data-tab="objetivos">Objetivos</button>
+                                <button class="tab-btn" data-tab="mais">Mais</button>
+                            </div>
+
+                            <div class="tabs-content">
+                                <div class="tab-panel active" id="projeto">
+                                    <p>Uma iniciativa do Instituto Girassol de Desenvolvimento Social para promover a
+                                        leitura e formar contadores de histórias mirins, em parceria com a Secretaria
+                                        Municipal de Educação de Boca da Mata – AL.</p>
+                                </div>
+
+                                <div class="tab-panel" id="origem">
+                                    <p>Desde 2011, antes do apoio do Criança Esperança, o Instituto Girassol já atuava
+                                        junto às escolas do município, oferecendo contação de histórias, jogos
+                                        pedagógicos e cursos de Inteligência Emocional. Essas atividades visam reduzir a
+                                        evasão escolar, melhorar o desempenho acadêmico e desenvolver habilidades
+                                        socioemocionais de crianças e jovens. Continuaremos com ações como contação de
+                                        histórias e mediação de leitura nas escolas e na sede, além de oferecer uma
+                                        biblioteca itinerante, incentivando o uso das bibliotecas escolares e promovendo
+                                        a leitura e a escrita.</p>
+                                </div>
+
+                                <div class="tab-panel" id="objetivos">
+                                    <p>Fomentar a prática da contação de histórias e o gosto pela leitura, a partir de
+                                        um acervo literário diversificado.</p>
+                                    <p>Incentivar a produção textual e a melhoria das habilidades de escrita de crianças
+                                        e adolescentes.</p>
+                                    <p>Ampliar a abrangência e a metodologia do Projeto, garantindo sua continuidade
+                                        além do Instituto Girassol.</p>
+                                </div>
+
+                                <div class="tab-panel" id="mais">
+                                    <p>O <strong>Projeto Contadores do Amanhã</strong> terá duração de doze meses e
+                                        atenderá 1.000 crianças e adolescentes do município.</p>
+                                    <p>As atividades serão realizadas de forma presencial na sede da organização, com
+                                        sessões de contação de histórias nas escolas locais e a formação de contadores
+                                        mirins.</p>
+                                    <p>Além disso, o projeto contará com ações à distância, por meio de uma plataforma
+                                        no YouTube, e o acompanhamento das famílias dos participantes.</p>
+                                    <p>Essa iniciativa busca fortalecer a educação integral como um direito fundamental
+                                        e como um poderoso instrumento de transformação social.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="project-label">
+                        <span class="project-number">Projeto Contadores do Amanhã em imagens</span>
+                        <div class="label-divider"></div>
+                    </div>
+                    <h2 class="section-title">
+                        Confira as fotos e vídeos das atividades realizadas com as crianças e adolescentes de Boca da
+                        Mata/AL.
+                    </h2>
+                </div>
+
+                <!-- Image Carousel -->
+                <div class="carousel-container">
+                    <div class="carousel" id="imageCarousel">
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
+                                <img src="midia/img/ContadoresDoAmanha/1.png" alt="Atividade do projeto - Imagem 1"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ContadoresDoAmanha/2.png" alt="Atividade do projeto - Imagem 2"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ContadoresDoAmanha/3.png" alt="Atividade do projeto - Imagem 3"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ContadoresDoAmanha/4.png" alt="Atividade do projeto - Imagem 4"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ContadoresDoAmanha/5.png" alt="Atividade do projeto - Imagem 5"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ContadoresDoAmanha/6.png" alt="Atividade do projeto - Imagem 6"
+                                    class="carousel-img">
+                            </div>
+                        </div>
+
+                        <button class="carousel-btn carousel-btn-prev" id="prevBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="carousel-btn carousel-btn-next" id="nextBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+
+                        <div class="carousel-indicators" id="indicators"></div>
+                    </div>
+                </div>
+
+                <!-- Video Section -->
+                <div class="video-section">
+                    <div class="video-container">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/2sCKL-RJR30"
+                                title="Projeto Contadores do Amanhã - Vídeo" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen class="video-iframe">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO (pode ser a mesma do header) -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="footer-logo">
+                    <p>Nosso compromisso é transformar realidades por meio de uma educação inovadora!</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/institutogirassoldedesenvolvimentosocial" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/instituto_girassol/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@institutogirassoldedesenvo3702" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/9445583/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Projetos & Ações</h4>
+                    <ul>
+                        <li><a href="#contadores">Projeto Contadores do Amanhã</a></li>
+                        <li><a href="#educacao">Projeto Educação C.J.</a></li>
+                        <li><a href="#jovem-falcao">Projeto Jovem Falcão</a></li>
+                        <li><a href="#conectando">Projeto Conectando Gerações</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#transparencia">Transparência</a></li>
+                        <li><a href="#noticias">Notícias</a></li>
+                        <li><a href="#voluntario">Seja Voluntário</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Receba nossas novidades e atualizações</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Instituto Girassol de Desenvolvimento Social - IGDS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5582999992784" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/contadores_do_amanha.js"></script>
+</body>
+
+</html>
