@@ -1,4 +1,3 @@
-console.log("Script carregado!");
 // Mobile Navigation Toggle
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -343,7 +342,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const images = [
     "midia/img/Entrada.png",
-    "midia/img/Contacao.png",
 ];
 
 const heroBg = document.querySelector('.hero-background');

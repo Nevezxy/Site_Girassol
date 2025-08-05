@@ -87,8 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (teamNextBtn) teamNextBtn.addEventListener('click', nextTeamSlide);
 
     // Auto-play
-    setInterval(nextSlide, 5000);
-    setInterval(nextTeamSlide, 7000);
+    //setInterval(nextSlide, 5000);
+    //setInterval(nextTeamSlide, 7000);
 
     // Swipe support
     let startX = 0;

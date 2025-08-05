@@ -1,18 +1,3 @@
-
-function openLightbox(imgElement) {
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImg = document.getElementById("lightbox-img");
-
-        lightbox.style.display = "flex";
-        lightboxImg.src = imgElement.src;
-        lightboxImg.alt = imgElement.alt;
-    }
-
-    function closeLightbox() {
-        const lightbox = document.getElementById("lightbox");
-        lightbox.style.display = "none";
-    }
-
 // Mobile Navigation Toggle
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
@@ -340,3 +325,18 @@ const debouncedScrollHandler = debounce(() => {
 
 window.addEventListener('scroll', debouncedScrollHandler);
 
+
+// AMPLIAR IMAGEM
+function openLightbox(imgElement) {
+        const lightbox = document.getElementById("lightbox");
+        const lightboxImg = document.getElementById("lightbox-img");
+
+        lightbox.style.display = "flex";
+        lightboxImg.src = imgElement.src;
+        lightboxImg.alt = imgElement.alt;
+    }
+
+    function closeLightbox() {
+        const lightbox = document.getElementById("lightbox");
+        lightbox.style.display = "none";
+    }

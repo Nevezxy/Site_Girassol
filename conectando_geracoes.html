@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Conectando Gerações</title>
+    <link rel="stylesheet" href="css/conectando_geracoes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="logo">
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Início</a></li>
+                        <li><a href="sobre_nos.html" class="nav-link">Sobre</a></li>
+                        <li class="dropdown">
+                            <a href="#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="contadores_do_amanha.html">Contadores do Amanhã</a></li>
+                                <li><a href="#educacao">Educação C.J.</a></li>
+                                <li><a href="#jovem-falcao">Jovem Falcão</a></li>
+                                <li><a href="#conectando">Conectando Gerações</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#parceiros" class="nav-link">Parceiros</a></li>
+                        <li><a href="#noticias" class="nav-link">Notícias</a></li>
+                        <li><a href="#contato" class="nav-link">Contato</a></li>
+                        <li><a href="#doar" class="nav-link btn-donate">Doe Agora</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background">
+            <img src="midia/img/ConectandoGeracoes/Capa.png" alt="Crianças participando do projeto" class="hero-bg-img">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Projeto<br>
+                    <span class="highlight">Conectando Gerações</span>
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Project Overview -->
+        <section class="project-overview">
+            <div class="container">
+                <div class="section-header">
+                    <div class="section-divider"></div>
+                </div>
+
+                <div class="content-grid">
+                    <div class="content-left">
+                        <div class="project-label">
+                            <span class="project-number">Projeto / 04</span>
+                            <div class="label-divider"></div>
+                        </div>
+                        <h2 class="section-title">
+                            Uma parceria do Instituto Girassol de Desenvolvimento Social e Conselho Municipal dos
+                            Direitos da Pessoa Idosa para promoção de um envelhecimento saudável.
+                        </h2>
+                    </div>
+
+                    <div class="content-right">
+                        <div class="tabs-container">
+                            <div class="tabs-nav">
+                                <button class="tab-btn active" data-tab="projeto">O Projeto</button>
+                                <button class="tab-btn" data-tab="origem">Origem</button>
+                                <button class="tab-btn" data-tab="objetivos">Objetivos</button>
+                                <button class="tab-btn" data-tab="mais">Mais</button>
+                            </div>
+
+                            <div class="tabs-content">
+                                <div class="tab-panel active" id="projeto">
+                                    <p>
+                                        O <strong>Projeto Conectando Gerações</strong> é uma parceria entre o
+                                        <strong>Instituto Girassol</strong> e o
+                                        <strong>Conselho Municipal de Defesa dos Direitos da Pessoa Idosa</strong>.
+                                        Seu objetivo é atender às necessidades e aos interesses do público idoso,
+                                        oferecendo um ciclo de <em>oficinas formativas</em> acompanhado por
+                                        profissionais
+                                        de <strong>Psicologia</strong> e <strong>Assistência Social</strong>.
+                                        A iniciativa busca contribuir para o atendimento e o acompanhamento de pessoas
+                                        com 60 anos ou mais, contemplando suas diferentes demandas.
+                                    </p>
+                                </div>
+
+                                <div class="tab-panel" id="origem">
+                                    <p>
+                                        O <strong>Projeto Conectando Gerações</strong> busca valorizar e ressignificar
+                                        as histórias
+                                        e experiências, tanto individuais quanto coletivas, das pessoas idosas.
+                                        A iniciativa também incentiva o fortalecimento dos vínculos familiares e
+                                        comunitários,
+                                        promovendo o acesso a diferentes serviços por meio de um ciclo de
+                                        <em>oficinas</em> e
+                                        acompanhamento psicossocial.
+                                        Um dos destaques do projeto é o atendimento a idosos com dificuldade de
+                                        locomoção,
+                                        oferecendo <strong>acompanhamento domiciliar</strong> e monitoramento contínuo,
+                                        garantindo que todos recebam o suporte necessário, mesmo fora da sede do
+                                        <strong>Instituto Girassol</strong>.
+                                    </p>
+                                </div>
+
+                                <div class="tab-panel" id="objetivos">
+                                    <p>
+                                        O projeto tem como objetivos específicos:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            Assegurar um <strong>espaço de encontro</strong> para as pessoas idosas,
+                                            promovendo atividades psicossociais que estimulem a convivência e o
+                                            bem-estar.
+                                        </li>
+                                        <li>
+                                            Proporcionar <strong>oficinas socioeducativas</strong> e vivências
+                                            culturais,
+                                            valorizando as experiências de vida e incentivando a participação em
+                                            atividades de arte e cultura.
+                                        </li>
+                                        <li>
+                                            Promover a <strong>inclusão digital</strong> da pessoa idosa, garantindo
+                                            equidade
+                                            no acesso às novas tecnologias.
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-panel" id="mais">
+                                    <p>
+                                        O <strong>Projeto Conectando Gerações</strong> tem duração de <em>um ano</em> e
+                                        pretende atender pessoas idosas com <em>60 anos ou mais</em>.
+                                    </p>
+
+                                    <p>
+                                        Entre os principais resultados esperados estão:
+                                    </p>
+                                    <ul>
+                                        <li>
+                                            <strong>Mapeamento</strong> do perfil das pessoas idosas participantes do
+                                            projeto.
+                                        </li>
+                                        <li>
+                                            Fornecimento de <strong>informações e orientações sobre cuidados com a
+                                                saúde</strong>.
+                                        </li>
+                                        <li>
+                                            Participação ativa dos idosos nas <strong>oficinas de arte e
+                                                cultura</strong>.
+                                        </li>
+                                        <li>
+                                            Engajamento efetivo nas atividades do projeto como um todo.
+                                        </li>
+                                    </ul><br>
+                                    
+                                    <p>
+                                        O <strong>Instituto Girassol</strong> acredita que, ao direcionar atenção direta
+                                        às
+                                        pessoas idosas, estará promovendo seu <strong>desenvolvimento pessoal</strong> e
+                                        fortalecendo a <strong>convivência intergeracional</strong> dentro da
+                                        organização.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <div class="container">
+                <div class="section-header">
+                    <div class="project-label">
+                        <span class="project-number">Veja as fotos do Projeto Conectando Gerações.</span>
+                        <div class="label-divider"></div>
+                    </div>
+                    <h2 class="section-title">
+                        Conheça o Conectando Gerações por meio das fotos das oficinas.
+                    </h2>
+                </div>
+
+                <!-- Image Carousel -->
+                <div class="carousel-container">
+                    <div class="carousel" id="imageCarousel">
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
+                                <img src="midia/img/ConectandoGeracoes/1.png" alt="Atividade do projeto - Imagem 1"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ConectandoGeracoes/2.png" alt="Atividade do projeto - Imagem 2"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ConectandoGeracoes/3.png" alt="Atividade do projeto - Imagem 3"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ConectandoGeracoes/4.png" alt="Atividade do projeto - Imagem 4"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ConectandoGeracoes/5.png" alt="Atividade do projeto - Imagem 5"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ConectandoGeracoes/6.png" alt="Atividade do projeto - Imagem 6"
+                                    class="carousel-img">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="midia/img/ConectandoGeracoes/7.png" alt="Atividade do projeto - Imagem 7"
+                                    class="carousel-img">
+                            </div>
+                        </div>
+
+                        <button class="carousel-btn carousel-btn-prev" id="prevBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="carousel-btn carousel-btn-next" id="nextBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        </button>
+
+                        <div class="carousel-indicators" id="indicators"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO (pode ser a mesma do header) -->
+                    <img src="midia/IGDSLogo.png" alt="Instituto Girassol" class="footer-logo">
+                    <p>Nosso compromisso é transformar realidades por meio de uma educação inovadora!</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/institutogirassoldedesenvolvimentosocial" target="_blank">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://www.instagram.com/instituto_girassol/" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.youtube.com/@institutogirassoldedesenvo3702" target="_blank">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/company/9445583/" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Projetos & Ações</h4>
+                    <ul>
+                        <li><a href="#contadores">Projeto Contadores do Amanhã</a></li>
+                        <li><a href="#educacao">Projeto Educação C.J.</a></li>
+                        <li><a href="#jovem-falcao">Projeto Jovem Falcão</a></li>
+                        <li><a href="#conectando">Projeto Conectando Gerações</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#transparencia">Transparência</a></li>
+                        <li><a href="#noticias">Notícias</a></li>
+                        <li><a href="#voluntario">Seja Voluntário</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Receba nossas novidades e atualizações</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Instituto Girassol de Desenvolvimento Social - IGDS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/5582999992784" class="whatsapp-btn" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="js/conectando_geracoes.js"></script>
+</body>
+
+</html>
