@@ -224,6 +224,10 @@ body {
   animation: fadeInUp 1s ease;
 }
 
+.highlight {
+    color: var(--primary-color);
+}
+
 /* Publications Section */
 .publications {
   padding: 6rem 0;

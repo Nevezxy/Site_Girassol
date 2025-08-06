@@ -316,7 +316,7 @@ body {
 
 /* Gallery Section */
 .gallery-section {
-    padding: 6rem 0;
+    padding: 2rem 0;
     background: var(--light-bg);
 }
 
@@ -398,7 +398,7 @@ body {
 
 /* TIMELINE */
 .timeline-section {
-    padding: 6rem 0;
+    padding: 2rem 0;
     background-color: #F8F7F3;
 }
 

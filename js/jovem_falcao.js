@@ -15,8 +15,16 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Header scroll effect
-window.addEventListener('scroll', () => {
+// Header scroll effect (com debounce para performance)
+function debounce(func, wait) {
+    let timeout;
+    return (...args) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func(...args), wait);
+    };
+}
+
+const debouncedScrollHandler = debounce(() => {
     const header = document.querySelector('.header');
     if (window.scrollY > 100) {
         header.style.background = 'rgba(255, 255, 255, 0.95)';
@@ -25,63 +33,40 @@ window.addEventListener('scroll', () => {
         header.style.background = 'var(--white)';
         header.style.backdropFilter = 'none';
     }
-});
+}, 10);
+
+window.addEventListener('scroll', debouncedScrollHandler);
 
 // Back to top button
 const backToTopBtn = document.getElementById('backToTop');
-
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
-    }
+    backToTopBtn.classList.toggle('show', window.scrollY > 300);
 });
-
 backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
-
 
 // Newsletter form handling
 const newsletterForm = document.querySelector('.newsletter-form');
-
-newsletterForm.addEventListener('submit', (e) => {
+newsletterForm.addEventListener('submit', e => {
     e.preventDefault();
-
     const email = newsletterForm.querySelector('input[type="email"]').value;
-
-    if (!email) {
-        alert('Por favor, insira seu e-mail.');
-        return;
-    }
-
+    if (!email) return alert('Por favor, insira seu e-mail.');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Por favor, insira um e-mail válido.');
-        return;
-    }
-
+    if (!emailRegex.test(email)) return alert('Por favor, insira um e-mail válido.');
     alert('Obrigado por se inscrever em nossa newsletter!');
     newsletterForm.reset();
 });
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             const headerHeight = document.querySelector('.header').offsetHeight;
             const targetPosition = target.offsetTop - headerHeight;
-
-            window.scrollTo({
-                top: targetPosition,
-                behavior: 'smooth'
-            });
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
         }
     });
 });
@@ -90,31 +75,23 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const heroBackground = document.querySelector('.hero-background');
-
-    if (heroBackground) {
-        heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
+    if (heroBackground) heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
 });
 
 // Tabs Functionality
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabPanels = document.querySelectorAll('.tab-panel');
-
 tabButtons.forEach(button => {
     button.addEventListener('click', () => {
         const targetTab = button.getAttribute('data-tab');
-
-        // Remove active class from all buttons and panels
         tabButtons.forEach(btn => btn.classList.remove('active'));
         tabPanels.forEach(panel => panel.classList.remove('active'));
-
-        // Add active class to clicked button and corresponding panel
         button.classList.add('active');
         document.getElementById(targetTab).classList.add('active');
     });
 });
 
-// Image Carousel
+// Image Carousel com autoplay e pausa ao interagir
 class ImageCarousel {
     constructor(carouselId) {
         this.carousel = document.getElementById(carouselId);
@@ -126,6 +103,8 @@ class ImageCarousel {
 
         this.currentSlide = 0;
         this.totalSlides = this.slides.length;
+        this.autoPlayInterval = null;
+        this.autoPlayDelay = 5000; // 5 segundos
 
         this.init();
     }
@@ -134,7 +113,7 @@ class ImageCarousel {
         this.createIndicators();
         this.updateCarousel();
         this.bindEvents();
-        // this.startAutoPlay();
+        this.startAutoPlay();
     }
 
     createIndicators() {
@@ -142,16 +121,18 @@ class ImageCarousel {
             const indicator = document.createElement('div');
             indicator.classList.add('indicator');
             if (i === 0) indicator.classList.add('active');
-            indicator.addEventListener('click', () => this.goToSlide(i));
+            indicator.addEventListener('click', () => {
+                this.stopAutoPlay();
+                this.goToSlide(i);
+            });
             this.indicatorsContainer.appendChild(indicator);
         }
     }
 
     updateCarousel() {
-        const translateX = -this.currentSlide * 100;
-        this.track.style.transform = `translateX(${translateX}%)`;
+        this.track.style.transition = "transform 0.6s ease-in-out"; // suaviza a transição
+        this.track.style.transform = `translateX(${-this.currentSlide * 100}%)`;
 
-        // Update indicators
         const indicators = this.indicatorsContainer.querySelectorAll('.indicator');
         indicators.forEach((indicator, index) => {
             indicator.classList.toggle('active', index === this.currentSlide);
@@ -174,80 +155,60 @@ class ImageCarousel {
     }
 
     bindEvents() {
-        this.nextBtn.addEventListener('click', () => this.nextSlide());
-        this.prevBtn.addEventListener('click', () => this.prevSlide());
-
-        // Touch/swipe support
-        let startX = 0;
-        let endX = 0;
-
-        this.carousel.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
+        this.nextBtn.addEventListener('click', () => {
+            this.stopAutoPlay();
+            this.nextSlide();
+        });
+        this.prevBtn.addEventListener('click', () => {
+            this.stopAutoPlay();
+            this.prevSlide();
         });
 
-        this.carousel.addEventListener('touchend', (e) => {
-            endX = e.changedTouches[0].clientX;
+        let startX = 0;
+        this.carousel.addEventListener('touchstart', e => {
+            startX = e.touches[0].clientX;
+        });
+        this.carousel.addEventListener('touchend', e => {
+            const endX = e.changedTouches[0].clientX;
             const diff = startX - endX;
-
             if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                    this.nextSlide();
-                } else {
-                    this.prevSlide();
-                }
+                this.stopAutoPlay();
+                diff > 0 ? this.nextSlide() : this.prevSlide();
             }
         });
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') this.prevSlide();
-            if (e.key === 'ArrowRight') this.nextSlide();
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowLeft') {
+                this.stopAutoPlay();
+                this.prevSlide();
+            }
+            if (e.key === 'ArrowRight') {
+                this.stopAutoPlay();
+                this.nextSlide();
+            }
         });
     }
 
     startAutoPlay() {
-        this.autoPlayInterval = setInterval(() => {
-            this.nextSlide();
-        }, 5000);
+        this.autoPlayInterval = setInterval(() => this.nextSlide(), this.autoPlayDelay);
+    }
 
-        // Pause on hover
-        this.carousel.addEventListener('mouseenter', () => {
-            clearInterval(this.autoPlayInterval);
-        });
-
-        this.carousel.addEventListener('mouseleave', () => {
-            this.startAutoPlay();
-        });
+    stopAutoPlay() {
+        clearInterval(this.autoPlayInterval);
     }
 }
 
-// Initialize carousel when DOM is loaded
+// Inicializa carousel quando o DOM carregar
 document.addEventListener('DOMContentLoaded', () => {
     new ImageCarousel('imageCarousel');
 });
 
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Intersection Observer for animations
+// Intersection Observer para animações
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
-
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.classList.add('visible');
@@ -255,42 +216,33 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
-    const animatedElements = document.querySelectorAll('.section-title, .tab-panel, .carousel-container');
-    animatedElements.forEach(el => {
+    document.querySelectorAll('.section-title, .tab-panel, .carousel-container').forEach(el => {
         el.classList.add('fade-in');
         observer.observe(el);
     });
 });
 
-// Lazy loading for images
-const imageObserver = new IntersectionObserver((entries) => {
+// Lazy loading para imagens
+const imageObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const img = entry.target;
-            if (img.dataset.src) {
-                img.src = img.dataset.src;
-                img.classList.remove('loading');
-                imageObserver.unobserve(img);
-            }
+        if (entry.isIntersecting && entry.target.dataset.src) {
+            entry.target.src = entry.target.dataset.src;
+            entry.target.classList.remove('loading');
+            imageObserver.unobserve(entry.target);
         }
     });
 });
-
-// Apply lazy loading to images
 document.addEventListener('DOMContentLoaded', () => {
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    lazyImages.forEach(img => {
+    document.querySelectorAll('img[data-src]').forEach(img => {
         img.classList.add('loading');
         imageObserver.observe(img);
     });
 });
 
-// Error handling for images
+// Tratamento de erro para imagens
 document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('img');
-    images.forEach(img => {
+    document.querySelectorAll('img').forEach(img => {
         img.addEventListener('error', function () {
             this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlbSBuXHUwMGUzbyBlbmNvbnRyYWRhPC90ZXh0Pjwvc3ZnPg==';
             this.alt = 'Imagem não encontrada';
@@ -298,45 +250,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Performance optimization: Debounce scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+// AMPLIAR IMAGEM (Lightbox)
+function openLightbox(imgElement) {
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+
+    lightbox.style.display = "flex";
+    lightboxImg.src = imgElement.src;
+    lightboxImg.alt = imgElement.alt;
 }
 
-// Apply debounce to scroll events
-const debouncedScrollHandler = debounce(() => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.background = 'var(--white)';
-        header.style.backdropFilter = 'none';
-    }
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
-
-
-// AMPLIAR IMAGEM
-function openLightbox(imgElement) {
-        const lightbox = document.getElementById("lightbox");
-        const lightboxImg = document.getElementById("lightbox-img");
-
-        lightbox.style.display = "flex";
-        lightboxImg.src = imgElement.src;
-        lightboxImg.alt = imgElement.alt;
-    }
-
-    function closeLightbox() {
-        const lightbox = document.getElementById("lightbox");
-        lightbox.style.display = "none";
-    }
+function closeLightbox() {
+    const lightbox = document.getElementById("lightbox");
+    lightbox.style.display = "none";
+}

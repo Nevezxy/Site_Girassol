@@ -1,4 +1,4 @@
-// Mobile Navigation Toggle
+// ===== MOBILE NAVIGATION TOGGLE =====
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 
@@ -7,7 +7,6 @@ navToggle.addEventListener('click', () => {
     navToggle.classList.toggle('active');
 });
 
-// Close mobile menu when clicking on a link
 document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
@@ -15,7 +14,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
-// Header scroll effect
+// ===== HEADER SCROLL EFFECT =====
 window.addEventListener('scroll', () => {
     const header = document.querySelector('.header');
     if (window.scrollY > 100) {
@@ -27,7 +26,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Back to top button
+// ===== BACK TO TOP BUTTON =====
 const backToTopBtn = document.getElementById('backToTop');
 
 window.addEventListener('scroll', () => {
@@ -39,20 +38,16 @@ window.addEventListener('scroll', () => {
 });
 
 backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-
-// Newsletter form handling
+// ===== NEWSLETTER FORM HANDLING =====
 const newsletterForm = document.querySelector('.newsletter-form');
 
 newsletterForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const email = newsletterForm.querySelector('input[type="email"]').value;
+    const email = newsletterForm.querySelector('input[type="email"]').value.trim();
 
     if (!email) {
         alert('Por favor, insira seu e-mail.');
@@ -69,7 +64,7 @@ newsletterForm.addEventListener('submit', (e) => {
     newsletterForm.reset();
 });
 
-// Smooth scrolling for anchor links
+// ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -86,13 +81,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Counter Animation
+// ===== COUNTER ANIMATION =====
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
 
     counters.forEach(counter => {
-        const target =
-            seInt(counter.getAttribute('data-target'));
+        const target = parseInt(counter.getAttribute('data-target'));
+        if (isNaN(target)) return;
+
         const increment = target / 100;
         let current = 0;
 
@@ -110,7 +106,7 @@ function animateCounters() {
     });
 }
 
-// Intersection Observer for animations
+// ===== INTERSECTION OBSERVER FOR ANIMATIONS =====
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -130,7 +126,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
 document.querySelectorAll('.value-item, .project-card, .stats').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
@@ -138,23 +133,18 @@ document.querySelectorAll('.value-item, .project-card, .stats').forEach(el => {
     observer.observe(el);
 });
 
-
-
-// Parallax effect for hero section
+// ===== PARALLAX EFFECT FOR HERO SECTION =====
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const heroBackground = document.querySelector('.hero-background');
-
     if (heroBackground) {
         heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
     }
 });
 
-// Add loading animation
+// ===== LOADING ANIMATION =====
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
-
-    // Animate hero content
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
         heroContent.style.opacity = '1';
@@ -162,9 +152,8 @@ window.addEventListener('load', () => {
     }
 });
 
-// Initialize
+// ===== INITIAL SETUP AFTER DOM CONTENT LOADED =====
 document.addEventListener('DOMContentLoaded', () => {
-    // Set initial styles for hero content
     const heroContent = document.querySelector('.hero-content');
     if (heroContent) {
         heroContent.style.opacity = '0';
@@ -172,18 +161,17 @@ document.addEventListener('DOMContentLoaded', () => {
         heroContent.style.transition = 'opacity 1s ease, transform 1s ease';
     }
 
-    // Add hover effects to project cards
+    // Hover effect on project cards
     document.querySelectorAll('.project-card').forEach(card => {
         card.addEventListener('mouseenter', () => {
             card.style.transform = 'translateY(-10px) scale(1.02)';
         });
-
         card.addEventListener('mouseleave', () => {
             card.style.transform = 'translateY(0) scale(1)';
         });
     });
 
-    // Add click effect to buttons
+    // Ripple effect on buttons
     document.querySelectorAll('.btn').forEach(btn => {
         btn.addEventListener('click', function (e) {
             const ripple = document.createElement('span');
@@ -199,14 +187,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             this.appendChild(ripple);
 
-            setTimeout(() => {
-                ripple.remove();
-            }, 600);
+            setTimeout(() => ripple.remove(), 600);
         });
     });
 });
 
-// Add CSS for ripple effect
+// ===== RIPPLES CSS INJECTION =====
 const style = document.createElement('style');
 style.textContent = `
     .btn {
@@ -232,18 +218,21 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// ===== CAROUSEL SETUP =====
 document.addEventListener("DOMContentLoaded", () => {
     const track = document.getElementById("carouselTrack");
     const originalSlides = Array.from(track.children);
     const nextButton = document.getElementById("nextBtn");
     const prevButton = document.getElementById("prevBtn");
-    const dotsNav = document.getElementById("carouselDots");
+    const dotsNav = document.getElementById("carouselDots"); // se não usar dots, pode remover
 
     let slidesPerPage;
     let currentIndex;
     let allSlides;
     let totalSlides;
     let totalPages;
+    let autoPlayInterval = null;
+    let autoPlayActive = true;
 
     function getSlidesPerPage() {
         const width = window.innerWidth;
@@ -259,7 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
         slidesPerPage = getSlidesPerPage();
         currentIndex = slidesPerPage;
 
-        // Recria com clones
+        // Cria clones para efeito infinito
         const clonesStart = originalSlides.slice(-slidesPerPage).map(s => s.cloneNode(true));
         const clonesEnd = originalSlides.slice(0, slidesPerPage).map(s => s.cloneNode(true));
 
@@ -274,53 +263,57 @@ document.addEventListener("DOMContentLoaded", () => {
         totalSlides = allSlides.length;
         totalPages = Math.ceil(originalSlides.length / slidesPerPage);
 
-        createDots();
         updateCarousel(false);
+        startAutoPlay();
     }
 
     function updateCarousel(animate = true) {
         const slideWidth = allSlides[0].getBoundingClientRect().width;
         const offset = -slideWidth * currentIndex;
 
-        track.style.transition = animate ? "transform 0.4s ease-in-out" : "none";
+        track.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
         track.style.transform = `translateX(${offset}px)`;
-
-        updateDots();
     }
 
-    function updateDots() {
-        const dots = dotsNav.querySelectorAll(".carousel-dot");
-        const visibleIndex = (currentIndex - slidesPerPage + totalPages) % totalPages;
-
-        dots.forEach((dot, i) => {
-            dot.classList.toggle("active", i === visibleIndex);
-        });
-    }
-
-    function createDots() {
-        dotsNav.innerHTML = "";
-        for (let i = 0; i < totalPages; i++) {
-            const dot = document.createElement("button");
-            dot.classList.add("carousel-dot");
-            if (i === 0) dot.classList.add("active");
-            dot.addEventListener("click", () => {
-                currentIndex = i * slidesPerPage + slidesPerPage;
-                updateCarousel();
-            });
-            dotsNav.appendChild(dot);
-        }
-    }
-
-    nextButton.addEventListener("click", () => {
+    function nextSlide() {
+        if (currentIndex >= totalSlides - slidesPerPage) return; // prevenir overflow até o loop
         currentIndex += slidesPerPage;
         updateCarousel();
+    }
+
+    function prevSlide() {
+        if (currentIndex <= 0) return; // prevenir underflow até o loop
+        currentIndex -= slidesPerPage;
+        updateCarousel();
+    }
+
+    function startAutoPlay() {
+        if (autoPlayInterval) return;
+        autoPlayActive = true;
+        autoPlayInterval = setInterval(() => {
+            nextSlide();
+        }, 1500);
+    }
+
+    function stopAutoPlay() {
+        if (!autoPlayActive) return;
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+        autoPlayActive = false;
+    }
+
+    // Eventos botões
+    nextButton.addEventListener("click", () => {
+        stopAutoPlay();
+        nextSlide();
     });
 
     prevButton.addEventListener("click", () => {
-        currentIndex -= slidesPerPage;
-        updateCarousel();
+        stopAutoPlay();
+        prevSlide();
     });
 
+    // Loop infinito (transição "clones")
     track.addEventListener("transitionend", () => {
         if (currentIndex >= totalSlides - slidesPerPage) {
             currentIndex = slidesPerPage;
@@ -333,25 +326,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Reconfigura ao redimensionar
-    window.addEventListener("resize", () => setupCarousel());
+    // Reconfigura no resize
+    window.addEventListener("resize", () => {
+        stopAutoPlay();
+        setupCarousel();
+    });
 
-    // Iniciar carrossel
+    // Inicializa tudo
     setupCarousel();
 });
 
+// ===== HERO BACKGROUND IMAGE SLIDER =====
 const images = [
     "midia/img/Entrada.png",
 ];
 
 const heroBg = document.querySelector('.hero-background');
-let currentIndex = 0;
+let bgCurrentIndex = 0;
 
 function changeBackground() {
-    heroBg.style.backgroundImage = `url('${images[currentIndex]}')`;
-    currentIndex = (currentIndex + 1) % images.length;
+    if (!heroBg) return;
+    heroBg.style.backgroundImage = `url('${images[bgCurrentIndex]}')`;
+    bgCurrentIndex = (bgCurrentIndex + 1) % images.length;
 }
 
 // Troca a imagem a cada 5 segundos
-changeBackground(); // Chamada inicial
-setInterval(changeBackground, 5000);
+changeBackground();
+setInterval(changeBackground, 1500);

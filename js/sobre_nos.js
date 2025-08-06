@@ -1,8 +1,9 @@
-// Slider and Navigation Initialization
 let currentSlide = 0;
 let currentTeamSlide = 0;
+let autoPlayMain, autoPlayTeam;
+const autoPlayDelayMain = 3000; // 5 segundos
+const autoPlayDelayTeam = 3000; // 7 segundos
 
-// DOMContentLoaded para garantir que tudo foi carregado
 document.addEventListener('DOMContentLoaded', () => {
     const navToggle = document.getElementById('nav-toggle');
     const navMenu = document.getElementById('nav-menu');
@@ -15,52 +16,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const slides = document.querySelectorAll('.slide');
     const teamSlides = document.querySelectorAll('.team-slide');
 
+    // ==== FUNÇÕES SLIDER PRINCIPAL ====
     function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
-        document.querySelectorAll('.indicator').forEach((indicator, i) => {
-            indicator.classList.toggle('active', i === index);
-        });
+        slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+        document.querySelectorAll('.indicator').forEach((indicator, i) => indicator.classList.toggle('active', i === index));
     }
-
-    function showTeamSlide(index) {
-        teamSlides.forEach((slide, i) => {
-            slide.classList.toggle('active', i === index);
-        });
-        document.querySelectorAll('.team-indicator').forEach((indicator, i) => {
-            indicator.classList.toggle('active', i === index);
-        });
-    }
-
     function nextSlide() {
         currentSlide = (currentSlide + 1) % slides.length;
         showSlide(currentSlide);
     }
-
     function prevSlide() {
         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
         showSlide(currentSlide);
     }
-
-    function nextTeamSlide() {
-        currentTeamSlide = (currentTeamSlide + 1) % teamSlides.length;
-        showTeamSlide(currentTeamSlide);
-    }
-
-    function prevTeamSlide() {
-        currentTeamSlide = (currentTeamSlide - 1 + teamSlides.length) % teamSlides.length;
-        showTeamSlide(currentTeamSlide);
-    }
-
     function goToSlide(index) {
         currentSlide = index;
         showSlide(currentSlide);
     }
 
+    // ==== FUNÇÕES SLIDER EQUIPE ====
+    function showTeamSlide(index) {
+        teamSlides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+        document.querySelectorAll('.team-indicator').forEach((indicator, i) => indicator.classList.toggle('active', i === index));
+    }
+    function nextTeamSlide() {
+        currentTeamSlide = (currentTeamSlide + 1) % teamSlides.length;
+        showTeamSlide(currentTeamSlide);
+    }
+    function prevTeamSlide() {
+        currentTeamSlide = (currentTeamSlide - 1 + teamSlides.length) % teamSlides.length;
+        showTeamSlide(currentTeamSlide);
+    }
     function goToTeamSlide(index) {
         currentTeamSlide = index;
         showTeamSlide(currentTeamSlide);
+    }
+
+    // ==== AUTO-PLAY ====
+    function startAutoPlayMain() {
+        stopAutoPlayMain();
+        autoPlayMain = setInterval(nextSlide, autoPlayDelayMain);
+    }
+    function stopAutoPlayMain() {
+        clearInterval(autoPlayMain);
+    }
+    function startAutoPlayTeam() {
+        stopAutoPlayTeam();
+        autoPlayTeam = setInterval(nextTeamSlide, autoPlayDelayTeam);
+    }
+    function stopAutoPlayTeam() {
+        clearInterval(autoPlayTeam);
     }
 
     // Criar indicadores
@@ -68,55 +73,50 @@ document.addEventListener('DOMContentLoaded', () => {
         const indicator = document.createElement('div');
         indicator.classList.add('indicator');
         if (index === 0) indicator.classList.add('active');
-        indicator.addEventListener('click', () => goToSlide(index));
+        indicator.addEventListener('click', () => { stopAutoPlayMain(); goToSlide(index); });
         sliderIndicators.appendChild(indicator);
     });
-
     teamSlides.forEach((_, index) => {
         const indicator = document.createElement('div');
         indicator.classList.add('team-indicator');
         if (index === 0) indicator.classList.add('active');
-        indicator.addEventListener('click', () => goToTeamSlide(index));
+        indicator.addEventListener('click', () => { stopAutoPlayTeam(); goToTeamSlide(index); });
         teamIndicators.appendChild(indicator);
     });
 
     // Eventos dos botões
-    if (prevBtn) prevBtn.addEventListener('click', prevSlide);
-    if (nextBtn) nextBtn.addEventListener('click', nextSlide);
-    if (teamPrevBtn) teamPrevBtn.addEventListener('click', prevTeamSlide);
-    if (teamNextBtn) teamNextBtn.addEventListener('click', nextTeamSlide);
+    if (prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlayMain(); prevSlide(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlayMain(); nextSlide(); });
+    if (teamPrevBtn) teamPrevBtn.addEventListener('click', () => { stopAutoPlayTeam(); prevTeamSlide(); });
+    if (teamNextBtn) teamNextBtn.addEventListener('click', () => { stopAutoPlayTeam(); nextTeamSlide(); });
 
-    // Auto-play
-    //setInterval(nextSlide, 5000);
-    //setInterval(nextTeamSlide, 7000);
-
-    // Swipe support
-    let startX = 0;
-    let endX = 0;
-
+    // Swipe mobile
+    let startX = 0, endX = 0;
     const sliderContainer = document.querySelector('.slider-container');
     const teamSliderContainer = document.querySelector('.team-slider');
 
     sliderContainer?.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     sliderContainer?.addEventListener('touchend', e => {
         endX = e.changedTouches[0].clientX;
-        if (startX - endX > 50) nextSlide();
-        else if (endX - startX > 50) prevSlide();
+        if (startX - endX > 50) { stopAutoPlayMain(); nextSlide(); }
+        else if (endX - startX > 50) { stopAutoPlayMain(); prevSlide(); }
     });
-
     teamSliderContainer?.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     teamSliderContainer?.addEventListener('touchend', e => {
         endX = e.changedTouches[0].clientX;
-        if (startX - endX > 50) nextTeamSlide();
-        else if (endX - startX > 50) prevTeamSlide();
+        if (startX - endX > 50) { stopAutoPlayTeam(); nextTeamSlide(); }
+        else if (endX - startX > 50) { stopAutoPlayTeam(); prevTeamSlide(); }
     });
 
-    // Mobile nav toggle
+    // Inicia autoplay
+    startAutoPlayMain();
+    startAutoPlayTeam();
+
+    // ==== MENU MOBILE ====
     navToggle?.addEventListener('click', () => {
         navMenu.classList.toggle('active');
         navToggle.classList.toggle('active');
     });
-
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
             navMenu.classList.remove('active');
@@ -124,21 +124,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Scroll animation
+    // ==== ANIMAÇÕES DE SCROLL ====
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('loaded');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('loaded');
         });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.mvv-card, .value-item, .team-content').forEach(el => {
         el.classList.add('loading');
         observer.observe(el);
     });
 
-    // Lazy loading
+    // ==== LAZY LOADING ====
     document.querySelectorAll('img[data-src]').forEach(img => {
         const lazyObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
@@ -151,68 +148,55 @@ document.addEventListener('DOMContentLoaded', () => {
         lazyObserver.observe(img);
     });
 
-    // Scroll behavior
+    // ==== SCROLL SUAVE PARA LINKS ====
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', e => {
             e.preventDefault();
             const target = document.querySelector(anchor.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-            }
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
     });
 
-    // Teclado
+    // ==== NAVEGAÇÃO POR TECLADO ====
     document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft') prevSlide();
-        if (e.key === 'ArrowRight') nextSlide();
+        if (e.key === 'ArrowLeft') { stopAutoPlayMain(); prevSlide(); }
+        if (e.key === 'ArrowRight') { stopAutoPlayMain(); nextSlide(); }
     });
 });
 
-// Preload critical images
+// ==== PRÉ-CARREGAMENTO DE IMAGENS ====
 ['images/logo.svg', 'images/hero-bg-1.jpg', 'images/instituto-2012.jpg', 'images/instituto-2024.jpg']
-    .forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
+    .forEach(src => { const img = new Image(); img.src = src; });
 
-// Back to top button
+// ==== BOTÃO VOLTAR AO TOPO ====
 const backToTopBtn = document.getElementById('backToTop');
-
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
-    }
+    backToTopBtn.classList.toggle('show', window.scrollY > 300);
 });
-
 backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Newsletter form handling
+// ==== FORMULÁRIO NEWSLETTER ====
 const newsletterForm = document.querySelector('.newsletter-form');
-
 newsletterForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
     const email = newsletterForm.querySelector('input[type="email"]').value;
-
-    if (!email) {
-        alert('Por favor, insira seu e-mail.');
-        return;
-    }
-
+    if (!email) return alert('Por favor, insira seu e-mail.');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Por favor, insira um e-mail válido.');
-        return;
-    }
-
+    if (!emailRegex.test(email)) return alert('Por favor, insira um e-mail válido.');
     alert('Obrigado por se inscrever em nossa newsletter!');
     newsletterForm.reset();
+});
+
+// ==== HEADER TRANSPARENTE NO SCROLL ====
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.header');
+    if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+        header.style.backdropFilter = 'blur(10px)';
+    } else {
+        header.style.background = 'var(--white)';
+        header.style.backdropFilter = 'none';
+    }
 });
