@@ -104,7 +104,7 @@ class ImageCarousel {
         this.currentSlide = 0;
         this.totalSlides = this.slides.length;
         this.autoPlayInterval = null;
-        this.autoPlayDelay = 5000; // 5 segundos
+        this.autoPlayDelay = 1500; // 5 segundos
 
         this.init();
     }

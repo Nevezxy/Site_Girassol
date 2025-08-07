@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,13 @@
     <link rel="stylesheet" href="css/doe_agora.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
+
 <body>
-     <!-- Header -->
+    <!-- Header -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
@@ -25,7 +28,7 @@
                         <li><a href="index.html" class="nav-link">Início</a></li>
                         <li><a href="sobre_nos.html" class="nav-link">Sobre</a></li>
                         <li class="dropdown">
-                            <a href="#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
+                            <a href="index.html#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="contadores_do_amanha.html">Contadores do Amanhã</a></li>
                                 <li><a href="educacao_cj.html">Educação C.J.</a></li>
@@ -52,12 +55,12 @@
     <!-- Hero Section -->
     <section class="hero" id="inicio">
         <div class="hero-background">
-            <img src="midia/img/Entrada.png" alt="Crianças felizes" class="hero-bg-image">
+            <img src="midia/img/DoeAgora/Capa.jpg" alt="Crianças felizes" class="hero-bg-image">
             <div class="hero-overlay"></div>
         </div>
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Faça a diferença na vida de crianças e jovens</h1>
+                <h1 class="hero-title">Faça a diferença na vida de <span class="highlight">crianças e jovens</span></h1>
                 <p class="hero-subtitle">Doe para o Instituto Girassol e transforme vidas através da educação</p>
                 <a href="#doar" class="btn btn-primary btn-large">Doar Agora</a>
             </div>
@@ -79,17 +82,21 @@
                         <div class="qr-code-container">
                             <img src="midia/img/DoeAgora/qrcode.png" alt="QR Code PIX" class="qr-code">
                             <p class="qr-code-note">
-                                <strong>*Este é um QR code PIX. Para funcionar deve ser lido com o app do banco na função pagar via QR code.</strong>
+                                <strong>*Este é um QR code PIX. Para funcionar deve ser lido com o app do banco na
+                                    função pagar via QR code.</strong>
                             </p>
                         </div>
-                        
+
                         <div class="pix-info">
                             <h3>PIX Copia e Cola:</h3>
                             <div class="pix-code">
-                                <input type="text" id="pix-code" value="00020126380014BR.GOV.BCB.PIX0116igds@igds.org.br520400005303986540510.005802BR5925Instituto Girassol de Des6015Boca da Mata AL62130509PIXMuro10630415C8" readonly>
+                                <input type="text" id="pix-code"
+                                    value="00020126380014BR.GOV.BCB.PIX0116igds@igds.org.br520400005303986540510.005802BR5925Instituto Girassol de Des6015Boca da Mata AL62130509PIXMuro10630415C8"
+                                    readonly>
                                 <button class="btn-copy" onclick="copyPix()">Copiar</button>
                             </div>
-                            <p class="pix-note">O valor pré-configurado é R$ 10,00. Para valores maiores utilize a chave PIX:</p>
+                            <p class="pix-note">O valor pré-configurado é R$ 10,00. Para valores maiores utilize a chave
+                                PIX:</p>
                             <div class="pix-key">
                                 <strong>igds@igds.org.br</strong>
                                 <button class="btn-copy" onclick="copyPixKey()">Copiar</button>
@@ -98,13 +105,21 @@
                     </div>
 
                     <div class="donation-text">
-                        <p>Você sabia que pode fazer a diferença na vida de muitas crianças e jovens com apenas <strong>R$ 30,00 por mês</strong>? Com uma doação simbólica, mas constante, você pode apoiar o Instituto Girassol de Desenvolvimento Social.</p>
-                        
+                        <p>Você sabia que pode fazer a diferença na vida de muitas crianças e jovens com apenas
+                            <strong>R$ 30,00 por mês</strong>? Com uma doação simbólica, mas constante, você pode apoiar
+                            o Instituto Girassol de Desenvolvimento Social.
+                        </p>
+
                         <div class="expandable-content">
                             <button class="btn-expand" onclick="toggleContent()">Leia Mais</button>
                             <div class="expanded-text" id="expanded-text">
-                                <p>O Instituto Girassol atende mais de 200 crianças e jovens em situação de vulnerabilidade social em Boca da Mata, oferecendo oficinas socioeducativas, qualificação profissional, reforço escolar e outras atividades que contribuem para o seu desenvolvimento integral.</p>
-                                <p>Para continuar realizando esse trabalho tão importante, o Instituto Girassol conta com a sua ajuda. Doando a partir de R$ 30,00 por mês pelo PIX, você se torna um parceiro dessa causa e ajuda a garantir a sustentabilidade da organização.</p>
+                                <p>O Instituto Girassol atende mais de 200 crianças e jovens em situação de
+                                    vulnerabilidade social em Boca da Mata, oferecendo oficinas socioeducativas,
+                                    qualificação profissional, reforço escolar e outras atividades que contribuem para o
+                                    seu desenvolvimento integral.</p>
+                                <p>Para continuar realizando esse trabalho tão importante, o Instituto Girassol conta
+                                    com a sua ajuda. Doando a partir de R$ 30,00 por mês pelo PIX, você se torna um
+                                    parceiro dessa causa e ajuda a garantir a sustentabilidade da organização.</p>
                                 <p><strong>Doe agora e faça a diferença!</strong></p>
                             </div>
                         </div>
@@ -112,65 +127,65 @@
                 </div>
 
                 <div class="donation-image">
-                    <img src="midia/img/Entrada.png" alt="Instituto Girassol - Transformando vidas" class="donation-hero-img">
+                    <img src="midia/img/DoeAgora/doar.jpg" alt="Instituto Girassol - Transformando vidas"
+                        class="donation-hero-img">
                 </div>
             </div>
         </div>
     </section>
 
     <section class="impact-carousel">
-    <div class="container">
-        <div class="carousel-container">
-            <div class="carousel-track" id="carousel-track">
-                <div class="carousel-slide">
-                    <div class="impact-card">
-                        <img src="midia/img/Entrada.png" alt="Impacto Social" class="impact-image">
-                        <div class="impact-content">
-                            <h3>IMPACTO</h3>
-                            <p>Ao doar para o Instituto Girassol, você contribui para o impacto positivo...</p>
+        <div class="container">
+            <div class="carousel-container">
+                <div class="carousel-track" id="carousel-track">
+                    <div class="carousel-slide">
+                        <div class="impact-card">
+                            <img src="midia/img/DoeAgora/1.jpg" alt="Impacto Social" class="impact-image">
+                            <div class="impact-content">
+                                <h3>IMPACTO</h3>
+                                <p>Ao doar para o Instituto Girassol, você contribui para o impacto positivo...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="impact-card">
+                            <img src="midia/img/DoeAgora/2.jpg" alt="Solidariedade" class="impact-image">
+                            <div class="impact-content">
+                                <h3>SOLIDARIEDADE</h3>
+                                <p>Ao doar, você demonstra sua solidariedade com as causas sociais...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="impact-card">
+                            <img src="midia/img/DoeAgora/3.jpg" alt="Inovação" class="impact-image">
+                            <div class="impact-content">
+                                <h3>INOVAÇÃO</h3>
+                                <p>Você apoia uma organização que busca inovar na forma de educar...</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-slide">
+                        <div class="impact-card">
+                            <img src="midia/img/DoeAgora/4.jpg" alt="Transparência" class="impact-image">
+                            <div class="impact-content">
+                                <h3>TRANSPARÊNCIA</h3>
+                                <p>Você confia em uma organização que preza pela transparência...</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="carousel-slide">
-                    <div class="impact-card">
-                        <img src="midia/img/Entrada.png" alt="Solidariedade" class="impact-image">
-                        <div class="impact-content">
-                            <h3>SOLIDARIEDADE</h3>
-                            <p>Ao doar, você demonstra sua solidariedade com as causas sociais...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-slide">
-                    <div class="impact-card">
-                        <img src="midia/img/Entrada.png" alt="Inovação" class="impact-image">
-                        <div class="impact-content">
-                            <h3>INOVAÇÃO</h3>
-                            <p>Você apoia uma organização que busca inovar na forma de educar...</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-slide">
-                    <div class="impact-card">
-                        <img src="midia/img/Entrada.png" alt="Transparência" class="impact-image">
-                        <div class="impact-content">
-                            <h3>TRANSPARÊNCIA</h3>
-                            <p>Você confia em uma organização que preza pela transparência...</p>
-                        </div>
-                    </div>
-                </div>
+                <button class="carousel-btn carousel-btn-prev" id="prevBtn">‹</button>
+                <button class="carousel-btn carousel-btn-next" id="nextBtn">›</button>
+                <div class="carousel-dots" id="carousel-dots"></div>
             </div>
-            <button class="carousel-btn carousel-btn-prev" id="prevBtn">‹</button>
-            <button class="carousel-btn carousel-btn-next" id="nextBtn">›</button>
-            <div class="carousel-dots" id="carousel-dots"></div>
         </div>
-    </div>
-</section>
-
+    </section>
 
     <!-- Team Section -->
     <section class="team-section">
         <div class="team-background">
-            <img src="midia/img/Entrada.png" alt="Equipe trabalhando" class="team-bg-image">
+            <img src="midia/img/DoeAgora/Educadores.jpg" alt="Equipe trabalhando" class="team-bg-image">
             <div class="team-overlay"></div>
         </div>
         <div class="container">
@@ -178,8 +193,48 @@
                 <span class="section-subtitle">Equipe Girassol</span>
                 <h2 class="section-title">Educadores que fazem a diferença</h2>
                 <div class="section-divider"></div>
-                <p class="team-description">Conheça os profissionais que atuam no Instituto Girassol e saiba por que eles são tão especiais.</p>
-                <a href="#sobre" class="btn btn-secondary">Conheça Nossa Equipe</a>
+                <p class="team-description">Conheça os profissionais que atuam no Instituto Girassol e saiba por que
+                    eles são tão especiais.</p>
+                <a href="sobre_nos.html#equipe" class="btn btn-secondary">Conheça Nossa Equipe</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials-carousel">
+        <div class="container">
+            <h2 class="section-title">Transformações Reais</h2>
+            <div class="testimonial-track" id="testimonial-track">
+                <!-- Slide 1 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <img src="midia/img/DoeAgora/teste.jpg" alt="Maria Eduarda" class="testimonial-avatar">
+                        <p class="testimonial-text">"Graças ao Instituto, hoje consigo estudar com mais confiança e
+                            sonhar com a faculdade."</p>
+                        <h4 class="testimonial-author">Maria Eduarda, 16 anos</h4>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <img src="midia/img/DoeAgora/teste.jpg" alt="Luciana" class="testimonial-avatar">
+                        <p class="testimonial-text">"Meu filho melhorou na escola depois das oficinas. Sou muito grata."
+                        </p>
+                        <h4 class="testimonial-author">Luciana, mãe de aluno</h4>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="testimonial-slide">
+                    <div class="testimonial-card">
+                        <img src="midia/img/DoeAgora/teste.jpg" alt="João Paulo" class="testimonial-avatar">
+                        <p class="testimonial-text">"Aprendi uma profissão graças ao projeto Jovem Falcão."</p>
+                        <h4 class="testimonial-author">João Paulo, 18 anos</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-controls">
+                <button class="testimonial-btn" id="prevTestimonial">‹</button>
+                <button class="testimonial-btn" id="nextTestimonial">›</button>
             </div>
         </div>
     </section>
@@ -282,4 +337,5 @@
 
     <script src="js/doe_agora.js"></script>
 </body>
+
 </html>

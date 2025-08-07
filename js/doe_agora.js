@@ -74,9 +74,9 @@ function showCopyMessage(message) {
         font-weight: 600;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     `;
-    
+
     document.body.appendChild(messageEl);
-    
+
     setTimeout(() => {
         messageEl.remove();
     }, 2000);
@@ -86,7 +86,7 @@ function showCopyMessage(message) {
 function toggleContent() {
     const expandedText = document.getElementById('expanded-text');
     const button = document.querySelector('.btn-expand');
-    
+
     if (expandedText.classList.contains('active')) {
         expandedText.classList.remove('active');
         button.textContent = 'Leia Mais';
@@ -185,12 +185,12 @@ document.addEventListener("DOMContentLoaded", () => {
 // Statistics counter animation
 function animateCounters() {
     const counters = document.querySelectorAll('.stat-number');
-    
+
     counters.forEach(counter => {
         const target = parseInt(counter.getAttribute('data-target'));
         const increment = target / 100;
         let current = 0;
-        
+
         const updateCounter = () => {
             if (current < target) {
                 current += increment;
@@ -200,7 +200,7 @@ function animateCounters() {
                 counter.textContent = target + "+";
             }
         };
-        
+
         updateCounter();
     });
 }
@@ -218,7 +218,7 @@ const observer = new IntersectionObserver((entries) => {
                 animateCounters();
                 observer.unobserve(entry.target);
             }
-            
+
             // Add fade-in animation
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
@@ -229,7 +229,7 @@ const observer = new IntersectionObserver((entries) => {
 // Initialize animations
 function initAnimations() {
     const animatedElements = document.querySelectorAll('.donation-section, .impact-carousel, .team-section, .statistics-section');
-    
+
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -247,7 +247,7 @@ function validateEmail(email) {
 // Lazy loading for images
 function initLazyLoading() {
     const images = document.querySelectorAll('img[data-src]');
-    
+
     const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -258,7 +258,7 @@ function initLazyLoading() {
             }
         });
     });
-    
+
     images.forEach(img => imageObserver.observe(img));
 }
 
@@ -266,7 +266,7 @@ function initLazyLoading() {
 document.addEventListener('DOMContentLoaded', () => {
     initAnimations();
     initLazyLoading();
-    
+
     // Add loading animation
     document.body.classList.add('loaded');
 });
@@ -300,7 +300,7 @@ window.addEventListener('scroll', handleScroll);
 
 // Error handling for images
 document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('error', function() {
+    img.addEventListener('error', function () {
         this.src = '/placeholder.svg?height=400&width=600&text=Imagem+não+encontrada';
         this.alt = 'Imagem não encontrada';
     });
@@ -362,4 +362,41 @@ newsletterForm.addEventListener('submit', (e) => {
 
     alert('Obrigado por se inscrever em nossa newsletter!');
     newsletterForm.reset();
+});
+
+// Testimonial Carousel
+const track = document.getElementById("testimonial-track");
+const slides = document.querySelectorAll(".testimonial-slide");
+const prevBtn = document.getElementById("prevTestimonial");
+const nextBtn = document.getElementById("nextTestimonial");
+
+let index = 0;
+
+function updateCarousel() {
+    const slideWidth = slides[0].offsetWidth;
+    track.style.transform = `translateX(-${index * slideWidth}px)`;
+}
+
+prevBtn.addEventListener("click", () => {
+    index = (index === 0) ? slides.length - 1 : index - 1;
+    updateCarousel();
+});
+
+nextBtn.addEventListener("click", () => {
+    index = (index === slides.length - 1) ? 0 : index + 1;
+    updateCarousel();
+});
+
+// Auto-slide
+setInterval(() => {
+    nextBtn.click();
+}, 8000); // 8 segundos
+
+// ===== PARALLAX EFFECT FOR HERO SECTION =====
+window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroBackground = document.querySelector('.hero-background');
+    if (heroBackground) {
+        heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
 });

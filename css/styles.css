@@ -427,7 +427,12 @@ section {
 /* Mission Section */
 .mission {
     padding: 6rem 0;
-    background: linear-gradient(135deg, var(--dark-color), var(--gray));
+    background: 
+        linear-gradient(135deg, rgba(30, 24, 16, 0.700), rgba(30, 24, 16, 0.700)),
+        url('../midia/img/Stats.jpg'); /* Caminho da imagem */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: var(--white);
 }
 
@@ -461,7 +466,7 @@ section {
 .stat-item {
     text-align: center;
     padding: 1.5rem;
-    background-color: rgba(255, 177, 0, 0.1);
+    background-color: rgba(255, 177, 0, 0.4);
     border-radius: var(--border-radius);
 }
 
@@ -521,7 +526,6 @@ section {
     max-width: 200px;
     max-height: 80px;
     object-fit: contain;
-    filter: grayscale(100%);
     transition: var(--transition);
 }
 

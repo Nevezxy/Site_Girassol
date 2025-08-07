@@ -206,12 +206,18 @@ body {
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
+    animation: fadeInUp 1s ease;
 }
 
 .hero-subtitle {
     font-size: 1.25rem;
     margin-bottom: 2rem;
     opacity: 0.9;
+    animation: fadeInUp 1s ease;
+}
+
+.highlight {
+    color: var(--primary-color);
 }
 
 /* Buttons */
@@ -226,6 +232,7 @@ body {
     cursor: pointer;
     transition: var(--transition);
     font-family: var(--font-family);
+    animation: fadeInUp 1s ease;
 }
 
 .btn-primary {
@@ -577,6 +584,107 @@ body {
     font-size: 1.2rem;
     margin: 2rem 0;
     opacity: 0.9;
+}
+
+/* depoimentos */
+.testimonials-carousel {
+    background-color: var(--light-bg);
+    padding: 6rem 0;
+    overflow: hidden;
+    position: relative;
+}
+
+.testimonials-carousel .section-title {
+    font-size: 2.2rem;
+    text-align: center;
+    color: var(--dark-color);
+    margin-bottom: 3rem;
+    font-weight: 600;
+}
+
+.testimonial-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.testimonial-slide {
+    min-width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+}
+
+.testimonial-card {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.testimonial-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 0 0 4px var(--primary-color);
+}
+
+.testimonial-text {
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--gray);
+    margin-bottom: 1.2rem;
+}
+
+.testimonial-author {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--primary-color);
+}
+
+/* Controles */
+.testimonial-controls {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.testimonial-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    margin: 0 0.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.testimonial-btn:hover {
+    background: var(--secondary-color);
+}
+
+/* ANIMAÇÕES */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .testimonial-slide {
+        padding: 0;
+    }
 }
 
 /* Statistics Section */
