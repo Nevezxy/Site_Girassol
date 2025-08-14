@@ -2,7 +2,7 @@ let currentSlide = 0;
 let currentTeamSlide = 0;
 let autoPlayMain, autoPlayTeam;
 const autoPlayDelayMain = 3000; // 5 segundos
-const autoPlayDelayTeam = 3000; // 7 segundos
+const autoPlayDelayTeam = 7000; // 7 segundos
 
 document.addEventListener('DOMContentLoaded', () => {
     const navToggle = document.getElementById('nav-toggle');
