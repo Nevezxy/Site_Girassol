@@ -338,7 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ===== HERO BACKGROUND IMAGE SLIDER =====
 const images = [
-    "midia/img/Entrada.png",
+    "midia/img/Entrada.webp",
 ];
 
 const heroBg = document.querySelector('.hero-background');

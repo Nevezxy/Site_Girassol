@@ -179,7 +179,7 @@ body {
     height: 100%;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     /* SUBSTITUA A URL ABAIXO PELO CAMINHO DA SUA IMAGEM DE FUNDO */
-    /* background-image: url('../midia/img/Entrada.png'); */
+    /* background-image: url('../midia/img/Entrada.webp'); */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
