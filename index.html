@@ -4,11 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO -->
     <meta name="description"
         content="O Instituto Girassol promove inclusão, educação e transformação social em Alagoas. Descubra nossos projetos e como participar.">
+    <meta name="keywords"
+        content="Instituto Girassol, inclusão social, educação, Alagoas, projetos sociais, desenvolvimento comunitário">
+    <meta name="author" content="Instituto Girassol de Desenvolvimento Social">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Instituto Girassol de Desenvolvimento Social">
+    <meta property="og:description" content="Promovendo inclusão, educação e transformação social em Alagoas.">
+    <meta property="og:image" content="https://igds.org.br/Entrada.webp">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://igds.org.br">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Instituto Girassol de Desenvolvimento Social">
+    <meta name="twitter:description" content="Promovendo inclusão, educação e transformação social em Alagoas.">
+    <meta name="twitter:image" content="https://igds.org.br/Entrada.webp">
+
     <title>Instituto Girassol de Desenvolvimento Social</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Preload e Preconnect -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
+    <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="css/styles.css">
+    </noscript>
+
+    <!-- Ícones -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </noscript>
 </head>
 
 <body>
@@ -18,7 +49,9 @@
             <div class="nav-container">
                 <div class="nav-logo">
                     <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
-                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="logo">
+                    <img src="midia/IGDSLogo-500.webp" alt="Instituto Girassol" class="logo" fetchpriority="high"
+                        srcset="midia/IGDSLogo-500.webp 500w, midia/IGDSLogo-1000.webp 1000w, midia/IGDSLogo.webp 1920w"
+                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                 </div>
 
                 <div class="nav-menu" id="nav-menu">
@@ -78,8 +111,8 @@
     <section id="valores" class="values">
         <div class="container">
             <div class="section-header">
-                <span class="section-subtitle">Educação & Desenvolvimento</span>
-                <h2 class="section-title">Nossos Valores & Crenças</h2>
+                <span class="section-subtitle">Educação &amp; Desenvolvimento</span>
+                <h2 class="section-title">Nossos Valores &amp; Crenças</h2>
             </div>
 
             <div class="values-grid">
@@ -148,7 +181,10 @@
                     <div class="project-number">01</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
                     <!-- <img src="CAMINHO_IMAGEM_PROJETO_1" alt="Contadores do Amanhã" class="project-image"> -->
-                    <img src="midia/img/ContadoresDoAmanha/Capa.webp" alt="Contadores do Amanhã" class="project-image">
+                    <img src="midia/img/ContadoresDoAmanha/Capa-500.webp" alt="Contadores do Amanhã"
+                        class="project-image"
+                        srcset="midia/img/ContadoresDoAmanha/Capa-500.webp 500w, midia/img/ContadoresDoAmanha/Capa-1000.webp 1000w, midia/img/ContadoresDoAmanha/Capa.webp 1920w"
+                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                     <h3>Contadores do Amanhã</h3>
                     <p><strong>Objetivo:</strong> Promover a leitura, a produção textual e o desenvolvimento de
                         habilidades socioemocionais de crianças e adolescentes.</p>
@@ -165,7 +201,9 @@
                     <div class="project-number">02</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
                     <!-- <img src="CAMINHO_IMAGEM_PROJETO_2" alt="Educação C.J." class="project-image"> -->
-                    <img src="midia/img/EducacaoCJ/Capa.webp" alt="Educação C.J." class="project-image">
+                    <img src="midia/img/EducacaoCJ/Capa-500.webp" alt="Educação C.J." class="project-image"
+                        srcset="midia/img/EducacaoCJ/Capa-500.webp 500w, midia/img/EducacaoCJ/Capa-1000.webp 1000w, midia/img/EducacaoCJ/Capa.webp 1920w"
+                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                     <h3>Educação Crescendo Juntos</h3>
                     <p><strong>Objetivo:</strong> Promover a formação integral de crianças, adolescentes e jovens em
                         situação de vulnerabilidade social.</p>
@@ -182,7 +220,9 @@
                     <div class="project-number">03</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
                     <!-- <img src="CAMINHO_IMAGEM_PROJETO_3" alt="Jovem Falcão" class="project-image"> -->
-                    <img src="midia/img/JovemFalcao/Capa.webp" alt="Jovem Falcão" class="project-image">
+                    <img src="midia/img/JovemFalcao/Capa-500.webp" alt="Jovem Falcão" class="project-image"
+                        srcset="midia/img/JovemFalcao/Capa-500.webp 500w, midia/img/JovemFalcao/Capa-1000.webp 1000w, midia/img/JovemFalcao/Capa.webp 1920w"
+                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                     <h3>Jovem Falcão</h3>
                     <p><strong>Objetivo:</strong> Contribuir para a promoção da garantia dos direitos dos adolescentes e
                         jovens, desenvolvendo potencial humano e social.</p>
@@ -198,7 +238,9 @@
                     <div class="project-number">04</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
                     <!-- <img src="CAMINHO_IMAGEM_PROJETO_4" alt="Conectando Gerações" class="project-image"> -->
-                    <img src="midia/img/ConectandoGeracoes/Capa.webp" alt="Jovem Falcão" class="project-image">
+                    <img src="midia/img/ConectandoGeracoes/Capa-500.webp" alt="Jovem Falcão" class="project-image"
+                        srcset="midia/img/ConectandoGeracoes/Capa-500.webp 500w, midia/img/ConectandoGeracoes/Capa-1000.webp 1000w, midia/img/ConectandoGeracoes/Capa.webp 1920w"
+                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                     <h3>Conectando Gerações</h3>
                     <p><strong>Objetivo:</strong> Contribuir com o processo de envelhecimento ativo e saudável da pessoa
                         idosa.</p>
@@ -263,37 +305,59 @@
                 <div class="carousel-wrapper">
                     <div class="carousel-track" id="carouselTrack">
                         <div class="partner-slide">
-                            <img src="midia/logos/BocadaMataLogo.webp" alt="Bocada Mata">
+                            <img src="midia/logos/BocadaMataLogo-500.webp" alt="Bocada Mata"
+                                srcset="midia/logos/BocadaMataLogo-500.webp 500w, midia/logos/BocadaMataLogo-1000.webp 1000w, midia/logos/BocadaMataLogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CMDCALogo.webp" alt="CMDCA">
+                            <img src="midia/logos/CMDCALogo-500.webp" alt="CMDCA"
+                                srcset="midia/logos/CMDCALogo-500.webp 500w, midia/logos/CMDCALogo-1000.webp 1000w, midia/logos/CMDCALogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CMDCAALogo.webp" alt="CMDCAA">
+                            <img src="midia/logos/CMDCAALogo-500.webp" alt="CMDCAA"
+                                srcset="midia/logos/CMDCAALogo-500.webp 500w, midia/logos/CMDCAALogo-1000.webp 1000w, midia/logos/CMDCAALogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/AmbevLogo.webp" alt="Ambev">
+                            <img src="midia/logos/AmbevLogo-500.webp" alt="Ambev"
+                                srcset="midia/logos/AmbevLogo-500.webp 500w, midia/logos/AmbevLogo-1000.webp 1000w, midia/logos/AmbevLogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/AnadiaLogo.webp" alt="Anadia">
+                            <img src="midia/logos/AnadiaLogo-500.webp" alt="Anadia"
+                                srcset="midia/logos/AnadiaLogo-500.webp 500w, midia/logos/AnadiaLogo-1000.webp 1000w, midia/logos/AnadiaLogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CMDPILogo.webp" alt="CMDPI">
+                            <img src="midia/logos/CMDPILogo-500.webp" alt="CMDPI"
+                                srcset="midia/logos/CMDPILogo-500.webp 500w, midia/logos/CMDPILogo-1000.webp 1000w, midia/logos/CMDPILogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CriancaEsperancaLogo.webp" alt="Criança Esperança">
+                            <img src="midia/logos/CriancaEsperancaLogo-500.webp" alt="Criança Esperança"
+                                srcset="midia/logos/CriancaEsperancaLogo-500.webp 500w, midia/logos/CriancaEsperancaLogo-1000.webp 1000w, midia/logos/CriancaEsperancaLogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/FalconsUniversityLogo.webp" alt="Falcons University">
+                            <img src="midia/logos/FalconsUniversityLogo-500.webp" alt="Falcons University"
+                                srcset="midia/logos/FalconsUniversityLogo-500.webp 500w, midia/logos/FalconsUniversityLogo-1000.webp 1000w, midia/logos/FalconsUniversityLogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/ItauSocialLogo.webp" alt="Itaú Social">
+                            <img src="midia/logos/ItauSocialLogo-500.webp" alt="Itaú Social"
+                                srcset="midia/logos/ItauSocialLogo-500.webp 500w, midia/logos/ItauSocialLogo-1000.webp 1000w, midia/logos/ItauSocialLogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/ProgramadeValorLogo.webp" alt="Programa de Valor">
+                            <img src="midia/logos/ProgramadeValorLogo-500.webp" alt="Programa de Valor"
+                                srcset="midia/logos/ProgramadeValorLogo-500.webp 500w, midia/logos/ProgramadeValorLogo-1000.webp 1000w, midia/logos/ProgramadeValorLogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/SiemensLogo.webp" alt="Siemens">
+                            <img src="midia/logos/SiemensLogo-500.webp" alt="Siemens"
+                                srcset="midia/logos/SiemensLogo-500.webp 500w, midia/logos/SiemensLogo-1000.webp 1000w, midia/logos/SiemensLogo.webp 1920w"
+                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                         </div>
                     </div>
                 </div>
@@ -302,13 +366,13 @@
                 <button class="carousel-btn carousel-btn-prev" id="prevBtn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                            stroke-linejoin="round"></path>
                     </svg>
                 </button>
                 <button class="carousel-btn carousel-btn-next" id="nextBtn">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
+                            stroke-linejoin="round"></path>
                     </svg>
                 </button>
             </div>
@@ -350,7 +414,7 @@
                     <div class="form-embed-wrapper">
                         <iframe
                             src="https://docs.google.com/forms/d/e/1FAIpQLSeyqQ9yL68Kcrg6FxqLm1DvMhurPQSsMapzum6f8IQuAGa4Cw/viewform?embedded=true"
-                            allowfullscreen loading="lazy">
+                            allowfullscreen="" loading="lazy">
                             Carregando…
                         </iframe>
                     </div>
@@ -366,7 +430,9 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO (pode ser a mesma do header) -->
-                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="footer-logo">
+                    <img src="midia/IGDSLogo-500.webp" alt="Instituto Girassol" class="footer-logo"
+                        srcset="midia/IGDSLogo-500.webp 500w, midia/IGDSLogo-1000.webp 1000w, midia/IGDSLogo.webp 1920w"
+                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
                     <p>Nosso compromisso é transformar realidades por meio de uma educação inovadora!</p>
                     <div class="social-links">
                         <a href="https://www.facebook.com/institutogirassoldedesenvolvimentosocial" target="_blank">
@@ -385,7 +451,7 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Projetos & Ações</h4>
+                    <h4>Projetos &amp; Ações</h4>
                     <ul>
                         <li><a href="#contadores">Projeto Contadores do Amanhã</a></li>
                         <li><a href="#educacao">Projeto Educação C.J.</a></li>
@@ -408,7 +474,7 @@
                     <h4>Newsletter</h4>
                     <p>Receba nossas novidades e atualizações</p>
                     <form class="newsletter-form">
-                        <input type="email" placeholder="Seu e-mail" required>
+                        <input type="email" placeholder="Seu e-mail" required="">
                         <button type="submit">
                             <i class="fas fa-paper-plane"></i>
                         </button>
@@ -417,7 +483,7 @@
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2025 Instituto Girassol de Desenvolvimento Social - IGDS. Todos os direitos reservados.</p>
+                <p>© 2025 Instituto Girassol de Desenvolvimento Social - IGDS. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
@@ -433,6 +499,8 @@
     </button>
 
     <script src="js/script.js"></script>
+
+
 </body>
 
 </html>

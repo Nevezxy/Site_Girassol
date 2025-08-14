@@ -990,3 +990,13 @@ iframe {
         right: 5px;
     }
 }
+
+/* Para que as logos fiquem maiores no mobile */
+@media (max-width: 768px) {
+    .partner-slide img {
+        width: 80%;       /* ou outro valor que fique bom */
+        max-width: none;  /* remove qualquer limite */
+        height: auto;     /* mantém proporção */
+    }
+}
+
