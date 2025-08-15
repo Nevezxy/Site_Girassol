@@ -33,6 +33,10 @@
     <noscript>
         <link rel="stylesheet" href="css/styles.css">
     </noscript>
+    <!-- Preload da imagem do hero -->
+    <link rel="preload" as="image" href="https://igds.org.br/Entrada.webp"
+        imagesrcset="midia/Entrada-500.webp 500w, midia/Entrada-1000.webp 1000w, midia/Entrada.webp 1920w"
+        imagesizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
 
     <!-- Ícones -->
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style"
@@ -182,9 +186,7 @@
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
                     <!-- <img src="CAMINHO_IMAGEM_PROJETO_1" alt="Contadores do Amanhã" class="project-image"> -->
                     <img src="midia/img/ContadoresDoAmanha/Capa-500.webp" alt="Contadores do Amanhã"
-                        class="project-image"
-                        srcset="midia/img/ContadoresDoAmanha/Capa-500.webp 500w, midia/img/ContadoresDoAmanha/Capa-1000.webp 1000w, midia/img/ContadoresDoAmanha/Capa.webp 1920w"
-                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                        class="project-image">
                     <h3>Contadores do Amanhã</h3>
                     <p><strong>Objetivo:</strong> Promover a leitura, a produção textual e o desenvolvimento de
                         habilidades socioemocionais de crianças e adolescentes.</p>
@@ -201,9 +203,7 @@
                     <div class="project-number">02</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
                     <!-- <img src="CAMINHO_IMAGEM_PROJETO_2" alt="Educação C.J." class="project-image"> -->
-                    <img src="midia/img/EducacaoCJ/Capa-500.webp" alt="Educação C.J." class="project-image"
-                        srcset="midia/img/EducacaoCJ/Capa-500.webp 500w, midia/img/EducacaoCJ/Capa-1000.webp 1000w, midia/img/EducacaoCJ/Capa.webp 1920w"
-                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                    <img src="midia/img/EducacaoCJ/Capa-500.webp" alt="Educação Crescendo Juntos" class="project-image">
                     <h3>Educação Crescendo Juntos</h3>
                     <p><strong>Objetivo:</strong> Promover a formação integral de crianças, adolescentes e jovens em
                         situação de vulnerabilidade social.</p>
@@ -220,9 +220,7 @@
                     <div class="project-number">03</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
                     <!-- <img src="CAMINHO_IMAGEM_PROJETO_3" alt="Jovem Falcão" class="project-image"> -->
-                    <img src="midia/img/JovemFalcao/Capa-500.webp" alt="Jovem Falcão" class="project-image"
-                        srcset="midia/img/JovemFalcao/Capa-500.webp 500w, midia/img/JovemFalcao/Capa-1000.webp 1000w, midia/img/JovemFalcao/Capa.webp 1920w"
-                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                    <img src="midia/img/JovemFalcao/Capa-500.webp" alt="Jovem Falcão" class="project-image">
                     <h3>Jovem Falcão</h3>
                     <p><strong>Objetivo:</strong> Contribuir para a promoção da garantia dos direitos dos adolescentes e
                         jovens, desenvolvendo potencial humano e social.</p>
@@ -238,9 +236,8 @@
                     <div class="project-number">04</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
                     <!-- <img src="CAMINHO_IMAGEM_PROJETO_4" alt="Conectando Gerações" class="project-image"> -->
-                    <img src="midia/img/ConectandoGeracoes/Capa-500.webp" alt="Jovem Falcão" class="project-image"
-                        srcset="midia/img/ConectandoGeracoes/Capa-500.webp 500w, midia/img/ConectandoGeracoes/Capa-1000.webp 1000w, midia/img/ConectandoGeracoes/Capa.webp 1920w"
-                        sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                    <img src="midia/img/ConectandoGeracoes/Capa-500.webp" alt="Conectando Gerações"
+                        class="project-image">
                     <h3>Conectando Gerações</h3>
                     <p><strong>Objetivo:</strong> Contribuir com o processo de envelhecimento ativo e saudável da pessoa
                         idosa.</p>
@@ -305,59 +302,37 @@
                 <div class="carousel-wrapper">
                     <div class="carousel-track" id="carouselTrack">
                         <div class="partner-slide">
-                            <img src="midia/logos/BocadaMataLogo-500.webp" alt="Bocada Mata"
-                                srcset="midia/logos/BocadaMataLogo-500.webp 500w, midia/logos/BocadaMataLogo-1000.webp 1000w, midia/logos/BocadaMataLogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/BocadaMataLogo-500.webp" alt="Bocada Mata">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CMDCALogo-500.webp" alt="CMDCA"
-                                srcset="midia/logos/CMDCALogo-500.webp 500w, midia/logos/CMDCALogo-1000.webp 1000w, midia/logos/CMDCALogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/CMDCALogo-500.webp" alt="CMDCA">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CMDCAALogo-500.webp" alt="CMDCAA"
-                                srcset="midia/logos/CMDCAALogo-500.webp 500w, midia/logos/CMDCAALogo-1000.webp 1000w, midia/logos/CMDCAALogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/CMDCAALogo-500.webp" alt="CMDCAA">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/AmbevLogo-500.webp" alt="Ambev"
-                                srcset="midia/logos/AmbevLogo-500.webp 500w, midia/logos/AmbevLogo-1000.webp 1000w, midia/logos/AmbevLogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/AmbevLogo-500.webp" alt="Ambev">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/AnadiaLogo-500.webp" alt="Anadia"
-                                srcset="midia/logos/AnadiaLogo-500.webp 500w, midia/logos/AnadiaLogo-1000.webp 1000w, midia/logos/AnadiaLogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/AnadiaLogo-500.webp" alt="Anadia">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CMDPILogo-500.webp" alt="CMDPI"
-                                srcset="midia/logos/CMDPILogo-500.webp 500w, midia/logos/CMDPILogo-1000.webp 1000w, midia/logos/CMDPILogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/CMDPILogo-500.webp" alt="CMDPI">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CriancaEsperancaLogo-500.webp" alt="Criança Esperança"
-                                srcset="midia/logos/CriancaEsperancaLogo-500.webp 500w, midia/logos/CriancaEsperancaLogo-1000.webp 1000w, midia/logos/CriancaEsperancaLogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/CriancaEsperancaLogo-500.webp" alt="Criança Esperança">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/FalconsUniversityLogo-500.webp" alt="Falcons University"
-                                srcset="midia/logos/FalconsUniversityLogo-500.webp 500w, midia/logos/FalconsUniversityLogo-1000.webp 1000w, midia/logos/FalconsUniversityLogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/FalconsUniversityLogo-500.webp" alt="Falcons University">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/ItauSocialLogo-500.webp" alt="Itaú Social"
-                                srcset="midia/logos/ItauSocialLogo-500.webp 500w, midia/logos/ItauSocialLogo-1000.webp 1000w, midia/logos/ItauSocialLogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/ItauSocialLogo-500.webp" alt="Itaú Social">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/ProgramadeValorLogo-500.webp" alt="Programa de Valor"
-                                srcset="midia/logos/ProgramadeValorLogo-500.webp 500w, midia/logos/ProgramadeValorLogo-1000.webp 1000w, midia/logos/ProgramadeValorLogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/ProgramadeValorLogo-500.webp" alt="Programa de Valor">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/SiemensLogo-500.webp" alt="Siemens"
-                                srcset="midia/logos/SiemensLogo-500.webp 500w, midia/logos/SiemensLogo-1000.webp 1000w, midia/logos/SiemensLogo.webp 1920w"
-                                sizes="(max-width: 500px) 500px, (max-width: 1000px) 1000px, 1920px">
+                            <img src="midia/logos/SiemensLogo-500.webp" alt="Siemens">
                         </div>
                     </div>
                 </div>
