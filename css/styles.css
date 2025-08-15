@@ -429,7 +429,7 @@ section {
     padding: 6rem 0;
     background: 
         linear-gradient(135deg, rgba(30, 24, 16, 0.700), rgba(30, 24, 16, 0.700)),
-        url('../midia/img/Stats.jpg'); /* Caminho da imagem */
+        url('../midia/img/Stats.webp'); /* Caminho da imagem */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

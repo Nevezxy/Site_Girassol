@@ -159,17 +159,6 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// ================= HERO BACKGROUND SLIDER =================
-const images = ["midia/img/Entrada.webp"];
-let bgCurrentIndex = 0;
-function changeBackground() {
-    if (!heroBackground) return;
-    heroBackground.style.backgroundImage = `url('${images[bgCurrentIndex]}')`;
-    bgCurrentIndex = (bgCurrentIndex + 1) % images.length;
-}
-changeBackground();
-setInterval(changeBackground, 5000);
-
 // ================= CAROUSEL INFINITO =================
 let originalSlides = Array.from(carouselTrack.children);
 let slidesPerPage = 3;
