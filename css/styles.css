@@ -572,6 +572,7 @@ section {
 .contact {
     background: var(--light-bg);
     padding: 4rem 2rem;
+    transition: background 0.3s ease;
 }
 
 .contact-grid {
@@ -586,6 +587,24 @@ section {
     font-size: 2rem;
     margin-bottom: 2rem;
     font-weight: 600;
+    position: relative;
+}
+
+.contact-info h3::after,
+.contact-form h3::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-color);
+    margin-top: 0.5rem;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+.contact-info h3:hover::after,
+.contact-form h3:hover::after {
+    width: 100px;
 }
 
 .contact-item {
@@ -593,12 +612,21 @@ section {
     align-items: flex-start;
     gap: 1rem;
     margin-bottom: 1.8rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards;
 }
 
 .contact-item i {
     font-size: 1.6rem;
     color: var(--primary-color);
     margin-top: 0.2rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-item:hover i {
+    color: var(--secondary-color);
+    transform: scale(1.2);
 }
 
 .contact-item h4 {
@@ -616,11 +644,18 @@ section {
     background: #fff;
     padding: 2rem;
     border-radius: var(--border-radius);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-form:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
 }
 
 .form-group {
     margin-bottom: 1.5rem;
+    position: relative;
 }
 
 .form-group input,
@@ -631,7 +666,7 @@ section {
     border: 1.5px solid #ddd;
     border-radius: 12px;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, transform 0.2s ease;
     background: #fdfdfd;
 }
 
@@ -640,7 +675,8 @@ section {
 .form-group select:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb),0.2);
+    box-shadow: 0 0 0 4px rgba(var(--primary-color-rgb),0.15);
+    transform: scale(1.02);
 }
 
 textarea {
@@ -658,13 +694,23 @@ button[type="submit"] {
     font-weight: 600;
     border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, transform 0.2s ease;
 }
 
 button[type="submit"]:hover {
-    background: #0056b3;
-    transform: translateY(-2px);
+    background: var(--secondary-color);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
+
+/* Keyframes para animação dos itens */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 
 @media (max-width: 900px) {
     .contact-grid {
