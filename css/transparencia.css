@@ -756,3 +756,13 @@ body {
         transform: translateY(-8px) rotate(-45deg);
     }
 }
+
+.fancy-sep {
+   width: 100%;
+  margin: 4rem 0;       /* distância entre os conteúdos */
+  border-top: 3px solid #000000;
+  border-bottom: 3px solid #000000;
+  padding: 12px 0;      /* espaço entre as duas linhas */
+  border-radius: 0;     /* linhas totalmente retas */
+  background: none;
+}
