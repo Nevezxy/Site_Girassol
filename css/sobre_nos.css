@@ -381,6 +381,7 @@ body {
 
 .mvv-card p {
     line-height: 1.7;
+    text-align: justify;
 }
 
 .values-section {
@@ -492,15 +493,17 @@ body {
 }
 
 .logo-section h2 {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--dark-color);
-    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
 }
 
+
 .main-logo {
-    max-width: 400px;
-    height: auto;
+    max-width: 400px; /* ou qualquer tamanho que você queira como máximo */
+    width: 100%;       /* faz a imagem se ajustar ao container */
+    height: auto;      /* mantém proporção */
 }
 
 /* Team Section */
@@ -518,8 +521,9 @@ body {
 
 .team-section .section-header h2 {
     font-size: 2.5rem;
-    font-weight: 600;
-    color: var(--dark-color);
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
 }
 
 .team-content {
@@ -534,6 +538,12 @@ body {
     width: 100%;
     height: auto;
     border-radius: var(--border-radius);
+    opacity: 1;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.team-img.fade-out {
+    opacity: 0;
 }
 
 .team-info {

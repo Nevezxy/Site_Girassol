@@ -34,10 +34,32 @@ document.addEventListener('DOMContentLoaded', () => {
         showSlide(currentSlide);
     }
 
+    const teamImages = [
+        "midia/img/Sobre/Equipe.webp",        // imagem do slide 1
+        "midia/img/Sobre/Equipe2.webp",       // imagem do slide 2
+        "midia/img/Sobre/Equipe3.webp",       // imagem do slide 3
+        "midia/img/Sobre/Equipe4.webp"        // imagem do slide 4
+    ];
+    const teamImageElement = document.querySelector(".team-img");
+
     // ==== FUNÇÕES SLIDER EQUIPE ====
     function showTeamSlide(index) {
-        teamSlides.forEach((slide, i) => slide.classList.toggle('active', i === index));
-        document.querySelectorAll('.team-indicator').forEach((indicator, i) => indicator.classList.toggle('active', i === index));
+        teamSlides.forEach((slide, i) =>
+            slide.classList.toggle('active', i === index)
+        );
+        document.querySelectorAll('.team-indicator').forEach((indicator, i) =>
+            indicator.classList.toggle('active', i === index)
+        );
+
+        // troca a imagem de acordo com o slide
+        if (teamImageElement) {
+            teamImageElement.classList.add("fade-out");
+
+            setTimeout(() => {
+                teamImageElement.src = teamImages[index];
+                teamImageElement.classList.remove("fade-out");
+            }, 400); // metade do tempo da transição
+        }
     }
     function nextTeamSlide() {
         currentTeamSlide = (currentTeamSlide + 1) % teamSlides.length;
