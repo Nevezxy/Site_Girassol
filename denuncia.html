@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canal de Denúncias - Instituto Girassol de Desenvolvimento Social</title>
+    <link rel="stylesheet" href="css/denuncia.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="midia/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+     <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
+                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="logo">
+                </div>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="nav-link">Início</a></li>
+                        <li><a href="sobre_nos.html" class="nav-link">Sobre</a></li>
+                        <li class="dropdown">
+                            <a href="#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="contadores_do_amanha.html">Contadores do Amanhã</a></li>
+                                <li><a href="educacao_cj.html">Educação C.J.</a></li>
+                                <li><a href="jovem_falcao.html">Jovem Falcão</a></li>
+                                <li><a href="conectando_geracoes.html">Conectando Gerações</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="publicacoes.html" class="nav-link">Publicações</a></li>
+                        <li><a href="transparencia.html" class="nav-link">Transparência</a></li>
+                        <li><a href="index.html#contato" class="nav-link">Contato</a></li>
+                        <li><a href="denuncia.html" class="nav-link">Denúncias</a></li>
+                        <li><a href="doe_agora.html" class="nav-link btn-donate">Doe Agora</a></li>
+                    </ul>
+                </div>
+
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container-form">
+        <div class="form-container">
+            <div class="form-header">
+                <h1>Canal de Denúncias</h1>
+                <p>Sua denúncia é importante para nós. Todas as informações serão tratadas com confidencialidade.</p>
+            </div>
+            
+            <form id="meuForm" class="contact-form">
+                <input type="hidden" name="form-name" value="denuncia">
+                
+                <div class="form-group">
+                    <label for="nome">Nome (opcional)</label>
+                    <input type="text" id="nome" name="entry.1655741229" placeholder="Seu nome (pode ser anônimo)">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail (opcional)</label>
+                    <input type="email" id="email" name="entry.777068924" placeholder="Seu e-mail para retorno">
+                </div>
+                
+                <div class="form-group">
+                    <input type="hidden" id="assunto" name="entry.429007067" value="Denúncia">
+                </div>
+                                
+                <div class="form-group">
+                    <label for="mensagem">Descrição da Denúncia</label>
+                    <textarea id="mensagem" name="entry.374350221" placeholder="Descreva detalhadamente a situação que deseja denunciar..." required rows="6"></textarea>
+                </div>
+                
+                <div class="privacy-notice">
+                    <p><strong>Confidencialidade:</strong> Suas informações serão tratadas com total sigilo e utilizadas apenas para investigação da denúncia.</p>
+                </div>
+                
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">Enviar Denúncia</span>
+                    <span class="btn-loading" style="display: none;">Enviando...</span>
+                </button>
+            </form>
+        </div>
+    </main>
+
+       <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO (pode ser a mesma do header) -->
+                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="footer-logo">
+                    <p>Nosso compromisso é transformar realidades por meio de uma educação inovadora!</p>
+                    <div class="social-links">
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/institutogirassoldedesenvolvimentosocial" target="_blank"
+                            aria-label="Instituto Girassol no Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/instituto_girassol/" target="_blank"
+                            aria-label="Instituto Girassol no Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <!-- YouTube -->
+                        <a href="https://www.youtube.com/c/InstitutoGirassoldeDesenvolvimentoSocial" target="_blank"
+                            aria-label="Instituto Girassol no YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+
+                        <!-- LinkedIn -->
+                        <a href="https://www.linkedin.com/company/9445583/" target="_blank"
+                            aria-label="Instituto Girassol no LinkedIn">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Projetos & Ações</h4>
+                    <ul>
+                        <li><a href="contadores_do_amanha.html">Projeto Contadores do Amanhã</a></li>
+                        <li><a href="educacao_cj.html">Projeto Educação C.J.</a></li>
+                        <li><a href="jovem_falcao.html">Projeto Jovem Falcão</a></li>
+                        <li><a href="conectando_geracoes.html">Projeto Conectando Gerações</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="sobre_nos.html">Sobre Nós</a></li>
+                        <li><a href="transparencia.html">Transparência</a></li>
+                        <li><a href="publicacoes.html">Publicações</a></li>
+                        <li><a href="index.html#contato">Seja Voluntário</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Newsletter</h4>
+                    <p>Receba nossas novidades e atualizações</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <button type="submit" aria-label="Enviar inscrição na newsletter">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Instituto Girassol de Desenvolvimento Social - IGDS. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+        <!-- WhatsApp Button -->
+    <a href="https://wa.me/5582999992784" class="whatsapp-btn" target="_blank"
+        aria-label="Fale com o Instituto Girassol pelo WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <script src="js/denuncia.js"></script>
+</body>
+</html>
