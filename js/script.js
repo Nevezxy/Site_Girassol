@@ -167,6 +167,9 @@ let slidesPerPage = 3;
 let currentIndex = slidesPerPage;
 let allSlides = [];
 let autoPlayInterval = null;
+// Logos fora da janela visível (inclusive as cópias das pontas) saem da
+// leitura sequencial de quem usa leitor de tela; refeito a cada rebuild.
+let slideVisibility = null;
 
 function getSlidesPerPage() {
     const width = window.innerWidth;
@@ -190,6 +193,7 @@ function setupCarousel() {
     clonesEnd.forEach(clone => carouselTrack.appendChild(clone));
 
     allSlides = Array.from(carouselTrack.children);
+    slideVisibility = IGDS.slideVisibility(allSlides);
     updateCarousel(false);
     startAutoPlay();
 }
@@ -202,6 +206,9 @@ function updateCarousel(animate = true) {
     const slide = animate && !IGDS.reduzirMovimento();
     carouselTrack.style.transition = slide ? "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)" : "none";
     carouselTrack.style.transform = `translateX(${offset}px)`;
+    const visible = [];
+    for (let i = 0; i < slidesPerPage; i++) visible.push(currentIndex + i);
+    slideVisibility.set(visible);
     if (animate && !slide) wrapCarousel();
 }
 

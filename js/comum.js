@@ -110,6 +110,66 @@ window.IGDS = window.IGDS || {};
         };
     };
 
+    // ---------- Estado acessível dos carrosséis ----------
+    // Fatias fora de vista saem da leitura sequencial e do tab: ganham
+    // aria-hidden e, se tiverem algo focável, tabindex="-1" (restaurado ao
+    // voltarem a ficar visíveis). Serve tanto carrossel de uma fatia por vez
+    // (passe um índice) quanto o de várias fatias visíveis ao mesmo tempo
+    // (passe a lista de índices visíveis).
+    const FOCUSABLE_SEL = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled])';
+
+    IGDS.slideVisibility = function (slides) {
+        slides = Array.from(slides || []);
+
+        function apply(visibleIndices) {
+            const visible = new Set(visibleIndices);
+            slides.forEach((slide, i) => {
+                const isVisible = visible.has(i);
+                if (isVisible) slide.removeAttribute('aria-hidden');
+                else slide.setAttribute('aria-hidden', 'true');
+                slide.querySelectorAll(FOCUSABLE_SEL).forEach((el) => {
+                    if (isVisible) {
+                        if (el.hasAttribute('data-igds-tabindex')) {
+                            const saved = el.getAttribute('data-igds-tabindex');
+                            if (saved) el.setAttribute('tabindex', saved);
+                            else el.removeAttribute('tabindex');
+                            el.removeAttribute('data-igds-tabindex');
+                        }
+                    } else if (!el.hasAttribute('data-igds-tabindex')) {
+                        el.setAttribute('data-igds-tabindex', el.getAttribute('tabindex') || '');
+                        el.setAttribute('tabindex', '-1');
+                    }
+                });
+            });
+        }
+
+        return {
+            set(indices) {
+                apply(Array.isArray(indices) ? indices : [indices]);
+            }
+        };
+    };
+
+    // Região aria-live única, reaproveitada por todos os carrosséis da
+    // página. Só deve ser chamada em resposta a uma troca pedida por quem
+    // usa o site (seta, indicador, teclado, arraste) — nunca a cada avanço
+    // automático, para não interromper leitores de tela a cada 4-8s.
+    let liveRegion;
+    IGDS.announce = function (text) {
+        if (!text) return;
+        if (!liveRegion) {
+            liveRegion = document.createElement('div');
+            liveRegion.className = 'sr-only';
+            liveRegion.setAttribute('aria-live', 'polite');
+            liveRegion.setAttribute('aria-atomic', 'true');
+            document.body.appendChild(liveRegion);
+        }
+        // setTimeout, não requestAnimationFrame: o anúncio precisa sair mesmo
+        // com a aba em segundo plano, onde o navegador pausa os frames.
+        liveRegion.textContent = '';
+        setTimeout(() => { liveRegion.textContent = text; }, 50);
+    };
+
     // ---------- Menu móvel ----------
     // O abrir/fechar continua no script de cada página; aqui só
     // sincronizamos o estado para leitores de tela e o teclado.

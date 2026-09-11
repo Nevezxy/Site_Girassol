@@ -110,21 +110,36 @@ function showCopyMessage(message, type) {
     }, type === 'error' ? 7000 : 3500);
 }
 
-// Expandable content toggle
+// Expandable content toggle. max-height vai para a altura real do texto
+// (scrollHeight), não um teto arbitrário: abre exatamente até o fim do
+// conteúdo, sem corte e sem sobra de espaço na transição.
 function toggleContent() {
     const expandedText = document.getElementById('expanded-text');
     const button = document.querySelector('.btn-expand');
 
     if (expandedText.classList.contains('active')) {
         expandedText.classList.remove('active');
+        // Valor explícito (não '') para a transição sempre ter um alvo
+        // numérico claro para animar, em vez de depender da folha de estilo.
+        expandedText.style.maxHeight = '0px';
         button.textContent = 'Leia Mais';
         button.setAttribute('aria-expanded', 'false');
     } else {
         expandedText.classList.add('active');
+        expandedText.style.maxHeight = expandedText.scrollHeight + 'px';
         button.textContent = 'Leia Menos';
         button.setAttribute('aria-expanded', 'true');
     }
 }
+
+// Recalcula a altura se a página redimensionar (rotação, zoom) com o
+// texto aberto — senão o teto fica com a medida antiga do texto reflowed.
+window.addEventListener('resize', () => {
+    const expandedText = document.getElementById('expanded-text');
+    if (expandedText && expandedText.classList.contains('active')) {
+        expandedText.style.maxHeight = expandedText.scrollHeight + 'px';
+    }
+});
 
 // Carousel functionality
 document.addEventListener("DOMContentLoaded", () => {
@@ -138,6 +153,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let autoPlayInterval;
     let autoPlayActive = true;
+    // Fatias fora de vista saem da leitura sequencial e do tab; o avanço
+    // automático não anuncia, só a troca pedida por quem usa o site.
+    const slideVisibility = IGDS.slideVisibility(slides);
 
     // Define altura inicial do track para evitar que a página colapse
     function updateTrackHeight() {
@@ -154,34 +172,39 @@ document.addEventListener("DOMContentLoaded", () => {
         if (index === 0) dot.classList.add('active');
         dot.addEventListener('click', () => {
             stopAutoPlay();
-            goToSlide(index);
+            goToSlide(index, true);
         });
         dotsContainer.appendChild(dot);
     });
 
-    function updateCarousel() {
+    function updateCarousel(announce = false) {
         slides.forEach((slide, index) => {
             slide.classList.toggle('active', index === currentSlide);
         });
         document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
             dot.classList.toggle('active', index === currentSlide);
         });
+        slideVisibility.set(currentSlide);
         updateTrackHeight();
+        if (announce) {
+            const heading = slides[currentSlide]?.querySelector('h3');
+            IGDS.announce(`${heading ? heading.textContent.trim() : 'Slide ' + (currentSlide + 1)} — slide ${currentSlide + 1} de ${totalSlides}`);
+        }
     }
 
-    function nextSlide() {
+    function nextSlide(announce = false) {
         currentSlide = (currentSlide + 1) % totalSlides;
-        updateCarousel();
+        updateCarousel(announce);
     }
 
-    function prevSlide() {
+    function prevSlide(announce = false) {
         currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateCarousel();
+        updateCarousel(announce);
     }
 
-    function goToSlide(index) {
+    function goToSlide(index, announce = false) {
         currentSlide = index;
-        updateCarousel();
+        updateCarousel(announce);
     }
 
     // Controle compartilhado (js/comum.js): botão pausar/retomar e pausa
@@ -203,16 +226,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     nextBtn.addEventListener("click", () => {
         stopAutoPlay();
-        nextSlide();
+        nextSlide(true);
     });
 
     prevBtn.addEventListener("click", () => {
         stopAutoPlay();
-        prevSlide();
+        prevSlide(true);
     });
 
     // Inicializa
     slides[0].classList.add('active');
+    slideVisibility.set(0);
     updateTrackHeight();
     startAutoPlay();
 });
@@ -414,15 +438,23 @@ const prevBtn = document.getElementById("prevTestimonial");
 const nextBtn = document.getElementById("nextTestimonial");
 
 let index = 0;
+// Fatias fora de vista saem da leitura sequencial e do tab; o avanço
+// automático não anuncia, só a troca pedida por quem usa o site.
+const testimonialVisibility = IGDS.slideVisibility(slides);
 
-function updateCarousel() {
+function updateCarousel(announce = false) {
     const slideWidth = slides[0].offsetWidth;
     track.style.transform = `translateX(-${index * slideWidth}px)`;
+    testimonialVisibility.set(index);
+    if (announce) {
+        const author = slides[index]?.querySelector('.testimonial-author');
+        IGDS.announce(`Depoimento${author ? ' de ' + author.textContent.trim() : ''} — ${index + 1} de ${slides.length}`);
+    }
 }
 
-function nextTestimonial() {
+function nextTestimonial(announce = false) {
     index = (index === slides.length - 1) ? 0 : index + 1;
-    updateCarousel();
+    updateCarousel(announce);
 }
 
 // Auto-slide a cada 8 segundos, com o mesmo controle dos outros carrosséis;
@@ -435,15 +467,17 @@ const testimonialAutoplay = IGDS.autoplay({
     delay: 8000
 });
 
+updateCarousel();
+
 prevBtn.addEventListener("click", () => {
     testimonialAutoplay.stop();
     index = (index === 0) ? slides.length - 1 : index - 1;
-    updateCarousel();
+    updateCarousel(true);
 });
 
 nextBtn.addEventListener("click", () => {
     testimonialAutoplay.stop();
-    nextTestimonial();
+    nextTestimonial(true);
 });
 
 // ===== PARALLAX EFFECT FOR HERO SECTION =====

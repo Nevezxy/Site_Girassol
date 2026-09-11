@@ -422,15 +422,19 @@ body {
     background: var(--secondary-color);
 }
 
+/* Acordeão: max-height, mas com a altura real do conteúdo (calculada em
+   js/doe_agora.js via scrollHeight), não mais um teto arbitrário de 500px.
+   Tentei grid-template-rows: 0fr → 1fr (a técnica só de CSS, sem teto) com
+   o texto já dividido em .expanded-text-inner para isso; o navegador de
+   verificação deste projeto não resolve 0fr para 0 num grid de altura
+   indefinida (fica preso na altura do conteúdo mesmo fechado) — reverti
+   para JS só depois de confirmar isso com um teste isolado, fora do site.
+   O wrapper .expanded-text-inner continua no HTML caso valha revisitar. */
 .expanded-text {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
     margin-top: 1rem;
-}
-
-.expanded-text.active {
-    max-height: 500px;
 }
 
 .donation-hero-img {

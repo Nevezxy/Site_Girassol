@@ -102,6 +102,9 @@ class ImageCarousel {
         this.totalSlides = this.slides.length;
         this.autoPlayInterval = null;
         this.autoPlayDelay = 5000; // 5s
+        // Fatias fora de vista saem da leitura sequencial e do tab; o avanço
+        // automático não anuncia, só a troca pedida por quem usa o site.
+        this.slideVisibility = IGDS.slideVisibility(this.slides);
 
         this.init();
     }
@@ -120,13 +123,13 @@ class ImageCarousel {
             if (i === 0) indicator.classList.add('active');
             indicator.addEventListener('click', () => {
                 this.stopAutoPlay();
-                this.goToSlide(i);
+                this.goToSlide(i, true);
             });
             this.indicatorsContainer.appendChild(indicator);
         }
     }
 
-    updateCarousel() {
+    updateCarousel(announce = false) {
         this.track.style.transition = IGDS.reduzirMovimento() ? 'none' : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
         this.track.style.transform = `translateX(${-this.currentSlide * 100}%)`;
 
@@ -134,31 +137,33 @@ class ImageCarousel {
         indicators.forEach((indicator, index) => {
             indicator.classList.toggle('active', index === this.currentSlide);
         });
+        this.slideVisibility.set(this.currentSlide);
+        if (announce) IGDS.announce(`Foto ${this.currentSlide + 1} de ${this.totalSlides}`);
     }
 
-    nextSlide() {
+    nextSlide(announce = false) {
         this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
-        this.updateCarousel();
+        this.updateCarousel(announce);
     }
 
-    prevSlide() {
+    prevSlide(announce = false) {
         this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
-        this.updateCarousel();
+        this.updateCarousel(announce);
     }
 
-    goToSlide(slideIndex) {
+    goToSlide(slideIndex, announce = false) {
         this.currentSlide = slideIndex;
-        this.updateCarousel();
+        this.updateCarousel(announce);
     }
 
     bindEvents() {
         this.nextBtn.addEventListener('click', () => {
             this.stopAutoPlay();
-            this.nextSlide();
+            this.nextSlide(true);
         });
         this.prevBtn.addEventListener('click', () => {
             this.stopAutoPlay();
-            this.prevSlide();
+            this.prevSlide(true);
         });
 
         let startX = 0;
@@ -170,7 +175,7 @@ class ImageCarousel {
             const diff = startX - endX;
             if (Math.abs(diff) > 50) {
                 this.stopAutoPlay();
-                diff > 0 ? this.nextSlide() : this.prevSlide();
+                diff > 0 ? this.nextSlide(true) : this.prevSlide(true);
             }
         });
 
@@ -178,11 +183,11 @@ class ImageCarousel {
             if (!this.carousel.contains(document.activeElement)) return;
             if (e.key === 'ArrowLeft') {
                 this.stopAutoPlay();
-                this.prevSlide();
+                this.prevSlide(true);
             }
             if (e.key === 'ArrowRight') {
                 this.stopAutoPlay();
-                this.nextSlide();
+                this.nextSlide(true);
             }
         });
     }

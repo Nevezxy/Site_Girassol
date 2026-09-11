@@ -11,6 +11,11 @@
    de sistema (Segoe UI / Tahoma / Verdana), sem fonte externa.
    ========================================================================== */
 :root {
+    /* Site é só claro (sem modo escuro): controles nativos do navegador
+       (scrollbar, campos, seleção de data) seguem o tema claro em vez do
+       tema do sistema operacional. */
+    color-scheme: light;
+
     --fw-regular: 400;
     --fw-medium: 500;
     --fw-semibold: 600;

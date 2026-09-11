@@ -15,23 +15,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const teamIndicators = document.getElementById('teamIndicators');
     const slides = document.querySelectorAll('.slide');
     const teamSlides = document.querySelectorAll('.team-slide');
+    // Fatias fora de vista saem da leitura sequencial e do tab; o avanço
+    // automático não anuncia (evita interromper o leitor de tela a cada
+    // 7s), só a troca pedida por quem usa o site.
+    const slideVisibility = IGDS.slideVisibility(slides);
+    const teamSlideVisibility = IGDS.slideVisibility(teamSlides);
 
     // ==== FUNÇÕES SLIDER PRINCIPAL ====
-    function showSlide(index) {
+    function showSlide(index, announce = false) {
         slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
         document.querySelectorAll('.indicator').forEach((indicator, i) => indicator.classList.toggle('active', i === index));
+        slideVisibility.set(index);
+        if (announce) {
+            const heading = slides[index]?.querySelector('h1, h2');
+            IGDS.announce(`${heading ? heading.textContent.trim() : 'Slide ' + (index + 1)} — slide ${index + 1} de ${slides.length}`);
+        }
     }
-    function nextSlide() {
+    function nextSlide(announce = false) {
         currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+        showSlide(currentSlide, announce);
     }
-    function prevSlide() {
+    function prevSlide(announce = false) {
         currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
+        showSlide(currentSlide, announce);
     }
-    function goToSlide(index) {
+    function goToSlide(index, announce = false) {
         currentSlide = index;
-        showSlide(currentSlide);
+        showSlide(currentSlide, announce);
     }
 
     const teamImages = [
@@ -43,13 +53,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const teamImageElement = document.querySelector(".team-img");
 
     // ==== FUNÇÕES SLIDER EQUIPE ====
-    function showTeamSlide(index) {
+    function showTeamSlide(index, announce = false) {
         teamSlides.forEach((slide, i) =>
             slide.classList.toggle('active', i === index)
         );
         document.querySelectorAll('.team-indicator').forEach((indicator, i) =>
             indicator.classList.toggle('active', i === index)
         );
+        teamSlideVisibility.set(index);
+        if (announce) IGDS.announce(`Depoimento ${index + 1} de ${teamSlides.length}`);
 
         // troca a imagem de acordo com o slide
         if (teamImageElement) {
@@ -61,17 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 400); // metade do tempo da transição
         }
     }
-    function nextTeamSlide() {
+    function nextTeamSlide(announce = false) {
         currentTeamSlide = (currentTeamSlide + 1) % teamSlides.length;
-        showTeamSlide(currentTeamSlide);
+        showTeamSlide(currentTeamSlide, announce);
     }
-    function prevTeamSlide() {
+    function prevTeamSlide(announce = false) {
         currentTeamSlide = (currentTeamSlide - 1 + teamSlides.length) % teamSlides.length;
-        showTeamSlide(currentTeamSlide);
+        showTeamSlide(currentTeamSlide, announce);
     }
-    function goToTeamSlide(index) {
+    function goToTeamSlide(index, announce = false) {
         currentTeamSlide = index;
-        showTeamSlide(currentTeamSlide);
+        showTeamSlide(currentTeamSlide, announce);
     }
 
     // ==== AUTO-PLAY ====
@@ -107,22 +119,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const indicator = document.createElement('div');
         indicator.classList.add('indicator');
         if (index === 0) indicator.classList.add('active');
-        indicator.addEventListener('click', () => { stopAutoPlayMain(); goToSlide(index); });
+        indicator.addEventListener('click', () => { stopAutoPlayMain(); goToSlide(index, true); });
         sliderIndicators.appendChild(indicator);
     });
     teamSlides.forEach((_, index) => {
         const indicator = document.createElement('div');
         indicator.classList.add('team-indicator');
         if (index === 0) indicator.classList.add('active');
-        indicator.addEventListener('click', () => { stopAutoPlayTeam(); goToTeamSlide(index); });
+        indicator.addEventListener('click', () => { stopAutoPlayTeam(); goToTeamSlide(index, true); });
         teamIndicators.appendChild(indicator);
     });
 
     // Eventos dos botões
-    if (prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlayMain(); prevSlide(); });
-    if (nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlayMain(); nextSlide(); });
-    if (teamPrevBtn) teamPrevBtn.addEventListener('click', () => { stopAutoPlayTeam(); prevTeamSlide(); });
-    if (teamNextBtn) teamNextBtn.addEventListener('click', () => { stopAutoPlayTeam(); nextTeamSlide(); });
+    if (prevBtn) prevBtn.addEventListener('click', () => { stopAutoPlayMain(); prevSlide(true); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { stopAutoPlayMain(); nextSlide(true); });
+    if (teamPrevBtn) teamPrevBtn.addEventListener('click', () => { stopAutoPlayTeam(); prevTeamSlide(true); });
+    if (teamNextBtn) teamNextBtn.addEventListener('click', () => { stopAutoPlayTeam(); nextTeamSlide(true); });
 
     // Swipe mobile
     let startX = 0, endX = 0;
@@ -132,15 +144,19 @@ document.addEventListener('DOMContentLoaded', () => {
     sliderContainer?.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     sliderContainer?.addEventListener('touchend', e => {
         endX = e.changedTouches[0].clientX;
-        if (startX - endX > 50) { stopAutoPlayMain(); nextSlide(); }
-        else if (endX - startX > 50) { stopAutoPlayMain(); prevSlide(); }
+        if (startX - endX > 50) { stopAutoPlayMain(); nextSlide(true); }
+        else if (endX - startX > 50) { stopAutoPlayMain(); prevSlide(true); }
     });
     teamSliderContainer?.addEventListener('touchstart', e => startX = e.touches[0].clientX);
     teamSliderContainer?.addEventListener('touchend', e => {
         endX = e.changedTouches[0].clientX;
-        if (startX - endX > 50) { stopAutoPlayTeam(); nextTeamSlide(); }
-        else if (endX - startX > 50) { stopAutoPlayTeam(); prevTeamSlide(); }
+        if (startX - endX > 50) { stopAutoPlayTeam(); nextTeamSlide(true); }
+        else if (endX - startX > 50) { stopAutoPlayTeam(); prevTeamSlide(true); }
     });
+
+    // Estado inicial de acessibilidade (sem isso só a 1ª troca escondia as demais fatias)
+    showSlide(currentSlide);
+    showTeamSlide(currentTeamSlide);
 
     // Inicia autoplay
     startAutoPlayMain();
@@ -195,8 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Setas só movem o slider quando o foco está nele (antes sequestravam as setas da página toda)
     document.addEventListener('keydown', e => {
         if (!document.querySelector('.hero-slider')?.contains(document.activeElement)) return;
-        if (e.key === 'ArrowLeft') { stopAutoPlayMain(); prevSlide(); }
-        if (e.key === 'ArrowRight') { stopAutoPlayMain(); nextSlide(); }
+        if (e.key === 'ArrowLeft') { stopAutoPlayMain(); prevSlide(true); }
+        if (e.key === 'ArrowRight') { stopAutoPlayMain(); nextSlide(true); }
     });
 });
 
