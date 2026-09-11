@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // ===== NEWSLETTER FORM HANDLING =====
     const newsletterForm = document.querySelector('.newsletter-form');
 
-    newsletterForm.addEventListener('submit', (e) => {
+    newsletterForm?.addEventListener('submit', (e) => {
         e.preventDefault();
 
         const email = newsletterForm.querySelector('input[type="email"]').value.trim();
@@ -128,23 +128,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return re.test(email);
     }
 
-    // Accessibility improvements
-    document.addEventListener('keydown', function (e) {
-        // Close mobile menu with Escape key
-        if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
-            mobileNav.classList.remove('active');
-            mobileMenuToggle.classList.remove('active');
-            body.classList.remove('menu-open');
-        }
-    });
-
-    // Focus management for mobile menu
-    mobileMenuToggle.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.click();
-        }
-    });
+    // Fechar o menu com Esc e ativar o botão por teclado ficam em js/comum.js;
+    // o .nav-toggle é um <button>, então Enter/Espaço já funcionam nativamente.
+    // (O trecho antigo aqui usava a variável inexistente `mobileMenuToggle` e
+    // quebrava o restante deste script.)
 
     // Lazy loading for images (if more images are added)
     if ('IntersectionObserver' in window) {
@@ -174,46 +161,8 @@ document.addEventListener('DOMContentLoaded', function () {
         printButton.addEventListener('click', printPage);
     }
 
-    // Back to top functionality
-    const backToTopButton = document.createElement('button');
-    backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    backToTopButton.className = 'back-to-top';
-    backToTopButton.style.cssText = `
-        position: fixed;
-        bottom: 90px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 999;
-        font-size: 1.2rem;
-    `;
-
-    document.body.appendChild(backToTopButton);
-
-    window.addEventListener('scroll', function () {
-        if (window.pageYOffset > 300) {
-            backToTopButton.style.opacity = '1';
-            backToTopButton.style.visibility = 'visible';
-        } else {
-            backToTopButton.style.opacity = '0';
-            backToTopButton.style.visibility = 'hidden';
-        }
-    });
-
-    backToTopButton.addEventListener('click', function () {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
+    // O botão "voltar ao topo" já existe no HTML (#backToTop) e é tratado acima;
+    // o segundo botão criado aqui ficava empilhado sobre ele, sem nome acessível.
 });
 
 // WhatsApp integration

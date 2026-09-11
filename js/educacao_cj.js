@@ -97,14 +97,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-// ======== Parallax Effect Hero Background ========
-const heroBackground = document.querySelector('.hero-background');
-window.addEventListener('scroll', () => {
-  if (heroBackground) {
-    const scrolled = window.pageYOffset;
-    heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-  }
-});
+// Parallax do hero: um listener throttled em js/comum.js, respeita menos movimento
+IGDS.parallax('.hero-background', 0.5);
 
 // ======== Tabs Functionality ========
 const tabButtons = document.querySelectorAll('.tab-btn');
@@ -163,7 +157,7 @@ class ImageCarousel {
 
     updateCarousel() {
         const translateX = -this.currentSlide * 100;
-        this.track.style.transition = 'transform 0.5s ease'; // transição suave
+        this.track.style.transition = IGDS.reduzirMovimento() ? 'none' : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
         this.track.style.transform = `translateX(${translateX}%)`;
 
         // Atualiza os indicadores
@@ -222,6 +216,7 @@ class ImageCarousel {
 
         // Navegação por teclado
         document.addEventListener('keydown', (e) => {
+            if (!this.carousel.contains(document.activeElement)) return;
             if (e.key === 'ArrowLeft') {
                 this.prevSlide();
                 this.stopAutoPlay();
@@ -234,18 +229,29 @@ class ImageCarousel {
     }
 
     startAutoPlay() {
-        if (this.autoPlayInterval) return; // não iniciar múltiplos timers
-        this.autoPlayActive = true;
-        this.autoPlayInterval = setInterval(() => {
-            this.nextSlide();
-        }, 1500);
+
+        // Controle compartilhado (js/comum.js): botão pausar/retomar e pausa
+
+        // com mouse, foco, fora da tela, aba oculta e menos movimento.
+
+        if (this.autoplay) return;
+
+        this.autoplay = IGDS.autoplay({
+
+            region: this.carousel,
+
+            next: () => this.nextSlide(),
+
+            delay: 5000
+
+        });
+
     }
 
     stopAutoPlay() {
-        if (!this.autoPlayActive) return;
-        clearInterval(this.autoPlayInterval);
-        this.autoPlayInterval = null;
-        this.autoPlayActive = false;
+
+        this.autoplay?.stop();
+
     }
 }
 

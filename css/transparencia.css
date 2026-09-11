@@ -5,6 +5,10 @@
 }
 
 :root {
+    /* Papéis do âmbar (contraste AA) */
+    --primary-color-rgb: 255, 177, 0;
+    --primary-ink: #976115;   /* Âmbar Tostado: âmbar como texto ou ícone pequeno sobre fundo claro (5.2:1 no branco) */
+    --on-primary: #1E1810;    /* texto e ícones sobre preenchimento âmbar ou laranja (9.7:1 / 7.5:1) */
     --primary-color: #FFB100;
     --secondary-color: #FF8C00;
     --dark-color: #1E1810;
@@ -20,6 +24,18 @@
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     --border-radius: 8px;
 }
+
+/* Superfícies do navegador na paleta */
+::selection {
+    background: var(--primary-color);
+    color: var(--on-primary);
+}
+
+html {
+    accent-color: var(--primary-ink);
+    caret-color: var(--primary-ink);
+}
+
 
 
 html {
@@ -87,7 +103,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .dropdown {
@@ -130,12 +146,12 @@ body {
 
 .dropdown-menu a:hover {
     background: var(--light-bg);
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .btn-donate {
     background: var(--primary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     font-weight: 600;
@@ -143,7 +159,7 @@ body {
 
 .btn-donate:hover {
     background: var(--secondary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
 }
 
 .nav-toggle {
@@ -168,13 +184,12 @@ body {
 /* Hero Section */
 .hero {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: var(--white);
+    color: var(--on-primary);
     padding: 4rem 0;
     text-align: center;
 }
 
 .hero-title {
-    font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
@@ -197,8 +212,8 @@ body {
 }
 
 .intro-text p {
-    font-size: 1.125rem;
-    max-width: 800px;
+    font-size: var(--fs-lead);
+    max-width: var(--measure);
     margin: 0 auto;
     line-height: 1.8;
 }
@@ -213,7 +228,7 @@ body {
 
 .section-description {
     text-align: center;
-    font-size: 1.125rem;
+    font-size: var(--fs-lead);
     margin-bottom: 3rem;
     max-width: 600px;
     margin-left: auto;
@@ -234,14 +249,15 @@ body {
 }
 
 .governance-section .governance-card {
-    border-top: 4px solid var(--dark-color);
-    border-radius: calc(var(--border-radius) * 2.5);
+    border-radius: var(--border-radius);
     background-color: var(--white);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
 }
 
 .governance-section .governance-card:hover {
-    transform: scale(1.02);
-    border-color: var(--gray);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
 .btn-governance {
@@ -253,21 +269,25 @@ body {
     background: var(--gray);
 }
 
-/* Financeiros */
+/* Financeiros: distinguidos da governança pelo botão Laranja Poente, não por
+   borda lateral. Cartão branco do sistema. */
 .finance-section .finance-card {
-    border-left: 4px solid var(--secondary-color);
+    border: 2px solid transparent;
     border-radius: var(--border-radius);
     background-color: var(--white);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
 }
 
 .finance-section .finance-card:hover {
-    transform: translateY(-5px) rotate(1deg);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
     border-color: var(--primary-color);
 }
 
 .btn-finance {
     background: var(--secondary-color);
-    color: var(--white);
+    color: var(--on-primary);
 }
 
 .btn-finance:hover {
@@ -335,7 +355,7 @@ body {
 
 .btn-primary {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
 }
 
 .btn-primary:hover {
@@ -345,13 +365,14 @@ body {
 
 .btn-outline {
     background: transparent;
-    color: var(--primary-color);
-    border-color: var(--primary-color);
+    color: var(--primary-ink);
+    border-color: var(--primary-ink);
 }
 
 .btn-outline:hover {
     background: var(--primary-color);
-    color: var(--white);
+    border-color: var(--primary-color);
+    color: var(--on-primary);
 }
 
 /* Documents Section */
@@ -381,7 +402,7 @@ body {
 
 .document-item i {
     font-size: 2.5rem;
-    color: var(--primary-color);
+    color: var(--primary-ink);
     margin-bottom: 1rem;
 }
 
@@ -434,7 +455,7 @@ body {
 }
 
 .contact-item i {
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 /* Footer */
@@ -456,7 +477,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.footer-section h4 {
+.footer-section h2 {
     color: var(--primary-color);
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -493,7 +514,7 @@ body {
     width: 40px;
     height: 40px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border-radius: 50%;
     text-decoration: none;
     transition: var(--transition);
@@ -520,7 +541,7 @@ body {
 
 .newsletter-form button {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     padding: 0.8rem 1rem;
     border-radius: var(--border-radius);
@@ -572,7 +593,7 @@ body {
     width: 50px;
     height: 50px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -606,17 +627,11 @@ body {
         display: block;
     }
 
-    .hero-title {
-        font-size: 2rem;
-    }
 
     .hero-subtitle {
         font-size: 1rem;
     }
 
-    .section-title {
-        font-size: 2rem;
-    }
 
     .reports-grid {
         grid-template-columns: 1fr;
@@ -658,9 +673,6 @@ body {
         padding: 2rem 0;
     }
 
-    .hero-title {
-        font-size: 1.75rem;
-    }
 
     .report-card {
         padding: 1.5rem;
@@ -757,14 +769,15 @@ body {
     }
 }
 
+/* Divisor do sistema: barra âmbar curta e centrada (DESIGN.md), no lugar
+   das duas linhas escuras de largura total. */
 .fancy-sep {
-   width: 100%;
-  margin: 4rem 0;       /* distância entre os conteúdos */
-  border-top: 3px solid #000000;
-  border-bottom: 3px solid #000000;
-  padding: 12px 0;      /* espaço entre as duas linhas */
-  border-radius: 0;     /* linhas totalmente retas */
-  background: none;
+  width: 100px;
+  height: 4px;
+  margin: 4rem auto;
+  border: 0;
+  border-radius: 2px;
+  background: var(--primary-color);
 }
 
 /* Header Section */
@@ -783,9 +796,9 @@ body {
     transform: translateX(-50%);
     width: 100px;
     height: 4px;
-    background: linear-gradient(90deg, #ff9800, #ffc107, #ff5722);
+    background: var(--primary-color);
     border-radius: 2px;
-    animation: shimmer 2s infinite;
+    animation: shimmer 2s ease-in-out 1;
 }
 
 @keyframes shimmer {
@@ -794,23 +807,21 @@ body {
 }
 
 .main-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: var(--fs-display);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
     font-weight: 700;
-    background: linear-gradient(135deg, #ff9800 0%, #f57c00 50%, #e65100 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--dark-color);
     margin-bottom: 16px;
-    letter-spacing: -0.02em;
 }
 
 .subtitle {
-    font-size: 1.2rem;
-    color: #6b7280;
+    font-size: var(--fs-lead);
+    color: var(--text-color);
     font-weight: 400;
-    max-width: 600px;
+    max-width: 42ch;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: var(--lh-lead);
 }
 
 /* Stats Bar */
@@ -825,23 +836,22 @@ body {
 .stat-item {
     text-align: center;
     padding: 20px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 152, 0, 0.1);
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
     min-width: 120px;
 }
 
 .stat-number {
     font-size: 2rem;
     font-weight: 700;
-    color: #ff9800;
+    color: var(--primary-ink);
     display: block;
 }
 
 .stat-label {
     font-size: 0.9rem;
-    color: #6b7280;
+    color: var(--text-color);
     margin-top: 4px;
 }
 
@@ -853,70 +863,34 @@ body {
     margin-top: 40px;
 }
 
-/* Card */
+/* Card: cartão branco flutuante do sistema (DESIGN.md) — sem vidro, sem
+   stripe superior, borda transparente que vira âmbar no hover. */
 .project-card {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 152, 0, 0.1);
-    border-radius: 24px;
-    padding: 32px;
+    background: var(--white);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius);
+    padding: 2rem;
     position: relative;
-    overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
     cursor: pointer;
     text-decoration: none;
     color: inherit;
     display: block;
 }
 
-.project-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #ff9800, #ffc107, #ff5722);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.4s ease;
-}
-
-.project-card::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(255, 152, 0, 0.05) 0%, rgba(255, 193, 7, 0.05) 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
-
 .project-card:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 
-        0 25px 50px rgba(255, 152, 0, 0.15),
-        0 0 0 1px rgba(255, 152, 0, 0.1);
-    border-color: rgba(255, 152, 0, 0.2);
-}
-
-.project-card:hover::before {
-    transform: scaleX(1);
-}
-
-.project-card:hover::after {
-    opacity: 1;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-color: var(--primary-color);
 }
 
 .project-card:hover .card-icon {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.05);
 }
 
 .project-card:hover .card-title {
-    color: #ff9800;
+    color: var(--primary-ink);
 }
 
 .project-card:hover .card-arrow {
@@ -932,30 +906,29 @@ body {
     margin-bottom: 20px;
 }
 
+/* Glifo âmbar solto, como os demais ícones do site — sem tile preenchido. */
 .card-icon {
-    width: 48px;
-    height: 48px;
-    background: linear-gradient(135deg, #ff9800, #ffc107);
-    border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    transition: all 0.3s ease;
+    font-size: 2rem;
+    color: var(--primary-ink);
+    transition: var(--transition);
     flex-shrink: 0;
 }
 
 .card-title {
-    font-size: 1.4rem;
+    font-size: var(--fs-h3);
+    line-height: var(--lh-heading);
     font-weight: 600;
-    color: #1f2937;
+    color: var(--dark-color);
     margin: 0;
     line-height: 1.3;
     transition: color 0.3s ease;
 }
 
 .card-description {
-    color: #6b7280;
+    color: var(--text-color);
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 24px;
@@ -968,13 +941,13 @@ body {
 }
 
 .card-link-text {
-    color: #ff9800;
+    color: var(--primary-ink);
     font-weight: 500;
     font-size: 0.95rem;
 }
 
 .card-arrow {
-    color: #ff9800;
+    color: var(--primary-ink);
     font-size: 1.2rem;
     transition: all 0.3s ease;
     opacity: 0.7;

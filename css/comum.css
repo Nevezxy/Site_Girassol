@@ -1,0 +1,480 @@
+/* ==========================================================================
+   Comum a todas as páginas: acessibilidade e componentes compartilhados.
+   Carregado depois do CSS de cada página; usa as variáveis do :root dela.
+   ========================================================================== */
+
+/* ==========================================================================
+   Escala tipográfica — fonte única de verdade.
+   Este arquivo carrega por último, então estes papéis valem para o site
+   inteiro: cada página herda a mesma rampa em vez de repetir literais e
+   pontos de quebra. Hierarquia por tamanho, peso e caixa sobre a pilha
+   de sistema (Segoe UI / Tahoma / Verdana), sem fonte externa.
+   ========================================================================== */
+:root {
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+
+    --lh-display: 1.12;   /* título de herói */
+    --lh-heading: 1.25;   /* títulos de seção e de cartão */
+    --lh-lead: 1.45;      /* subtítulo do herói, parágrafo de abertura */
+    --lh-body: 1.6;       /* texto corrido */
+    --lh-prose: 1.75;     /* corpo em coluna estreita ou sobre fundo escuro */
+
+    --tracking-display: -0.015em;  /* a sans de sistema aperta bem em tamanho grande */
+    --tracking-label: 0.08em;      /* sobretítulo em maiúsculas */
+
+    --measure: 66ch;               /* largura de leitura confortável */
+
+    /* Papéis: mínimo · fluido · máximo. O fluido substitui os overrides
+       de @media que cada página repetia para herói e título de seção. */
+    --fs-display: clamp(2rem, 1.1rem + 4vw, 3.25rem);   /* .hero-title, todas as páginas */
+    --fs-h2:      clamp(1.75rem, 1.3rem + 1.9vw, 2.5rem); /* .section-title */
+    --fs-h3:      1.5rem;                                 /* título de cartão e de formulário */
+    --fs-title:   1.25rem;                                /* nome de valor, título do rodapé, subtítulo de bloco */
+    --fs-lead:    clamp(1.05rem, 1rem + 0.4vw, 1.2rem);   /* subtítulo do herói, abertura */
+    --fs-stat:    clamp(2rem, 1.6rem + 1.4vw, 2.75rem);   /* número de estatística */
+    --fs-body:    1rem;
+    --fs-small:   0.9375rem;                              /* legenda, metadado */
+    --fs-label:   0.875rem;                               /* sobretítulo em maiúsculas */
+
+    --input-border: #DDD;                                 /* borda de campo de formulário (DESIGN.md) */
+}
+
+body {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+}
+
+/* Fundo de reserva do herói: Terra Queimada por baixo da foto, para o texto
+   branco continuar legível enquanto a imagem carrega ou se ela falhar. */
+.hero-background {
+    background-color: var(--dark-color);
+}
+
+/* Papéis compartilhados. Como comum.css vem depois, estes tamanhos valem
+   para todas as páginas; os literais e @media de cada CSS de página que
+   ainda existirem para estes seletores ficam sem efeito. */
+.hero-title {
+    font-size: var(--fs-display);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
+}
+
+.hero-subtitle {
+    font-size: var(--fs-lead);
+    line-height: var(--lh-lead);
+}
+
+.section-title,
+.form-header h1 {
+    font-size: var(--fs-h2);
+    line-height: var(--lh-heading);
+}
+
+.section-subtitle {
+    font-size: var(--fs-label);
+    letter-spacing: var(--tracking-label);
+}
+
+.footer-section h2 {
+    font-size: var(--fs-title);
+    line-height: var(--lh-heading);
+}
+
+/* Texto claro sobre o rodapé Terra Queimada: um passo a mais de entrelinha
+   para o corpo respirar sobre fundo escuro. */
+.footer-section p,
+.footer-section ul {
+    line-height: var(--lh-prose);
+}
+
+/* Texto só para leitores de tela */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Link "Pular para o conteúdo": invisível até receber foco pelo teclado */
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 2000;
+    padding: 0.75rem 1.25rem;
+    background: var(--primary-color);
+    color: var(--on-primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transform: translateY(-200%);
+    transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* Foco visível em duas cores: anel escuro interno + âmbar externo.
+   Funciona sobre branco, palha, âmbar, rodapé escuro e fotos veladas. */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--on-primary);
+}
+
+/* Destinos do link de pular e de âncoras não mostram anel ao receber foco por script */
+[tabindex="-1"]:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+/* Botão do menu móvel (antes era uma div sem acesso por teclado) */
+.nav-toggle {
+    background: none;
+    border: 0;
+    padding: 0;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--border-radius);
+    color: var(--dark-color);
+}
+
+/* Submenu "Projetos" também abre pelo teclado */
+@media (min-width: 769px) {
+    .dropdown:focus-within .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+/* Itens do dropdown com respiro lateral; o hover não encosta na borda do painel */
+.dropdown-menu {
+    overflow: hidden;
+    padding-inline: 0.5rem;
+}
+
+.dropdown-menu a {
+    border-radius: var(--border-radius);
+}
+
+/* Gaveta do menu fechada fica fora da ordem de tabulação */
+@media (max-width: 768px) {
+    /* Ao abrir, fica visível na hora; ao fechar, só some depois de deslizar */
+    .nav-menu {
+        visibility: hidden;
+        transition: left 0.3s ease, visibility 0s linear 0.3s;
+    }
+
+    .nav-menu.active {
+        visibility: visible;
+        transition: left 0.3s ease, visibility 0s;
+    }
+}
+
+/* Rótulos visíveis no formulário de contato */
+.contact-form .form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.contact-form .form-group .optional {
+    font-weight: 400;
+    color: var(--text-color);
+}
+
+.contact-form textarea:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: #B3261E;
+}
+
+/* Mensagens de status de formulário (anunciadas por leitores de tela) */
+.form-status {
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.form-status:empty {
+    display: none;
+}
+
+.form-status.is-success,
+.form-status.is-error {
+    padding: 0.875rem 1rem;
+    border-radius: var(--border-radius);
+}
+
+.form-status.is-success {
+    background: #E8F3EA;
+    color: #1E5B2C;
+}
+
+.form-status.is-error {
+    background: #FBEAE8;
+    color: #8C1D18;
+}
+
+button[disabled] {
+    cursor: progress;
+    opacity: 0.75;
+}
+
+/* Rodapé: chamada para acompanhar no Instagram (substitui a newsletter sem envio) */
+.footer-follow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    margin-top: 1rem;
+    padding: 0.7rem 1.1rem;
+    background: var(--primary-color);
+    color: var(--on-primary);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.footer-follow:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+.footer-follow i {
+    font-size: 1.2rem;
+}
+
+/* Botão pausar/retomar dos carrosséis (criado por IGDS.autoplay em js/comum.js) */
+.autoplay-toggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 6;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--dark-color);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.autoplay-toggle:hover {
+    background: var(--primary-color);
+    color: var(--on-primary);
+}
+
+.autoplay-toggle.is-inline {
+    position: static;
+    flex-shrink: 0;
+}
+
+/* Menos movimento: sem deslocamentos, sem loops, sem parallax.
+   Fades de opacidade e mudanças de cor continuam, porque confirmam ações e estados. */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    /* As entradas deixam de subir e passam a só aparecer */
+    @keyframes fadeInUp {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes fadeInDown {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideInDown {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Loops decorativos e de carregamento ficam parados */
+    @keyframes shimmer {
+        from, to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+        from, to { opacity: 1; }
+    }
+
+    /* Parallax e fundo fixo desligados */
+    .hero-background {
+        transform: none !important;
+        background-attachment: scroll !important;
+    }
+
+    /* Revelação ao rolar só por opacidade */
+    .fade-in,
+    .fade-in.visible {
+        transform: none !important;
+    }
+
+    /* Galerias e depoimentos trocam de quadro sem deslizar */
+    .carousel .carousel-track,
+    .testimonial-track {
+        transition: none !important;
+    }
+}
+
+/* Aviso de cópia do PIX */
+.copy-toast {
+    position: fixed;
+    left: 50%;
+    bottom: 1.5rem;
+    z-index: 10000;
+    max-width: min(90vw, 420px);
+    padding: 1rem 1.5rem;
+    background: var(--dark-color);
+    color: var(--white);
+    font-weight: 600;
+    text-align: center;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    transform: translateX(-50%);
+}
+
+.copy-toast.is-success {
+    background: var(--primary-color);
+    color: var(--on-primary);
+}
+
+/* ==========================================================================
+   Toque: alvos de 44px e ajustes para tela sem cursor (adapt).
+   O site recebe tráfego majoritariamente por celular (Instagram/WhatsApp)
+   e o público inclui pessoas idosas e famílias. Alvos pequenos são o
+   principal atrito de toque apontado na auditoria.
+   ========================================================================== */
+
+/* Sempre: ícones sociais e links do rodapé nunca ficam abaixo de 44px de altura */
+.social-links {
+    gap: 0.75rem;
+}
+
+.social-links a {
+    width: 44px;
+    height: 44px;
+}
+
+.footer-section ul li a {
+    display: inline-block;
+    padding: 0.6rem 0.25rem;
+    margin: -0.6rem -0.25rem;
+}
+
+@media (pointer: coarse) {
+    /* Menu em gaveta: cada link ocupa a largura toda e tem 44px de altura */
+    .nav-menu .nav-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+    }
+
+    .dropdown-menu a {
+        min-height: 44px;
+        padding: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Setas de carrossel, slider, equipe e depoimentos: 44px em qualquer eixo */
+    .carousel-btn,
+    .carousel-btn-prev,
+    .carousel-btn-next,
+    .slider-btn,
+    .team-prev-btn,
+    .team-next-btn,
+    .testimonial-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    /* Botões de PIX e "Leia Mais": altura mínima de toque */
+    .btn-copy,
+    .btn-expand {
+        min-height: 44px;
+    }
+
+    #pix-code {
+        min-height: 44px;
+    }
+
+    /* Bolinhas de navegação: a bolinha continua com 12px, mas a área de
+       toque cresce para 44px (padding transparente, recorte no conteúdo). */
+    .indicator,
+    .carousel-dot,
+    .team-indicator {
+        box-sizing: border-box;
+        width: 44px;
+        height: 44px;
+        padding: 16px;
+        background-clip: content-box;
+    }
+
+    .carousel-indicators,
+    .slider-indicators,
+    .testimonial-dots,
+    .carousel-dots {
+        gap: 0;
+        flex-wrap: wrap;
+    }
+
+    /* Toque não tem hover: efeitos de "levantar" cartão não ficam grudados
+       depois do toque. Cor e sombra de estado continuam. */
+    .project-card:hover,
+    .value-item:hover,
+    .report-card:hover,
+    .document-item:hover,
+    .timeline-item:hover,
+    .mvv-card:hover,
+    .stat-card:hover {
+        transform: none;
+    }
+}
+
+/* Celular deitado (viewport baixa): o herói cresce para caber o conteúdo
+   em vez de travar em 100vh e cortar o texto. */
+@media (orientation: landscape) and (max-height: 500px) {
+    .hero,
+    .hero-slider {
+        height: auto;
+        min-height: 460px;
+    }
+
+    .hero {
+        padding: 5.5rem 0 3rem;
+    }
+}

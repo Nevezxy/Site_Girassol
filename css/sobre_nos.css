@@ -1,5 +1,9 @@
 /* CSS Variables */
 :root {
+    /* Papéis do âmbar (contraste AA) */
+    --primary-color-rgb: 255, 177, 0;
+    --primary-ink: #976115;   /* Âmbar Tostado: âmbar como texto ou ícone pequeno sobre fundo claro (5.2:1 no branco) */
+    --on-primary: #1E1810;    /* texto e ícones sobre preenchimento âmbar ou laranja (9.7:1 / 7.5:1) */
     --primary-color: #FFB100;
     --secondary-color: #FF8C00;
     --dark-color: #1E1810;
@@ -15,6 +19,18 @@
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     --border-radius: 8px;
 }
+
+/* Superfícies do navegador na paleta */
+::selection {
+    background: var(--primary-color);
+    color: var(--on-primary);
+}
+
+html {
+    accent-color: var(--primary-ink);
+    caret-color: var(--primary-ink);
+}
+
 
 /* Reset and Base Styles */
 * {
@@ -88,7 +104,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .dropdown {
@@ -131,12 +147,12 @@ body {
 
 .dropdown-menu a:hover {
     background: var(--light-bg);
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .btn-donate {
     background: var(--primary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     font-weight: 600;
@@ -144,7 +160,7 @@ body {
 
 .btn-donate:hover {
     background: var(--secondary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
 }
 
 .nav-toggle {
@@ -173,7 +189,7 @@ body {
 }
 
 .breadcrumb-nav a {
-    color: var(--primary-color);
+    color: var(--primary-ink);
     text-decoration: none;
 }
 
@@ -234,7 +250,9 @@ body {
 }
 
 .slide-content h1 {
-    font-size: 3rem;
+    font-size: var(--fs-display);
+    line-height: var(--lh-display);
+    letter-spacing: var(--tracking-display);
     font-weight: 700;
     margin-bottom: 1rem;
     color: var(--white);
@@ -242,16 +260,17 @@ body {
 }
 
 .slide-content h2 {
-    font-size: 2.5rem;
-    font-weight: 600;
+    font-size: var(--fs-h2);
+    line-height: var(--lh-heading);
+    font-weight: 700;
     margin-bottom: 1rem;
     color: var(--dark-color);
 }
 
 .slide-content p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    max-width: 700px;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-prose);
+    max-width: var(--measure);
     margin: 0 auto;
 }
 
@@ -282,7 +301,7 @@ body {
 
 .slider-btn:hover {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
 }
 
 .prev-btn {
@@ -380,8 +399,7 @@ body {
 }
 
 .mvv-card p {
-    line-height: 1.7;
-    text-align: justify;
+    line-height: var(--lh-prose);
 }
 
 .values-section {
@@ -400,19 +418,19 @@ body {
 .section-header h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary-ink);
     margin-bottom: 0.5rem;
 }
 
 .section-header p {
-    font-size: 1.1rem;
+    font-size: var(--fs-lead);
     color: var(--dark-color);
     max-width: 700px;
     margin: 0 auto;
 }
 
 .values-content > p {
-    font-size: 1.05rem;
+    font-size: var(--fs-lead);
     line-height: 1.7;
     margin-bottom: 2rem;
     text-align: center;
@@ -432,8 +450,7 @@ body {
     background: var(--white);
     padding: 1.5rem;
     border-radius: var(--border-radius);
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
-    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--shadow);
     display: flex;
     align-items: flex-start;
     gap: 1rem;
@@ -446,7 +463,7 @@ body {
 /* Ícones */
 .value-item i {
     font-size: 1.5rem;
-    color: var(--primary-color);
+    color: var(--primary-ink);
     flex-shrink: 0;
     transition: var(--transition);
 }
@@ -459,19 +476,12 @@ body {
 
 /* Hover com destaque */
 .value-item:hover {
-    transform: translateY(-10px) scale(1.05);
-    box-shadow: 
-        0 12px 30px rgba(247, 183, 51, 0.45),  /* sombra dourada */
-        0 0 20px rgba(247, 183, 51, 0.6),      /* brilho suave */
-        0 0 40px rgba(247, 183, 51, 0.4);      /* brilho mais difuso */
-    border-left: 4px solid transparent;
-    background: linear-gradient(white, white) padding-box,
-                linear-gradient(45deg, #f7b733, #ffcc4d) border-box;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
 }
 
 .value-item:hover i {
-    transform: rotate(8deg) scale(1.1);
+    transform: scale(1.1);
 }
 
 /* ===== Animações ===== */
@@ -495,7 +505,7 @@ body {
 .logo-section h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary-ink);
     margin-bottom: 0.5rem;
 }
 
@@ -513,7 +523,7 @@ body {
 }
 
 .team-section .section-header h5 {
-    color: var(--primary-color);
+    color: var(--primary-ink);
     font-size: 1rem;
     font-weight: 500;
     margin-bottom: 0.5rem;
@@ -522,7 +532,7 @@ body {
 .team-section .section-header h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary-ink);
     margin-bottom: 0.5rem;
 }
 
@@ -550,6 +560,12 @@ body {
     position: relative;
 }
 
+/* Era um h5; virou h3 para não pular níveis, com o mesmo tamanho de antes */
+.team-subtitle {
+    font-size: 0.83em;
+    font-weight: 700;
+}
+
 .team-slider {
     position: relative;
     min-height: 200px;
@@ -569,9 +585,8 @@ body {
 }
 
 .team-slide p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    text-align: justify;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-prose);
 }
 
 .team-slider-controls {
@@ -588,7 +603,7 @@ body {
     height: 40px;
     border-radius: 50%;
     cursor: pointer;
-    color: var(--white);
+    color: var(--on-primary);
     transition: var(--transition);
 }
 
@@ -608,13 +623,13 @@ body {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: rgba(255, 177, 0, 0.3);
+    background: rgba(30, 24, 16, 0.2);
     cursor: pointer;
     transition: var(--transition);
 }
 
 .team-indicator.active {
-    background: var(--primary-color);
+    background: var(--primary-ink);
 }
 
 /* Footer */
@@ -636,9 +651,8 @@ body {
     margin-bottom: 1rem;
 }
 
-.footer-section h4 {
+.footer-section h2 {
     color: var(--primary-color);
-    font-size: 1.2rem;
     margin-bottom: 1rem;
 }
 
@@ -673,7 +687,7 @@ body {
     width: 40px;
     height: 40px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border-radius: 50%;
     text-decoration: none;
     transition: var(--transition);
@@ -700,7 +714,7 @@ body {
 
 .newsletter-form button {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     padding: 0.8rem 1rem;
     border-radius: var(--border-radius);
@@ -752,7 +766,7 @@ body {
     width: 50px;
     height: 50px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -947,18 +961,6 @@ body {
 
     .slide-content {
         padding: 1rem;
-    }
-
-    .slide-content h1 {
-        font-size: 1.5rem;
-    }
-
-    .slide-content h2 {
-        font-size: 1.3rem;
-    }
-
-    .slide-content p {
-        font-size: 1rem;
     }
 
     .mvv-card {

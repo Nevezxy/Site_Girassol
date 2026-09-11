@@ -6,6 +6,10 @@
 }
 
 :root {
+    /* Papéis do âmbar (contraste AA) */
+    --primary-color-rgb: 255, 177, 0;
+    --primary-ink: #976115;   /* Âmbar Tostado: âmbar como texto ou ícone pequeno sobre fundo claro (5.2:1 no branco) */
+    --on-primary: #1E1810;    /* texto e ícones sobre preenchimento âmbar ou laranja (9.7:1 / 7.5:1) */
     --primary-color: #FFB100;
     --secondary-color: #FF8C00;
     --dark-color: #1E1810;
@@ -21,6 +25,18 @@
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     --border-radius: 8px;
 }
+
+/* Superfícies do navegador na paleta */
+::selection {
+    background: var(--primary-color);
+    color: var(--on-primary);
+}
+
+html {
+    accent-color: var(--primary-ink);
+    caret-color: var(--primary-ink);
+}
+
 
 
 html {
@@ -88,7 +104,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .dropdown {
@@ -131,12 +147,12 @@ body {
 
 .dropdown-menu a:hover {
     background: var(--light-bg);
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .btn-donate {
     background: var(--primary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     font-weight: 600;
@@ -144,7 +160,7 @@ body {
 
 .btn-donate:hover {
     background: var(--secondary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
 }
 
 .nav-toggle {
@@ -176,7 +192,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
 }
 
 .hero-bg-image {
@@ -195,6 +210,8 @@ body {
 }
 
 .hero-content {
+    position: relative;
+    z-index: 2;
     text-align: center;
     color: var(--white);
     max-width: 800px;
@@ -202,7 +219,6 @@ body {
 }
 
 .hero-title {
-    font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -237,7 +253,7 @@ body {
 
 .btn-primary {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
 }
 
 .btn-primary:hover {
@@ -254,12 +270,12 @@ body {
 
 .btn-secondary:hover {
     background: var(--white);
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .btn-large {
     padding: 1.25rem 2.5rem;
-    font-size: 1.1rem;
+    font-size: var(--fs-lead);
 }
 
 /* Section Styles */
@@ -269,7 +285,7 @@ body {
 }
 
 .section-subtitle {
-    color: var(--primary-color);
+    color: var(--primary-ink);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -344,7 +360,7 @@ body {
 .pix-code input {
     flex: 1;
     padding: 0.75rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--input-border);
     border-radius: var(--border-radius);
     font-size: 0.8rem;
     background: var(--white);
@@ -352,7 +368,7 @@ body {
 
 .btn-copy {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     padding: 0.75rem 1rem;
     border-radius: var(--border-radius);
@@ -378,13 +394,13 @@ body {
     background: var(--white);
     padding: 0.75rem;
     border-radius: var(--border-radius);
-    border: 1px solid #ddd;
+    border: 1px solid var(--input-border);
     flex: 1;
 }
 
 .donation-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-prose);
 }
 
 .expandable-content {
@@ -393,7 +409,7 @@ body {
 
 .btn-expand {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     padding: 0.75rem 1.5rem;
     border-radius: var(--border-radius);
@@ -475,15 +491,15 @@ body {
 }
 
 .impact-content h3 {
-    color: var(--primary-color);
+    color: var(--primary-ink);
     font-size: 1.5rem;
     margin-bottom: 1rem;
     font-weight: 700;
 }
 
 .impact-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
+    font-size: var(--fs-lead);
+    line-height: var(--lh-body);
 }
 
 .carousel-btn {
@@ -491,7 +507,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     width: 50px;
     height: 50px;
@@ -525,13 +541,13 @@ body {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #ddd;
+    background: var(--input-border);
     cursor: pointer;
     transition: var(--transition);
 }
 
 .carousel-dot.active {
-    background: var(--primary-color);
+    background: var(--primary-ink);
 }
 
 /* Team Section */
@@ -548,7 +564,6 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -2;
 }
 
 .team-bg-image {
@@ -567,6 +582,8 @@ body {
 }
 
 .team-content {
+    position: relative;
+    z-index: 2;
     color: var(--white);
     max-width: 600px;
     margin: 0 auto;
@@ -595,7 +612,6 @@ body {
 }
 
 .testimonials-carousel .section-title {
-    font-size: 2.2rem;
     text-align: center;
     color: var(--dark-color);
     margin-bottom: 3rem;
@@ -642,7 +658,7 @@ body {
 .testimonial-author {
     font-weight: 600;
     font-size: 1rem;
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 /* Controles */
@@ -653,7 +669,7 @@ body {
 
 .testimonial-btn {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     font-size: 1.5rem;
     padding: 0.5rem 1rem;
@@ -713,14 +729,15 @@ body {
 }
 
 .stat-number {
-    font-size: 3rem;
+    font-size: var(--fs-stat);
+    line-height: var(--lh-display);
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary-ink);
     margin-bottom: 0.5rem;
 }
 
 .stat-label {
-    font-size: 1.1rem;
+    font-size: var(--fs-small);
     color: var(--text-color);
     font-weight: 500;
 }
@@ -744,7 +761,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.footer-section h4 {
+.footer-section h2 {
     color: var(--primary-color);
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -781,7 +798,7 @@ body {
     width: 40px;
     height: 40px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border-radius: 50%;
     text-decoration: none;
     transition: var(--transition);
@@ -808,7 +825,7 @@ body {
 
 .newsletter-form button {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     padding: 0.8rem 1rem;
     border-radius: var(--border-radius);
@@ -860,7 +877,7 @@ body {
     width: 50px;
     height: 50px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -961,17 +978,6 @@ body {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .section-title {
-        font-size: 2rem;
-    }
 
     .donation-content {
         grid-template-columns: 1fr;
@@ -1010,9 +1016,6 @@ body {
 }
 
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
 
     .btn-large {
         padding: 1rem 2rem;

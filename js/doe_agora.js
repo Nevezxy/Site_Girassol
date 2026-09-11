@@ -41,45 +41,73 @@ window.addEventListener('scroll', () => {
 });
 
 // Copy PIX functions
+// Navegadores internos (Instagram, Facebook) e páginas sem HTTPS podem negar a
+// área de transferência. Nesse caso tentamos o método antigo e, se ainda
+// falhar, deixamos o texto selecionado e explicamos como copiar à mão.
+function copyText(text, fieldToSelect) {
+    const fallback = () => {
+        let copied = false;
+        const field = fieldToSelect || Object.assign(document.createElement('textarea'), {
+            value: text,
+            readOnly: true
+        });
+        if (!fieldToSelect) {
+            field.style.cssText = 'position:fixed;top:0;left:0;opacity:0;';
+            document.body.appendChild(field);
+        }
+        field.focus();
+        field.select();
+        field.setSelectionRange(0, text.length);
+        try {
+            copied = document.execCommand('copy');
+        } catch (e) {
+            copied = false;
+        }
+        if (!fieldToSelect) field.remove();
+        return copied;
+    };
+
+    if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text).then(() => true, () => fallback());
+    }
+    return Promise.resolve(fallback());
+}
+
 function copyPix() {
     const pixCode = document.getElementById('pix-code');
-    pixCode.select();
-    pixCode.setSelectionRange(0, 99999);
-    navigator.clipboard.writeText(pixCode.value).then(() => {
-        showCopyMessage('Código PIX copiado!');
+    copyText(pixCode.value, pixCode).then((ok) => {
+        if (ok) {
+            showCopyMessage('Código PIX copiado! Agora é só colar no app do seu banco.', 'success');
+        } else {
+            pixCode.focus();
+            pixCode.select();
+            showCopyMessage('Não foi possível copiar automaticamente. O código está selecionado: toque nele e escolha "Copiar".', 'error');
+        }
     });
 }
 
 function copyPixKey() {
     const pixKey = 'igds@igds.org.br';
-    navigator.clipboard.writeText(pixKey).then(() => {
-        showCopyMessage('Chave PIX copiada!');
+    copyText(pixKey).then((ok) => {
+        showCopyMessage(ok
+            ? 'Chave PIX copiada! Agora é só colar no app do seu banco.'
+            : 'Não foi possível copiar automaticamente. A chave PIX é igds@igds.org.br', ok ? 'success' : 'error');
     });
 }
 
-function showCopyMessage(message) {
-    // Create temporary message element
-    const messageEl = document.createElement('div');
-    messageEl.textContent = message;
-    messageEl.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: var(--primary-color);
-        color: white;
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        z-index: 10000;
-        font-weight: 600;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-    `;
+// Aviso anunciado por leitores de tela; um só por vez
+function showCopyMessage(message, type) {
+    document.querySelector('.copy-toast')?.remove();
 
+    const messageEl = document.createElement('div');
+    messageEl.className = 'copy-toast' + (type === 'success' ? ' is-success' : '');
+    messageEl.setAttribute('role', type === 'error' ? 'alert' : 'status');
+    messageEl.textContent = message;
     document.body.appendChild(messageEl);
 
     setTimeout(() => {
         messageEl.remove();
-    }, 2000);
+    }, type === 'error' ? 7000 : 3500);
 }
 
 // Expandable content toggle
@@ -90,9 +118,11 @@ function toggleContent() {
     if (expandedText.classList.contains('active')) {
         expandedText.classList.remove('active');
         button.textContent = 'Leia Mais';
+        button.setAttribute('aria-expanded', 'false');
     } else {
         expandedText.classList.add('active');
         button.textContent = 'Leia Menos';
+        button.setAttribute('aria-expanded', 'true');
     }
 }
 
@@ -154,14 +184,20 @@ document.addEventListener("DOMContentLoaded", () => {
         updateCarousel();
     }
 
+    // Controle compartilhado (js/comum.js): botão pausar/retomar e pausa
+    // com mouse, foco, fora da tela, aba oculta e menos movimento.
     function startAutoPlay() {
+        if (autoPlayInterval) return;
         autoPlayActive = true;
-        autoPlayInterval = setInterval(nextSlide, 5000);
+        autoPlayInterval = IGDS.autoplay({
+            region: document.querySelector('.impact-carousel .carousel-container'),
+            next: nextSlide,
+            delay: 5000
+        });
     }
 
     function stopAutoPlay() {
-        if (!autoPlayActive) return;
-        clearInterval(autoPlayInterval);
+        autoPlayInterval?.stop();
         autoPlayActive = false;
     }
 
@@ -183,25 +219,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Statistics counter animation
+// O HTML já traz os números finais (visíveis mesmo sem JavaScript);
+// a contagem de 0 até eles só roda para quem não pediu menos movimento.
 function animateCounters() {
+    if (IGDS.reduzirMovimento()) return;
+
     const counters = document.querySelectorAll('.stat-number');
+    const format = (n) => Math.floor(n).toLocaleString('pt-BR') + "+";
+    const duration = 1600;
 
     counters.forEach(counter => {
         const target = parseInt(counter.getAttribute('data-target'));
-        const increment = target / 100;
-        let current = 0;
+        if (isNaN(target)) return;
+        let start = null;
 
-        const updateCounter = () => {
-            if (current < target) {
-                current += increment;
-                counter.textContent = Math.floor(current) + "+";
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = target + "+";
-            }
+        const updateCounter = (now) => {
+            if (!start) start = now;
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            counter.textContent = format(eased * target);
+            if (progress < 1) requestAnimationFrame(updateCounter);
         };
 
-        updateCounter();
+        counter.textContent = format(0);
+        requestAnimationFrame(updateCounter);
     });
 }
 
@@ -230,10 +271,11 @@ const observer = new IntersectionObserver((entries) => {
 function initAnimations() {
     const animatedElements = document.querySelectorAll('.donation-section, .impact-carousel, .team-section, .statistics-section');
 
+    // Com menos movimento, as seções só aparecem (sem subir)
     animatedElements.forEach(el => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        el.style.transform = IGDS.reduzirMovimento() ? 'none' : 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
         observer.observe(el);
     });
 }
@@ -299,11 +341,12 @@ const handleScroll = debounce(() => {
 window.addEventListener('scroll', handleScroll);
 
 // Error handling for images
+// O antigo /placeholder.svg não existe e fazia a imagem falhar em loop;
+// agora a imagem quebrada só é escondida, sem deixar um buraco com ícone.
 document.querySelectorAll('img').forEach(img => {
     img.addEventListener('error', function () {
-        this.src = '/placeholder.svg?height=400&width=600&text=Imagem+não+encontrada';
-        this.alt = 'Imagem não encontrada';
-    });
+        this.style.visibility = 'hidden';
+    }, { once: true });
 });
 
 // Accessibility improvements
@@ -344,7 +387,7 @@ backToTopBtn.addEventListener('click', () => {
 // ===== NEWSLETTER FORM HANDLING =====
 const newsletterForm = document.querySelector('.newsletter-form');
 
-newsletterForm.addEventListener('submit', (e) => {
+newsletterForm?.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const email = newsletterForm.querySelector('input[type="email"]').value.trim();
@@ -377,26 +420,32 @@ function updateCarousel() {
     track.style.transform = `translateX(-${index * slideWidth}px)`;
 }
 
+function nextTestimonial() {
+    index = (index === slides.length - 1) ? 0 : index + 1;
+    updateCarousel();
+}
+
+// Auto-slide a cada 8 segundos, com o mesmo controle dos outros carrosséis;
+// usar as setas pausa a passagem automática.
+const testimonialAutoplay = IGDS.autoplay({
+    region: document.querySelector('.testimonials-carousel'),
+    mount: document.querySelector('.testimonial-controls'),
+    inline: true,
+    next: nextTestimonial,
+    delay: 8000
+});
+
 prevBtn.addEventListener("click", () => {
+    testimonialAutoplay.stop();
     index = (index === 0) ? slides.length - 1 : index - 1;
     updateCarousel();
 });
 
 nextBtn.addEventListener("click", () => {
-    index = (index === slides.length - 1) ? 0 : index + 1;
-    updateCarousel();
+    testimonialAutoplay.stop();
+    nextTestimonial();
 });
-
-// Auto-slide
-setInterval(() => {
-    nextBtn.click();
-}, 8000); // 8 segundos
 
 // ===== PARALLAX EFFECT FOR HERO SECTION =====
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroBackground = document.querySelector('.hero-background');
-    if (heroBackground) {
-        heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
+// Parallax do hero: um listener throttled em js/comum.js, respeita menos movimento
+IGDS.parallax('.hero-background', 0.5);

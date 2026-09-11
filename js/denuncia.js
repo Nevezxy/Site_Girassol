@@ -62,22 +62,39 @@ form.addEventListener("submit", (e) => {
       submitBtn.classList.remove("loading")
       submitBtn.disabled = false
 
-      // Mostra mensagem de sucesso mesmo assim (devido ao no-cors)
-      showSuccessMessage()
-      form.reset()
+      // Com no-cors, a falha só acontece quando a denúncia não saiu do navegador
+      // (sem conexão). Não fingimos sucesso e mantemos o texto digitado.
+      showSendError()
     })
 })
 
+function showSendError() {
+  document.querySelector(".success-message")?.classList.remove("show")
+  let status = document.querySelector(".send-error")
+  if (!status) {
+    status = document.createElement("p")
+    status.className = "form-status is-error send-error"
+    status.setAttribute("role", "alert")
+    submitBtn.insertAdjacentElement("afterend", status)
+  }
+  status.textContent =
+    "Não conseguimos enviar sua denúncia agora. Verifique sua conexão e tente de novo: o que você escreveu continua no formulário."
+}
+
 function showSuccessMessage() {
+  document.querySelector(".send-error")?.remove()
+
   // Cria elemento de mensagem de sucesso se não existir
   let successMessage = document.querySelector(".success-message")
   if (!successMessage) {
     successMessage = document.createElement("div")
     successMessage.className = "success-message"
-    successMessage.innerHTML =
-      "<strong>Denúncia enviada com sucesso!</strong> Agradecemos por nos ajudar a manter um ambiente seguro. Sua denúncia será analisada com total confidencialidade."
+    successMessage.setAttribute("role", "status")
     form.parentNode.insertBefore(successMessage, form)
   }
+  // Conteúdo definido depois de a região existir, para o leitor de tela anunciar
+  successMessage.innerHTML =
+    "<strong>Denúncia enviada com sucesso!</strong> Agradecemos por nos ajudar a manter um ambiente seguro. Sua denúncia será analisada com total confidencialidade."
 
   // Mostra a mensagem
   successMessage.classList.add("show")

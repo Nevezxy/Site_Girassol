@@ -6,6 +6,10 @@
 }
 
 :root {
+    /* Papéis do âmbar (contraste AA) */
+    --primary-color-rgb: 255, 177, 0;
+    --primary-ink: #976115;   /* Âmbar Tostado: âmbar como texto ou ícone pequeno sobre fundo claro (5.2:1 no branco) */
+    --on-primary: #1E1810;    /* texto e ícones sobre preenchimento âmbar ou laranja (9.7:1 / 7.5:1) */
     --primary-color: #FFB100;
     --secondary-color: #FF8C00;
     --dark-color: #1E1810;
@@ -21,6 +25,18 @@
     --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     --border-radius: 8px;
 }
+
+/* Superfícies do navegador na paleta */
+::selection {
+    background: var(--primary-color);
+    color: var(--on-primary);
+}
+
+html {
+    accent-color: var(--primary-ink);
+    caret-color: var(--primary-ink);
+}
+
 
 
 html {
@@ -88,7 +104,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .dropdown {
@@ -131,12 +147,12 @@ body {
 
 .dropdown-menu a:hover {
     background: var(--light-bg);
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .btn-donate {
     background: var(--primary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     font-weight: 600;
@@ -144,7 +160,7 @@ body {
 
 .btn-donate:hover {
     background: var(--secondary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
 }
 
 .nav-toggle {
@@ -203,16 +219,14 @@ body {
 }
 
 .hero-title {
-    font-size: 3.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
     animation: fadeInUp 1s ease;
 }
 
 .hero-subtitle {
-    font-size: 1.2rem;
     margin-bottom: 2rem;
-    max-width: 600px;
+    max-width: 38ch;
     margin-left: auto;
     margin-right: auto;
     animation: fadeInUp 1s ease 0.2s both;
@@ -243,7 +257,7 @@ body {
 
 .btn-primary {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
 }
 
 .btn-primary:hover {
@@ -273,7 +287,7 @@ section {
 }
 
 .section-subtitle {
-    color: var(--primary-color);
+    color: var(--primary-ink);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 1px;
@@ -281,7 +295,6 @@ section {
 }
 
 .section-title {
-    font-size: 2.5rem;
     font-weight: 700;
     color: var(--dark-color);
     margin-top: 0.5rem;
@@ -320,7 +333,8 @@ section {
 
 .value-item h3 {
     color: var(--dark-color);
-    font-size: 1.2rem;
+    font-size: var(--fs-title);
+    line-height: var(--lh-heading);
     font-weight: 600;
 }
 
@@ -354,7 +368,7 @@ section {
     top: -15px;
     right: 20px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -376,7 +390,8 @@ section {
 
 .project-card h3 {
     color: var(--dark-color);
-    font-size: 1.5rem;
+    font-size: var(--fs-h3);
+    line-height: var(--lh-heading);
     margin-bottom: 1rem;
 }
 
@@ -398,7 +413,7 @@ section {
     content: "✓";
     position: absolute;
     left: 0;
-    color: var(--primary-color);
+    color: var(--primary-ink);
     font-weight: bold;
 }
 
@@ -407,7 +422,7 @@ section {
     margin-top: 1rem;
     padding: 0.6rem 1.2rem;
     background-color: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     text-decoration: none;
     font-weight: 600;
     border-radius: var(--border-radius);
@@ -425,15 +440,36 @@ section {
 }
 
 /* Mission Section */
+/* A foto de fundo agora é um <img loading="lazy"> (.mission-bg), para não baixar
+   os 238 KB no carregamento inicial; o véu Terra Queimada a 70% vem no ::after. */
 .mission {
+    position: relative;
+    overflow: hidden;
     padding: 6rem 0;
-    background: 
-        linear-gradient(135deg, rgba(30, 24, 16, 0.700), rgba(30, 24, 16, 0.700)),
-        url('../midia/img/Stats.webp'); /* Caminho da imagem */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: var(--dark-color);
     color: var(--white);
+}
+
+.mission-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
+.mission::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(30, 24, 16, 0.7), rgba(30, 24, 16, 0.7));
+    z-index: 1;
+}
+
+.mission .container {
+    position: relative;
+    z-index: 2;
 }
 
 .mission-content {
@@ -472,14 +508,16 @@ section {
 
 .stat-number {
     display: block;
-    font-size: 2.5rem;
-    font-weight: bold;
+    font-size: var(--fs-stat);
+    line-height: var(--lh-display);
+    font-weight: 700;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
 
 .stat-label {
-    font-size: 0.9rem;
+    font-size: var(--fs-small);
+    line-height: var(--lh-lead);
     color: var(--white);
 }
 
@@ -540,8 +578,8 @@ section {
     top: 50%;
     transform: translateY(-50%);
     background: var(--white);
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 2px solid var(--primary-ink);
+    color: var(--primary-ink);
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -556,7 +594,8 @@ section {
 
 .carousel-btn:hover {
     background: var(--primary-color);
-    color: var(--white);
+    border-color: var(--primary-color);
+    color: var(--on-primary);
     transform: translateY(-50%) scale(1.1);
 }
 
@@ -584,7 +623,8 @@ section {
 .contact-info h3,
 .contact-form h3 {
     color: var(--dark-color);
-    font-size: 2rem;
+    font-size: var(--fs-h3);
+    line-height: var(--lh-heading);
     margin-bottom: 2rem;
     font-weight: 600;
     position: relative;
@@ -594,17 +634,19 @@ section {
 .contact-form h3::after {
     content: '';
     display: block;
-    width: 60px;
+    width: 100px;
     height: 3px;
     background: var(--primary-color);
     margin-top: 0.5rem;
     border-radius: 2px;
-    transition: width 0.3s ease;
+    transform: scaleX(0.6);
+    transform-origin: left;
+    transition: transform 0.3s ease;
 }
 
 .contact-info h3:hover::after,
 .contact-form h3:hover::after {
-    width: 100px;
+    transform: scaleX(1);
 }
 
 .contact-item {
@@ -619,25 +661,26 @@ section {
 
 .contact-item i {
     font-size: 1.6rem;
-    color: var(--primary-color);
+    color: var(--primary-ink);
     margin-top: 0.2rem;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .contact-item:hover i {
-    color: var(--secondary-color);
+    color: var(--dark-color);
     transform: scale(1.2);
 }
 
 .contact-item h4 {
     color: var(--dark-color);
-    font-size: 1.15rem;
+    font-size: var(--fs-title);
+    line-height: var(--lh-heading);
     margin-bottom: 0.3rem;
 }
 
 .contact-item p {
-    color: #555;
-    font-size: 0.95rem;
+    color: var(--text-color);
+    font-size: var(--fs-small);
 }
 
 .contact-form {
@@ -663,7 +706,7 @@ section {
 .form-group select {
     width: 100%;
     padding: 1rem;
-    border: 1.5px solid #ddd;
+    border: 1.5px solid var(--input-border);
     border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s ease, transform 0.2s ease;
@@ -674,8 +717,8 @@ section {
 .form-group textarea:focus,
 .form-group select:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 4px rgba(var(--primary-color-rgb),0.15);
+    border-color: var(--primary-ink);
+    box-shadow: 0 0 0 4px rgba(var(--primary-color-rgb), 0.35);
     transform: scale(1.02);
 }
 
@@ -687,7 +730,7 @@ textarea {
 button[type="submit"] {
     display: inline-block;
     background: var(--primary-color);
-    color: #fff;
+    color: var(--on-primary);
     border: none;
     padding: 1rem 2rem;
     font-size: 1rem;
@@ -737,7 +780,7 @@ button[type="submit"]:hover {
     margin-bottom: 1rem;
 }
 
-.footer-section h4 {
+.footer-section h2 {
     color: var(--primary-color);
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -774,7 +817,7 @@ button[type="submit"]:hover {
     width: 40px;
     height: 40px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border-radius: 50%;
     text-decoration: none;
     transition: var(--transition);
@@ -801,7 +844,7 @@ button[type="submit"]:hover {
 
 .newsletter-form button {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     padding: 0.8rem 1rem;
     border-radius: var(--border-radius);
@@ -853,7 +896,7 @@ button[type="submit"]:hover {
     width: 50px;
     height: 50px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -950,21 +993,9 @@ iframe {
         transform: translateY(-8px) rotate(-45deg);
     }
 
-    .hero-title {
-        font-size: 2.5rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
     .hero-buttons {
         flex-direction: column;
         align-items: center;
-    }
-
-    .section-title {
-        font-size: 2rem;
     }
 
     .contact-grid {
@@ -1006,25 +1037,13 @@ iframe {
         padding: 0 15px;
     }
 
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .section-title {
-        font-size: 1.8rem;
-    }
-
     .btn {
         padding: 0.8rem 1.5rem;
-        font-size: 0.9rem;
+        font-size: var(--fs-small);
     }
 
     .stats-grid {
         grid-template-columns: 1fr;
-    }
-
-    .stat-number {
-        font-size: 2.5rem;
     }
 
     .partners-grid {

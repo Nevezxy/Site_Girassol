@@ -13,12 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baixe As Nossas Publicações - Instituto Girassol de Desenvolvimento Social - IGDS</title>
     <link rel="stylesheet" href="css/publicacoes.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
     <link rel="icon" href="midia/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/comum.css">
 </head>
 
 <body>
@@ -26,13 +24,14 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8JWVN8"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
                     <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
-                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="logo">
+                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="logo" width="200" height="60" decoding="async">
                 </div>
 
                 <div class="nav-menu" id="nav-menu">
@@ -40,7 +39,7 @@
                         <li><a href="index.html" class="nav-link">Início</a></li>
                         <li><a href="sobre_nos.html" class="nav-link">Sobre</a></li>
                         <li class="dropdown">
-                            <a href="#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
+                            <a href="index.html#projetos" class="nav-link">Projetos <i class="fas fa-chevron-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="contadores_do_amanha.html">Contadores do Amanhã</a></li>
                                 <li><a href="educacao_cj.html">Educação C.J.</a></li>
@@ -56,21 +55,21 @@
                     </ul>
                 </div>
 
-                <div class="nav-toggle" id="nav-toggle">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
+                <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                </button>
             </div>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="conteudo">
         <div class="hero-overlay"></div>
         <div class="hero-background">
             <!-- Replace this image path as needed -->
-            <img src="midia/img/Publicacoes/Capa.webp" alt="Publicações IGDS" class="hero-bg-image">
+            <img src="midia/img/Publicacoes/Capa.webp" alt="Publicações IGDS" class="hero-bg-image" width="1920" height="1080" decoding="async" loading="lazy">
         </div>
         <div class="hero-content">
             <div class="container">
@@ -93,10 +92,10 @@
                     <div class="publication-image">
                         <!-- Replace this image path as needed -->
                         <img src="midia/img/Publicacoes/GuiadoEducador.webp" alt="Guia do Educador"
-                            class="publication-cover">
+                            class="publication-cover" width="700" height="500" decoding="async" loading="lazy">
                     </div>
                     <div class="publication-content">
-                        <h3 class="publication-title">Guia do Educador</h3>
+                        <h2 class="publication-title">Guia do Educador</h2>
                         <p class="publication-description">
                             Uma introdução ao trabalho do Instituto Girassol e do Projeto Academia de Desenvolvimento
                             Juvenil.
@@ -117,11 +116,11 @@
                     <div class="publication-image">
                         <!-- Replace this image path as needed -->
                         <img src="midia/img/Publicacoes/DiagnosticoAnadia2020.webp" alt="Diagnóstico Anadia 2020"
-                            class="publication-cover">
+                            class="publication-cover" width="700" height="500" decoding="async" loading="lazy">
                     </div>
                     <div class="publication-content">
-                        <h3 class="publication-title">Diagnóstico Situacional da Criança e Adolescente do Município de
-                            Anadia/AL - 2020</h3>
+                        <h2 class="publication-title">Diagnóstico Situacional da Criança e Adolescente do Município de
+                            Anadia/AL - 2020</h2>
                         <p class="publication-description">
                             Um estudo para o planejamento e a execução de políticas públicas sociais.
                         </p>
@@ -141,11 +140,11 @@
                     <div class="publication-image">
                         <!-- Replace this image path as needed -->
                         <img src="midia/img/Publicacoes/DiagnosticoAnadia2021-2022.webp"
-                            alt="Diagnóstico Anadia 2021/2022" class="publication-cover">
+                            alt="Diagnóstico Anadia 2021/2022" class="publication-cover" width="700" height="500" decoding="async" loading="lazy">
                     </div>
                     <div class="publication-content">
-                        <h3 class="publication-title">Diagnóstico Situacional da Criança e Adolescente do Município de
-                            Anadia/AL - 2021/2022</h3>
+                        <h2 class="publication-title">Diagnóstico Situacional da Criança e Adolescente do Município de
+                            Anadia/AL - 2021/2022</h2>
                         <p class="publication-description">
                             O diagnóstico ajudou a mapear dados sobre a infância e juventude, identificar forças, riscos
                             e vulnerabilidades, e orientar um plano de ação fundamentado, articulado e eficiente.
@@ -166,11 +165,11 @@
                     <div class="publication-image">
                         <!-- Replace this image path as needed -->
                         <img src="midia/img/Publicacoes/DiagnosticoPessoaIdosa.webp" alt="Diagnóstico Boca da Mata 2025"
-                            class="publication-cover">
+                            class="publication-cover" width="700" height="500" decoding="async" loading="lazy">
                     </div>
                     <div class="publication-content">
-                        <h3 class="publication-title">Diagnóstico Situacional da Pessoa Idosa do Município de Boca da
-                            Mata/AL - 2025</h3>
+                        <h2 class="publication-title">Diagnóstico Situacional da Pessoa Idosa do Município de Boca da
+                            Mata/AL - 2025</h2>
                         <p class="publication-description">
                             O livro apresenta um estudo aprofundado sobre a realidade das pessoas idosas da cidade,
                             analisando aspectos como perfil socioeconômico, acesso a serviços públicos, saúde, educação,
@@ -191,10 +190,10 @@
                     <div class="publication-image">
                         <!-- Replace this image path as needed -->
                         <img src="midia/img/Publicacoes/DiagnosticoCriancaAdolescente.webp" alt="Diagnóstico Criança e Adolescente de Boca da Mata 2025"
-                            class="publication-cover">
+                            class="publication-cover" width="1999" height="1117" decoding="async" loading="lazy">
                     </div>
                     <div class="publication-content">
-                        <h3 class="publication-title">Diagnóstico Situacional da Criança e Adolescente do Município de Boca da Mata/AL - 2025</h3>
+                        <h2 class="publication-title">Diagnóstico Situacional da Criança e Adolescente do Município de Boca da Mata/AL - 2025</h2>
                         <p class="publication-description">
                             O livro analisa as condições de vida e os direitos de crianças e adolescentes de Boca da Mata (AL) em 2025.
                         </p>
@@ -215,7 +214,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO (pode ser a mesma do header) -->
-                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="footer-logo">
+                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="footer-logo" width="200" height="60" decoding="async" loading="lazy">
                     <p>Nosso compromisso é transformar realidades por meio de uma educação inovadora!</p>
                     <div class="social-links">
                         <!-- Facebook -->
@@ -245,7 +244,7 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Projetos & Ações</h4>
+                    <h2>Projetos & Ações</h2>
                     <ul>
                         <li><a href="contadores_do_amanha.html">Projeto Contadores do Amanhã</a></li>
                         <li><a href="educacao_cj.html">Projeto Educação C.J.</a></li>
@@ -255,7 +254,7 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Links Úteis</h4>
+                    <h2>Links Úteis</h2>
                     <ul>
                         <li><a href="sobre_nos.html">Sobre Nós</a></li>
                         <li><a href="transparencia.html">Transparência</a></li>
@@ -265,14 +264,12 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Newsletter</h4>
-                    <p>Receba nossas novidades e atualizações</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Seu e-mail" required>
-                        <button type="submit" aria-label="Enviar inscrição na newsletter">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
+                    <h2>Novidades</h2>
+                    <p>Acompanhe as oficinas, os resultados e os bastidores dos projetos no nosso Instagram.</p>
+                    <a href="https://www.instagram.com/instituto_girassol/" class="footer-follow" target="_blank" rel="noopener">
+                        <i class="fab fa-instagram" aria-hidden="true"></i> Seguir @instituto_girassol
+                        <span class="sr-only">(abre em nova aba)</span>
+                    </a>
                 </div>
             </div>
 
@@ -288,10 +285,11 @@
     </a>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo">
         <i class="fas fa-chevron-up"></i>
     </button>
 
+    <script src="js/comum.js"></script>
     <script src="js/publicacoes.js"></script>
 </body>
 

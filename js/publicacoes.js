@@ -46,14 +46,8 @@ window.addEventListener('scroll', () => {
 });
 
 // Parallax effect for hero section
-window.addEventListener('scroll', () => {
-  const scrolled = window.pageYOffset;
-  const heroBackground = document.querySelector('.hero-background');
-
-  if (heroBackground) {
-    heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-  }
-});
+// Parallax do hero: um listener throttled em js/comum.js, respeita menos movimento
+IGDS.parallax('.hero-background', 0.5);
 
 
 
@@ -79,7 +73,7 @@ backToTopBtn.addEventListener('click', () => {
 // Newsletter form handling
 const newsletterForm = document.querySelector('.newsletter-form');
 
-newsletterForm.addEventListener('submit', (e) => {
+newsletterForm?.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const email = newsletterForm.querySelector('input[type="email"]').value;

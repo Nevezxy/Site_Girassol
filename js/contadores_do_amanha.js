@@ -38,7 +38,7 @@ backToTopBtn.addEventListener('click', () => {
 
 // Newsletter form handling
 const newsletterForm = document.querySelector('.newsletter-form');
-newsletterForm.addEventListener('submit', (e) => {
+newsletterForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = newsletterForm.querySelector('input[type="email"]').value;
     if (!email) return alert('Por favor, insira seu e-mail.');
@@ -61,14 +61,8 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Parallax effect for hero section
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroBackground = document.querySelector('.hero-background');
-    if (heroBackground) {
-        heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
+// Parallax do hero: um listener throttled em js/comum.js, respeita menos movimento
+IGDS.parallax('.hero-background', 0.5);
 
 // Tabs
 const tabButtons = document.querySelectorAll('.tab-btn');
@@ -95,7 +89,7 @@ class ImageCarousel {
         this.currentSlide = 0;
         this.totalSlides = this.slides.length;
         this.autoPlayInterval = null;
-        this.autoPlayDelay = 1500; // 5s
+        this.autoPlayDelay = 5000; // 5s
         this.init();
     }
 
@@ -117,7 +111,7 @@ class ImageCarousel {
     }
 
     updateCarousel() {
-        this.track.style.transition = "transform 0.6s ease-in-out"; // animação suave
+        this.track.style.transition = IGDS.reduzirMovimento() ? 'none' : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
         this.track.style.transform = `translateX(${-this.currentSlide * 100}%)`;
         const indicators = this.indicatorsContainer.querySelectorAll('.indicator');
         indicators.forEach((indicator, index) => {
@@ -160,17 +154,36 @@ class ImageCarousel {
 
         // Keyboard
         document.addEventListener('keydown', (e) => {
+            if (!this.carousel.contains(document.activeElement)) return;
             if (e.key === 'ArrowLeft') { this.stopAutoPlay(); this.prevSlide(); }
             if (e.key === 'ArrowRight') { this.stopAutoPlay(); this.nextSlide(); }
         });
     }
 
     startAutoPlay() {
-        this.autoPlayInterval = setInterval(() => this.nextSlide(), this.autoPlayDelay);
+
+        // Controle compartilhado (js/comum.js): botão pausar/retomar e pausa
+
+        // com mouse, foco, fora da tela, aba oculta e menos movimento.
+
+        if (this.autoplay) return;
+
+        this.autoplay = IGDS.autoplay({
+
+            region: this.carousel,
+
+            next: () => this.nextSlide(),
+
+            delay: 5000
+
+        });
+
     }
 
     stopAutoPlay() {
-        clearInterval(this.autoPlayInterval);
+
+        this.autoplay?.stop();
+
     }
 }
 

@@ -39,9 +39,9 @@ window.addEventListener('scroll', () => {
                 header.style.backdropFilter = scrollY > 100 ? 'blur(10px)' : 'none';
             }
 
-            // Hero Parallax
+            // Hero Parallax (não roda com "menos movimento" ativo)
             if (heroBackground) {
-                heroBackground.style.transform = `translateY(${scrollY * 0.5}px)`;
+                heroBackground.style.transform = IGDS.reduzirMovimento() ? '' : `translateY(${scrollY * 0.5}px)`;
             }
 
             // Back to top button
@@ -61,7 +61,7 @@ backToTopBtn.addEventListener('click', () => {
 });
 
 // ================= NEWSLETTER FORM =================
-newsletterForm.addEventListener('submit', e => {
+newsletterForm?.addEventListener('submit', e => {
     e.preventDefault();
     const email = newsletterForm.querySelector('input[type="email"]').value.trim();
     if (!email) return alert('Por favor, insira seu e-mail.');
@@ -113,10 +113,11 @@ const observer = new IntersectionObserver(entries => {
     });
 }, observerOptions);
 
+// Cartões aparecem ao entrar na tela; com menos movimento, só por opacidade
 [...valueItems, ...projectCards].forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    el.style.transform = IGDS.reduzirMovimento() ? 'none' : 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
     observer.observe(el);
 });
 
@@ -138,6 +139,7 @@ projectCards.forEach(card => {
 // ================= BUTTON RIPPLE EFFECT =================
 document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('click', e => {
+        if (IGDS.reduzirMovimento()) return;
         const ripple = document.createElement('span');
         const rect = btn.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -195,8 +197,24 @@ function setupCarousel() {
 function updateCarousel(animate = true) {
     const slideWidth = allSlides[0].getBoundingClientRect().width;
     const offset = -slideWidth * currentIndex;
-    carouselTrack.style.transition = animate ? "transform 0.5s ease-in-out" : "none";
+    // Com menos movimento a troca é instantânea; sem transição não há
+    // transitionend, então o retorno ao início do loop acontece na hora.
+    const slide = animate && !IGDS.reduzirMovimento();
+    carouselTrack.style.transition = slide ? "transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)" : "none";
     carouselTrack.style.transform = `translateX(${offset}px)`;
+    if (animate && !slide) wrapCarousel();
+}
+
+// Volta das cópias das pontas para os logos originais, sem o salto aparecer
+function wrapCarousel() {
+    if (currentIndex >= allSlides.length - slidesPerPage) {
+        currentIndex = slidesPerPage;
+        updateCarousel(false);
+    }
+    if (currentIndex < slidesPerPage) {
+        currentIndex = allSlides.length - slidesPerPage * 2;
+        updateCarousel(false);
+    }
 }
 
 function nextSlide() {
@@ -211,32 +229,28 @@ function prevSlide() {
     updateCarousel();
 }
 
+// Um único controle de autoplay para o carrossel inteiro (sobrevive aos
+// rebuilds do resize); pausa com mouse, foco, fora da tela e aba oculta.
 function startAutoPlay() {
     if (autoPlayInterval) return;
-    autoPlayInterval = setInterval(nextSlide, 4000);
+    autoPlayInterval = IGDS.autoplay({
+        region: document.querySelector('#parceiros .carousel-container'),
+        next: nextSlide,
+        delay: 4000
+    });
 }
 
 function stopAutoPlay() {
-    clearInterval(autoPlayInterval);
-    autoPlayInterval = null;
+    autoPlayInterval?.stop();
 }
 
 nextButton.addEventListener("click", () => { stopAutoPlay(); nextSlide(); });
 prevButton.addEventListener("click", () => { stopAutoPlay(); prevSlide(); });
 
-carouselTrack.addEventListener("transitionend", () => {
-    if (currentIndex >= allSlides.length - slidesPerPage) {
-        currentIndex = slidesPerPage;
-        updateCarousel(false);
-    }
-    if (currentIndex < slidesPerPage) {
-        currentIndex = allSlides.length - slidesPerPage * 2;
-        updateCarousel(false);
-    }
-});
+carouselTrack.addEventListener("transitionend", wrapCarousel);
 
+// Reconstrói o carrossel na nova largura sem desligar o autoplay
 window.addEventListener("resize", () => {
-    stopAutoPlay();
     setupCarousel();
 });
 
@@ -246,26 +260,57 @@ setupCarousel();
 // FORM
 const form = document.getElementById('meuForm');
 
-form.addEventListener('submit', function(e){
+const formStatus = form?.querySelector('.form-status');
+const formSubmitBtn = form?.querySelector('button[type="submit"]');
+
+function setFormStatus(type, message) {
+  if (!formStatus) return;
+  formStatus.className = 'form-status' + (type ? ' is-' + type : '');
+  formStatus.textContent = message;
+}
+
+form?.addEventListener('submit', function(e){
   e.preventDefault(); // evita que a página recarregue
+
+  // Mensagem vazia: o navegador aponta o campo e explica o que falta
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
+
+  // Evita envio duplo enquanto a requisição está em andamento
+  if (formSubmitBtn.disabled) return;
+  formSubmitBtn.disabled = true;
+  formSubmitBtn.textContent = 'Enviando…';
+  setFormStatus('', '');
 
   const data = new FormData(form);
   const payload = new URLSearchParams();
 
-  payload.append("entry.1655741229", data.get("entry.1655741229"));
-  payload.append("entry.777068924", data.get("entry.777068924"));
-  payload.append("entry.429007067", data.get("entry.429007067"));
-  payload.append("entry.374350221", data.get("entry.374350221"));
+  // Campos opcionais vazios seguem como texto vazio, nunca como "null"
+  payload.append("entry.1655741229", data.get("entry.1655741229") || "");
+  payload.append("entry.777068924", data.get("entry.777068924") || "");
+  payload.append("entry.429007067", data.get("entry.429007067") || "");
+  payload.append("entry.374350221", data.get("entry.374350221") || "");
 
   const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSeyqQ9yL68Kcrg6FxqLm1DvMhurPQSsMapzum6f8IQuAGa4Cw/formResponse";
 
+  // Com no-cors o Google não devolve confirmação: só sabemos se a mensagem saiu
+  // do navegador. Falha aqui significa sem conexão, e o texto é mantido.
   fetch(googleFormURL, {
     method: "POST",
     body: payload,
     mode: "no-cors"
-  });
-
-  // Mensagem de sucesso "simulada"
-  alert("Mensagem enviada!");
-  form.reset(); // limpa o formulário
+  })
+    .then(() => {
+      form.reset();
+      setFormStatus('success', 'Mensagem enviada. Obrigado pelo contato! Se você deixou seu e-mail, responderemos por lá.');
+    })
+    .catch(() => {
+      setFormStatus('error', 'Não conseguimos enviar agora. Verifique sua conexão e tente de novo; sua mensagem continua no formulário. Se preferir, fale com a gente pelo WhatsApp (82) 99999-2784.');
+    })
+    .finally(() => {
+      formSubmitBtn.disabled = false;
+      formSubmitBtn.textContent = 'Enviar';
+    });
 });

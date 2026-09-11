@@ -1,4 +1,8 @@
 :root {
+    /* Papéis do âmbar (contraste AA) */
+    --primary-color-rgb: 255, 177, 0;
+    --primary-ink: #976115;   /* Âmbar Tostado: âmbar como texto ou ícone pequeno sobre fundo claro (5.2:1 no branco) */
+    --on-primary: #1E1810;    /* texto e ícones sobre preenchimento âmbar ou laranja (9.7:1 / 7.5:1) */
   --primary-color: #ffb100;
   --secondary-color: #ff8c00;
   --dark-color: #1e1810;
@@ -13,6 +17,18 @@
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   --border-radius: 8px;
 }
+
+/* Superfícies do navegador na paleta */
+::selection {
+    background: var(--primary-color);
+    color: var(--on-primary);
+}
+
+html {
+    accent-color: var(--primary-ink);
+    caret-color: var(--primary-ink);
+}
+
 
 /* Reset e Base */
 * {
@@ -94,7 +110,7 @@ body {
 }
 
 .nav-link:hover {
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .dropdown {
@@ -137,12 +153,12 @@ body {
 
 .dropdown-menu a:hover {
     background: var(--light-bg);
-    color: var(--primary-color);
+    color: var(--primary-ink);
 }
 
 .btn-donate {
     background: var(--primary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     font-weight: 600;
@@ -150,7 +166,7 @@ body {
 
 .btn-donate:hover {
     background: var(--secondary-color);
-    color: var(--white) !important;
+    color: var(--on-primary) !important;
 }
 
 .nav-toggle {
@@ -177,7 +193,7 @@ body {
 
 .form-header {
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: var(--white);
+  color: var(--on-primary);
   padding: 2rem;
   text-align: center;
 }
@@ -225,8 +241,8 @@ body {
 .form-group select:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(255, 177, 0, 0.1);
+  border-color: var(--primary-ink);
+  box-shadow: 0 0 0 3px rgba(var(--primary-color-rgb), 0.35);
 }
 
 .form-group select {
@@ -246,10 +262,9 @@ body {
 
 .privacy-notice {
   background-color: var(--light-bg);
-  padding: 1rem;
+  padding: 1rem 1.25rem;
   border-radius: var(--border-radius);
   margin-bottom: 1.5rem;
-  border-left: 4px solid var(--primary-color);
 }
 
 .privacy-notice p {
@@ -260,10 +275,10 @@ body {
 .submit-btn {
   width: 100%;
   background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  color: var(--white);
+  color: var(--on-primary);
   border: none;
   padding: 1rem 2rem;
-  font-size: 1.1rem;
+  font-size: var(--fs-lead);
   font-weight: 600;
   border-radius: var(--border-radius);
   cursor: pointer;
@@ -299,14 +314,14 @@ body {
   display: inline;
 }
 
-/* Success message styles */
+/* Mensagem de sucesso: mesmas cores de status do formulário do site
+   (DESIGN.md — sucesso #1E5B2C sobre #E8F3EA). */
 .success-message {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: #E8F3EA;
+  color: #1E5B2C;
   padding: 1rem;
   border-radius: var(--border-radius);
   margin-bottom: 1rem;
-  border: 1px solid #c3e6cb;
   display: none;
 }
 
@@ -374,7 +389,7 @@ body {
     margin-bottom: 1rem;
 }
 
-.footer-section h4 {
+.footer-section h2 {
     color: var(--primary-color);
     font-size: 1.2rem;
     margin-bottom: 1rem;
@@ -411,7 +426,7 @@ body {
     width: 40px;
     height: 40px;
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border-radius: 50%;
     text-decoration: none;
     transition: var(--transition);
@@ -438,7 +453,7 @@ body {
 
 .newsletter-form button {
     background: var(--primary-color);
-    color: var(--white);
+    color: var(--on-primary);
     border: none;
     padding: 0.8rem 1rem;
     border-radius: var(--border-radius);

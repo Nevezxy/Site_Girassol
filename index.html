@@ -84,7 +84,7 @@
         }
 
         .nav-link:hover {
-            color: #FFB100;
+            color: #976115;
         }
 
         .dropdown {
@@ -123,7 +123,7 @@
 
         .dropdown-menu li a:hover {
             background: #F8F7F3;
-            color: #FFB100;
+            color: #976115;
         }
 
         /* Botões */
@@ -143,7 +143,7 @@
 
         .btn-primary {
             background: #FFB100;
-            color: #FFF;
+            color: #1E1810;
         }
 
         .btn-primary:hover {
@@ -164,7 +164,7 @@
 
         .btn-donate {
             background: #FFB100;
-            color: #FFF;
+            color: #1E1810;
             padding: 0.5rem 1rem;
             border-radius: 8px;
             font-weight: 600;
@@ -173,7 +173,7 @@
 
         .btn-donate:hover {
             background: #FF8C00;
-            color: #FFF;
+            color: #1E1810;
         }
 
         /* Hero Section */
@@ -213,17 +213,23 @@
             color: #FFF;
         }
 
+        /* CSS crítico: os mesmos valores da rampa em css/comum.css (--fs-display /
+           --fs-lead), escritos literais porque os tokens ainda não carregaram
+           no primeiro paint. */
         .hero-title {
-            font-size: 3.5rem;
+            font-size: clamp(2rem, 1.1rem + 4vw, 3.25rem);
+            line-height: 1.12;
+            letter-spacing: -0.015em;
             font-weight: 700;
             margin-bottom: 1rem;
             animation: fadeInUp 1s ease;
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: clamp(1.05rem, 1rem + 0.4vw, 1.2rem);
+            line-height: 1.45;
             margin-bottom: 2rem;
-            max-width: 600px;
+            max-width: 38ch;
             margin-left: auto;
             margin-right: auto;
             animation: fadeInUp 1s ease 0.2s both;
@@ -235,6 +241,48 @@
             justify-content: center;
             flex-wrap: wrap;
             animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        /* Momento principal da home: o pátio se ilumina.
+           O véu de terra começa mais fechado e clareia enquanto a foto da sede
+           assenta e o título chega. O texto aparece aos 0.3s; tudo acaba em ~1.5s. */
+        .hero .hero-overlay {
+            background: rgba(30, 24, 16, 0.9);
+            opacity: 0.78; /* 0.9 × 0.78 ≈ o véu de 70% do sistema */
+            animation: amanhecer 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .hero .hero-image {
+            animation: assentar 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+        }
+
+        .hero .hero-title {
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+        }
+
+        .hero .hero-subtitle {
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+        }
+
+        .hero .hero-buttons {
+            animation: fadeInUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.6s both;
+        }
+
+        @keyframes amanhecer {
+            from { opacity: 1; }
+            to { opacity: 0.78; }
+        }
+
+        @keyframes assentar {
+            from { transform: scale(1.06); }
+            to { transform: scale(1); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero .hero-overlay,
+            .hero .hero-image {
+                animation: none;
+            }
         }
 
         /* Responsividade básica */
@@ -278,15 +326,19 @@
         }
     </style>
 
-    <!-- CSS externo assíncrono -->
-    <link rel="preload" href="css/styles.css" as="style" onload="this.rel='stylesheet'">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style"
-        onload="this.rel='stylesheet'">
+    <!-- Imagem principal (LCP): começa a baixar já no head -->
+    <link rel="preload" as="image" href="midia/img/Entrada.webp" fetchpriority="high">
+
+    <!-- CSS da página: bloqueante, para o conteúdo abaixo do hero não piscar sem estilo -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/comum.css">
+
+    <!-- Font Awesome: só ícones, carrega sem bloquear a renderização -->
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
-        <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     </noscript>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="midia/img/favicon.ico" type="image/x-icon">
 </head>
 
@@ -295,13 +347,14 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T8JWVN8"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <a class="skip-link" href="#inicio">Pular para o conteúdo</a>
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
             <div class="nav-container">
                 <div class="nav-logo">
                     <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO -->
-                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="logo">
+                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="logo" width="200" height="60" decoding="async">
                 </div>
 
                 <div class="nav-menu" id="nav-menu">
@@ -325,11 +378,11 @@
                     </ul>
                 </div>
 
-                <div class="nav-toggle" id="nav-toggle">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
+                <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-menu">
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                    <span class="bar" aria-hidden="true"></span>
+                </button>
             </div>
         </nav>
     </header>
@@ -338,7 +391,7 @@
     <section id="inicio" class="hero">
         <div class="hero-background">
             <!-- SUBSTITUA PELO CAMINHO DA SUA IMAGEM DE FUNDO NO CSS -->
-            <img src="midia/img/Entrada.webp" alt="Entrada" class="hero-image">
+            <img src="midia/img/Entrada.webp" alt="Entrada" class="hero-image" width="1920" height="1080" decoding="async" fetchpriority="high">
             <div class="hero-overlay"></div>
         </div>
         <div class="hero-content">
@@ -431,9 +484,9 @@
                 <div class="project-card">
                     <div class="project-number">01</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
-                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_1" alt="Contadores do Amanhã" class="project-image"> -->
+                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_1" alt="Contadores do Amanhã" class="project-image" decoding="async" loading="lazy"> -->
                     <img src="midia/img/ContadoresDoAmanha/Capa-500.webp" alt="Contadores do Amanhã"
-                        class="project-image">
+                        class="project-image" width="1920" height="1080" decoding="async" loading="lazy">
                     <h3>Contadores do Amanhã</h3>
                     <p><strong>Objetivo:</strong> Promover a leitura, a produção textual e o desenvolvimento de
                         habilidades socioemocionais de crianças e adolescentes.</p>
@@ -449,8 +502,8 @@
                 <div class="project-card">
                     <div class="project-number">02</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
-                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_2" alt="Educação C.J." class="project-image"> -->
-                    <img src="midia/img/EducacaoCJ/Capa-500.webp" alt="Educação C.J." class="project-image">
+                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_2" alt="Educação C.J." class="project-image" decoding="async" loading="lazy"> -->
+                    <img src="midia/img/EducacaoCJ/Capa-500.webp" alt="Educação C.J." class="project-image" width="1920" height="1080" decoding="async" loading="lazy">
                     <h3>Educação 4.0 - Crescendo Juntos</h3>
                     <p><strong>Objetivo:</strong> Promover a formação integral de crianças, adolescentes e jovens em
                         situação de vulnerabilidade social.</p>
@@ -465,8 +518,8 @@
                 <div class="project-card">
                     <div class="project-number">03</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
-                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_3" alt="Jovem Falcão" class="project-image"> -->
-                    <img src="midia/img/JovemFalcao/Capa-500.webp" alt="Jovem Falcão" class="project-image">
+                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_3" alt="Jovem Falcão" class="project-image" decoding="async" loading="lazy"> -->
+                    <img src="midia/img/JovemFalcao/Capa-500.webp" alt="Jovem Falcão" class="project-image" width="500" height="281" decoding="async" loading="lazy">
                     <h3>Jovem Falcão</h3>
                     <p><strong>Objetivo:</strong> Contribuir para a promoção da garantia dos direitos dos adolescentes e
                         jovens, desenvolvendo potencial humano e social.</p>
@@ -481,8 +534,8 @@
                 <div class="project-card">
                     <div class="project-number">04</div>
                     <!-- OPCIONAL: Adicione uma imagem do projeto aqui -->
-                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_4" alt="Conectando Gerações" class="project-image"> -->
-                    <img src="midia/img/ConectandoGeracoes/Capa-500.webp" alt="Jovem Falcão" class="project-image">
+                    <!-- <img src="CAMINHO_IMAGEM_PROJETO_4" alt="Conectando Gerações" class="project-image" decoding="async" loading="lazy"> -->
+                    <img src="midia/img/ConectandoGeracoes/Capa-500.webp" alt="Jovem Falcão" class="project-image" width="500" height="281" decoding="async" loading="lazy">
                     <h3>Conectando Gerações</h3>
                     <p><strong>Objetivo:</strong> Contribuir com o processo de envelhecimento ativo e saudável da pessoa
                         idosa.</p>
@@ -499,6 +552,7 @@
 
     <!-- Mission Section -->
     <section class="mission">
+        <img class="mission-bg" src="midia/img/Stats.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="1920" height="1080">
         <div class="container">
             <div class="mission-content">
                 <div class="mission-text">
@@ -547,37 +601,37 @@
                 <div class="carousel-wrapper">
                     <div class="carousel-track" id="carouselTrack">
                         <div class="partner-slide">
-                            <img src="midia/logos/BocadaMataLogo-500.webp" alt="Bocada Mata">
+                            <img src="midia/logos/BocadaMataLogo-500.webp" alt="Bocada Mata" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CMDCALogo-500.webp" alt="CMDCA">
+                            <img src="midia/logos/CMDCALogo-500.webp" alt="CMDCA" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CMDCAALogo-500.webp" alt="CMDCAA">
+                            <img src="midia/logos/CMDCAALogo-500.webp" alt="CMDCAA" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/AmbevLogo-500.webp" alt="Ambev">
+                            <img src="midia/logos/AmbevLogo-500.webp" alt="Ambev" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/AnadiaLogo-500.webp" alt="Anadia">
+                            <img src="midia/logos/AnadiaLogo-500.webp" alt="Anadia" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CMDPILogo-500.webp" alt="CMDPI">
+                            <img src="midia/logos/CMDPILogo-500.webp" alt="CMDPI" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/CriancaEsperancaLogo-500.webp" alt="Criança Esperança">
+                            <img src="midia/logos/CriancaEsperancaLogo-500.webp" alt="Criança Esperança" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/FalconsUniversityLogo-500.webp" alt="Falcons University">
+                            <img src="midia/logos/FalconsUniversityLogo-500.webp" alt="Falcons University" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/ItauSocialLogo-500.webp" alt="Itaú Social">
+                            <img src="midia/logos/ItauSocialLogo-500.webp" alt="Itaú Social" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/ProgramadeValorLogo-500.webp" alt="Programa de Valor">
+                            <img src="midia/logos/ProgramadeValorLogo-500.webp" alt="Programa de Valor" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                         <div class="partner-slide">
-                            <img src="midia/logos/SiemensLogo-500.webp" alt="Siemens">
+                            <img src="midia/logos/SiemensLogo-500.webp" alt="Siemens" width="500" height="250" decoding="async" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -632,23 +686,28 @@
                     <input type="hidden" name="form-name" value="contato">
                     <h3>Envie uma Mensagem</h3>
                     <div class="form-group">
-                        <input type="text" name="entry.1655741229" placeholder="Nome (opcional)">
+                        <label for="contato-nome">Nome <span class="optional">(opcional)</span></label>
+                        <input type="text" id="contato-nome" name="entry.1655741229" autocomplete="name">
                     </div>
                     <div class="form-group">
-                        <input type="email" name="entry.777068924" placeholder="E-mail (opcional)">
+                        <label for="contato-email">E-mail <span class="optional">(opcional, para podermos responder)</span></label>
+                        <input type="email" id="contato-email" name="entry.777068924" autocomplete="email" inputmode="email">
                     </div>
                     <div class="form-group">
-                        <select name="entry.429007067">
-                            <option value="" disabled selected>Assunto</option>
+                        <label for="contato-assunto">Assunto</label>
+                        <select id="contato-assunto" name="entry.429007067">
+                            <option value="" disabled selected>Selecione um assunto</option>
                             <option value="Contato">Contato</option>
                             <option value="Voluntário">Voluntário</option>
                             <option value="Trabalho">Trabalho</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <textarea name="entry.374350221" placeholder="Mensagem" required></textarea>
+                        <label for="contato-mensagem">Mensagem</label>
+                        <textarea id="contato-mensagem" name="entry.374350221" required maxlength="3000" placeholder=" "></textarea>
                     </div>
                     <button type="submit">Enviar</button>
+                    <p class="form-status" role="status" aria-live="polite"></p>
                 </form>
             </div>
         </div>
@@ -660,7 +719,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <!-- SUBSTITUA PELO CAMINHO DA SUA LOGO (pode ser a mesma do header) -->
-                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="footer-logo">
+                    <img src="midia/IGDSLogo.webp" alt="Instituto Girassol" class="footer-logo" width="200" height="60" decoding="async" loading="lazy">
                     <p>Nosso compromisso é transformar realidades por meio de uma educação inovadora!</p>
                     <div class="social-links">
                         <!-- Facebook -->
@@ -690,7 +749,7 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Projetos & Ações</h4>
+                    <h2>Projetos & Ações</h2>
                     <ul>
                         <li><a href="contadores_do_amanha.html">Projeto Contadores do Amanhã</a></li>
                         <li><a href="educacao_cj.html">Projeto Educação C.J.</a></li>
@@ -700,7 +759,7 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Links Úteis</h4>
+                    <h2>Links Úteis</h2>
                     <ul>
                         <li><a href="sobre_nos.html">Sobre Nós</a></li>
                         <li><a href="transparencia.html">Transparência</a></li>
@@ -710,14 +769,12 @@
                 </div>
 
                 <div class="footer-section">
-                    <h4>Newsletter</h4>
-                    <p>Receba nossas novidades e atualizações</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Seu e-mail" required>
-                        <button type="submit" aria-label="Enviar inscrição na newsletter">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </form>
+                    <h2>Novidades</h2>
+                    <p>Acompanhe as oficinas, os resultados e os bastidores dos projetos no nosso Instagram.</p>
+                    <a href="https://www.instagram.com/instituto_girassol/" class="footer-follow" target="_blank" rel="noopener">
+                        <i class="fab fa-instagram" aria-hidden="true"></i> Seguir @instituto_girassol
+                        <span class="sr-only">(abre em nova aba)</span>
+                    </a>
                 </div>
             </div>
 
@@ -734,10 +791,11 @@
     </a>
 
     <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
+    <button class="back-to-top" id="backToTop" type="button" aria-label="Voltar ao topo">
         <i class="fas fa-chevron-up"></i>
     </button>
 
+    <script src="js/comum.js"></script>
     <script src="js/script.js"></script>
 </body>
 

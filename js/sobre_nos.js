@@ -1,7 +1,7 @@
 let currentSlide = 0;
 let currentTeamSlide = 0;
 let autoPlayMain, autoPlayTeam;
-const autoPlayDelayMain = 3000; // 5 segundos
+const autoPlayDelayMain = 7000; // 7 segundos: os slides têm título e parágrafo para ler
 const autoPlayDelayTeam = 7000; // 7 segundos
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -75,19 +75,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==== AUTO-PLAY ====
+    // Controle compartilhado (js/comum.js): botão pausar/retomar e pausa
+    // com mouse, foco, fora da tela, aba oculta e menos movimento.
     function startAutoPlayMain() {
-        stopAutoPlayMain();
-        autoPlayMain = setInterval(nextSlide, autoPlayDelayMain);
+        if (autoPlayMain) return;
+        autoPlayMain = IGDS.autoplay({
+            region: document.querySelector('.hero-slider'),
+            next: nextSlide,
+            delay: autoPlayDelayMain
+        });
     }
     function stopAutoPlayMain() {
-        clearInterval(autoPlayMain);
+        autoPlayMain?.stop();
     }
     function startAutoPlayTeam() {
-        stopAutoPlayTeam();
-        autoPlayTeam = setInterval(nextTeamSlide, autoPlayDelayTeam);
+        if (autoPlayTeam) return;
+        autoPlayTeam = IGDS.autoplay({
+            region: document.querySelector('.team-info'),
+            mount: document.querySelector('.team-slider-controls'),
+            inline: true,
+            next: nextTeamSlide,
+            delay: autoPlayDelayTeam
+        });
     }
     function stopAutoPlayTeam() {
-        clearInterval(autoPlayTeam);
+        autoPlayTeam?.stop();
     }
 
     // Criar indicadores
@@ -180,15 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==== NAVEGAÇÃO POR TECLADO ====
+    // Setas só movem o slider quando o foco está nele (antes sequestravam as setas da página toda)
     document.addEventListener('keydown', e => {
+        if (!document.querySelector('.hero-slider')?.contains(document.activeElement)) return;
         if (e.key === 'ArrowLeft') { stopAutoPlayMain(); prevSlide(); }
         if (e.key === 'ArrowRight') { stopAutoPlayMain(); nextSlide(); }
     });
 });
-
-// ==== PRÉ-CARREGAMENTO DE IMAGENS ====
-['images/logo.svg', 'images/hero-bg-1.jpg', 'images/instituto-2012.jpg', 'images/instituto-2024.jpg']
-    .forEach(src => { const img = new Image(); img.src = src; });
 
 // ==== BOTÃO VOLTAR AO TOPO ====
 const backToTopBtn = document.getElementById('backToTop');
@@ -201,7 +211,7 @@ backToTopBtn.addEventListener('click', () => {
 
 // ==== FORMULÁRIO NEWSLETTER ====
 const newsletterForm = document.querySelector('.newsletter-form');
-newsletterForm.addEventListener('submit', (e) => {
+newsletterForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     const email = newsletterForm.querySelector('input[type="email"]').value;
     if (!email) return alert('Por favor, insira seu e-mail.');

@@ -1,0 +1,533 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-10T00:00:00Z",
+  "title": "Design System: Instituto Girassol de Desenvolvimento Social",
+  "extensions": {
+    "colorMeta": {
+      "amarelo-girassol": {
+        "role": "primary",
+        "displayName": "Amarelo Girassol",
+        "canonical": "#FFB100",
+        "tonalRamp": [
+          "#150800",
+          "#331F00",
+          "#553A05",
+          "#7B550E",
+          "#A9750E",
+          "#D7971C",
+          "#FFBD50",
+          "#FFECD0"
+        ]
+      },
+      "laranja-poente": {
+        "role": "secondary",
+        "displayName": "Laranja Poente",
+        "canonical": "#FF8C00",
+        "tonalRamp": [
+          "#1A0400",
+          "#3B1A00",
+          "#603205",
+          "#8A4B0D",
+          "#BC670D",
+          "#EF861B",
+          "#FCBB89",
+          "#FEEADC"
+        ]
+      },
+      "ambar-tostado": {
+        "role": "primary",
+        "displayName": "Âmbar Tostado",
+        "canonical": "#976115",
+        "tonalRamp": [
+          "#170600",
+          "#371D00",
+          "#5A3703",
+          "#825109",
+          "#AA732D",
+          "#D19754",
+          "#F9BE79",
+          "#FEEBD7"
+        ]
+      },
+      "terra-queimada": {
+        "role": "neutral",
+        "displayName": "Terra Queimada",
+        "canonical": "#1E1810",
+        "tonalRamp": [
+          "#100A04",
+          "#29231B",
+          "#453F36",
+          "#645C53",
+          "#877F75",
+          "#ABA399",
+          "#D2C9BE",
+          "#F6EDE2"
+        ]
+      },
+      "cinza-argila": {
+        "role": "neutral",
+        "displayName": "Cinza Argila",
+        "canonical": "#62615C",
+        "tonalRamp": [
+          "#0C0B08",
+          "#252420",
+          "#41403B",
+          "#5F5E59",
+          "#81807B",
+          "#A6A59F",
+          "#CCCBC5",
+          "#F0EFE9"
+        ]
+      },
+      "cinza-grafite": {
+        "role": "neutral",
+        "displayName": "Cinza Grafite",
+        "canonical": "#4B4F58",
+        "tonalRamp": [
+          "#080B12",
+          "#20242C",
+          "#3C4048",
+          "#595E67",
+          "#7C808A",
+          "#A0A5AF",
+          "#C6CAD5",
+          "#EAEEFA"
+        ]
+      },
+      "palha-clara": {
+        "role": "neutral",
+        "displayName": "Palha Clara",
+        "canonical": "#F8F7F3",
+        "tonalRamp": [
+          "#0C0B09",
+          "#252421",
+          "#40403D",
+          "#5E5E5A",
+          "#81807D",
+          "#A5A5A1",
+          "#CBCAC7",
+          "#EFEEEA"
+        ]
+      },
+      "branco": {
+        "role": "neutral",
+        "displayName": "Branco",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#0B0B0B",
+          "#242424",
+          "#404040",
+          "#5D5D5D",
+          "#808080",
+          "#A4A4A4",
+          "#CACACA",
+          "#EEEEEE"
+        ]
+      },
+      "verde-whatsapp": {
+        "role": "functional",
+        "displayName": "Verde WhatsApp",
+        "canonical": "#25D366",
+        "tonalRamp": [
+          "#001101",
+          "#002D0E",
+          "#004E1F",
+          "#017131",
+          "#1C9949",
+          "#2CC361",
+          "#4EEE7F",
+          "#C9FED2"
+        ]
+      },
+      "input-border": {
+        "role": "neutral",
+        "displayName": "Borda de Campo",
+        "canonical": "#DDDDDD",
+        "tonalRamp": [
+          "#1A1A1A",
+          "#303030",
+          "#494949",
+          "#646464",
+          "#838383",
+          "#A6A6A6",
+          "#CCCCCC",
+          "#EFEFEF"
+        ]
+      },
+      "status-sucesso-texto": {
+        "role": "functional",
+        "displayName": "Sucesso (texto)",
+        "canonical": "#1E5B2C",
+        "tonalRamp": [
+          "#04160B",
+          "#0C2E18",
+          "#164B27",
+          "#205F32",
+          "#3E8452",
+          "#63A97A",
+          "#93CBA6",
+          "#DCEFE3"
+        ]
+      },
+      "status-sucesso-fundo": {
+        "role": "functional",
+        "displayName": "Sucesso (fundo)",
+        "canonical": "#E8F3EA",
+        "tonalRamp": [
+          "#0B120D",
+          "#212C24",
+          "#3B4A3F",
+          "#59685D",
+          "#7C8A80",
+          "#A3B0A8",
+          "#C9D4CD",
+          "#EEF4F0"
+        ]
+      },
+      "status-erro-texto": {
+        "role": "functional",
+        "displayName": "Erro (texto)",
+        "canonical": "#8C1D18",
+        "tonalRamp": [
+          "#1C0503",
+          "#3B120E",
+          "#5E211B",
+          "#8C1D18",
+          "#B54237",
+          "#DA6C60",
+          "#F19C92",
+          "#FCE0DB"
+        ]
+      },
+      "status-erro-fundo": {
+        "role": "functional",
+        "displayName": "Erro (fundo)",
+        "canonical": "#FBEAE8",
+        "tonalRamp": [
+          "#140B0A",
+          "#2C211F",
+          "#493C39",
+          "#675855",
+          "#8A7A76",
+          "#B0A09B",
+          "#D5C7C2",
+          "#F5EBE8"
+        ]
+      },
+      "status-erro-borda": {
+        "role": "functional",
+        "displayName": "Erro (borda de campo)",
+        "canonical": "#B3261E",
+        "tonalRamp": [
+          "#240604",
+          "#45130E",
+          "#6B211A",
+          "#932A22",
+          "#B3261E",
+          "#D65043",
+          "#EE8175",
+          "#FBDDD8"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Título do herói (.hero-title) em toda página, branco sobre foto velada. Fluido clamp(2rem → 3.25rem), tracking −0.015em; sem overrides de @media por página."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Título de seção (.section-title) e .form-header h1, Terra Queimada, sempre sob o sobretítulo âmbar. Fluido clamp(1.75rem → 2.5rem)."
+      },
+      "subhead": {
+        "displayName": "Subhead",
+        "purpose": "Título de cartão de projeto e de bloco de formulário/contato (--fs-h3, 1.5rem). Unificou o antigo 2rem dos blocos de contato."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Nome de valor, título de coluna do rodapé, rótulo de item de contato (--fs-title, 1.25rem)."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Subtítulo do herói (bloco ~38ch), parágrafo de abertura de seção, citação de equipe. Fluido clamp(1.05rem → 1.2rem)."
+      },
+      "stat": {
+        "displayName": "Stat",
+        "purpose": "Número de estatística em Amarelo Girassol (--fs-stat). Fluido clamp(2rem → 2.75rem)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Texto corrido em Cinza Argila (--fs-body, 1rem / 1.6). Sobe para 1.75 de entrelinha sobre o rodapé escuro."
+      },
+      "small": {
+        "displayName": "Small",
+        "purpose": "Rótulo de estatística, legenda, metadado, texto de item de contato (--fs-small, 0.9375rem)."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Sobretítulo de seção em MAIÚSCULAS, tracking 0.08em (--fs-label, 0.875rem): Âmbar Tostado sobre fundo claro, Amarelo Girassol sobre véu escuro."
+      }
+    },
+    "shadows": [
+      {
+        "name": "repouso",
+        "value": "0 4px 20px rgba(0, 0, 0, 0.1)",
+        "purpose": "Sombra padrão (--shadow) de cartões, cabeçalho fixo, dropdown, carrossel e botões flutuantes."
+      },
+      {
+        "name": "elevado",
+        "value": "0 8px 30px rgba(0, 0, 0, 0.15)",
+        "purpose": "Cartões em hover, junto de translateY(-5px)."
+      },
+      {
+        "name": "formulario",
+        "value": "0 8px 30px rgba(0, 0, 0, 0.12)",
+        "purpose": "Cartão do formulário de contato; no hover 0 12px 40px rgba(0, 0, 0, 0.15)."
+      },
+      {
+        "name": "pulso-whatsapp",
+        "value": "0 0 0 10px rgba(37, 211, 102, 0)",
+        "purpose": "Anel pulsante do botão flutuante de WhatsApp."
+      }
+    ],
+    "motion": [
+      {
+        "name": "transicao-padrao",
+        "value": "all 0.3s ease",
+        "purpose": "Variável --transition: hover de cor, elevação e aparição em todo o site."
+      },
+      {
+        "name": "abertura-do-patio",
+        "value": "amanhecer 1.4s + assentar 2.2s + fadeInUp 0.9s (atrasos 0.3s / 0.45s / 0.6s)",
+        "purpose": "Momento com autoria da home: o véu de terra clareia, a foto da sede assenta do zoom e o texto chega em sequência. Só na home."
+      },
+      {
+        "name": "revelacao-ao-rolar",
+        "value": "opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Cartões de valor, projeto e seções sobem 30px e aparecem ao entrar na tela (IntersectionObserver). Só opacidade sob prefers-reduced-motion."
+      },
+      {
+        "name": "deslize-carrossel",
+        "value": "transform 0.5s–0.6s cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Troca de quadro dos carrosséis; instantânea sob prefers-reduced-motion."
+      },
+      {
+        "name": "revelar-sublinhado",
+        "value": "transform 0.3s ease (scaleX 0.6 → 1, transform-origin: left)",
+        "purpose": "A barra âmbar de 100px sob títulos de formulário/contato cresce no hover por escala, não por width, para não causar reflow."
+      },
+      {
+        "name": "reduzir-movimento",
+        "value": "@media (prefers-reduced-motion: reduce) em css/comum.css",
+        "purpose": "Troca fadeInUp/slideIn por só opacidade, para os loops pulse/shimmer, desliga parallax e background-attachment fixed, e IGDS.autoplay começa pausado."
+      },
+      {
+        "name": "scroll-throttled",
+        "value": "requestAnimationFrame + passive listener (IGDS.parallax)",
+        "purpose": "Um listener de scroll por efeito, sem escrever transform a cada evento; não roda sob prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "desktop-estreito",
+        "value": "1024px"
+      },
+      {
+        "name": "tablet",
+        "value": "992px"
+      },
+      {
+        "name": "contato-empilha",
+        "value": "900px"
+      },
+      {
+        "name": "menu-gaveta",
+        "value": "768px"
+      },
+      {
+        "name": "celular",
+        "value": "576px"
+      },
+      {
+        "name": "celular-pequeno",
+        "value": "480px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botão Primário",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ação principal: âmbar sólido que aquece para laranja e sobe 2px no hover.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Conheça Nosso Trabalho</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: var(--primary-color, #FFB100); color: var(--on-primary, #1E1810); border: none; border-radius: 8px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.3s ease; } .ds-btn-primary:hover { background: var(--secondary-color, #FF8C00); transform: translateY(-2px); } .ds-btn-primary:focus-visible { outline: 3px solid #1E1810; outline-offset: 2px; }"
+    },
+    {
+      "name": "Botão Fantasma (sobre foto)",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Ação secundária sobre foto velada no hero; inverte para branco no hover.",
+      "html": "<div class=\"ds-ghost-stage\"><a class=\"ds-btn-ghost\" href=\"#\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.1 4.3 2.4h1.8c.7-1.3 2.2-2.4 4.3-2.4 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z\"/></svg>Doar Agora</a></div>",
+      "css": ".ds-ghost-stage { padding: 2rem; background: rgba(30, 24, 16, 0.7); border-radius: 8px; display: inline-block; } .ds-btn-ghost { display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; background: transparent; color: #FFFFFF; border: 2px solid #FFFFFF; border-radius: 8px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 1rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; } .ds-btn-ghost:hover { background: #FFFFFF; color: var(--dark-color, #1E1810); } .ds-btn-ghost:focus-visible { outline: 3px solid #FFB100; outline-offset: 2px; }"
+    },
+    {
+      "name": "Barra de Navegação",
+      "kind": "nav",
+      "refersTo": "nav-bar",
+      "description": "Cabeçalho fixo branco com links Terra Queimada, hover âmbar e 'Doe Agora' como botão. Itens do dropdown com raio de 8px e respiro lateral.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-logo\">Instituto <b>Girassol</b></span><ul class=\"ds-nav-list\"><li><a href=\"#\">Início</a></li><li><a href=\"#\">Sobre</a></li><li><a href=\"#\">Projetos ▾</a></li><li><a href=\"#\">Transparência</a></li><li><a href=\"#\">Denúncias</a></li><li><a class=\"ds-nav-donate\" href=\"#\">Doe Agora</a></li></ul></nav>",
+      "css": ".ds-nav { display: flex; justify-content: space-between; align-items: center; padding: 1rem 20px; background: #FFFFFF; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; } .ds-nav-logo { font-size: 1.4rem; color: var(--dark-color, #1E1810); } .ds-nav-logo b { font-weight: 700; } .ds-nav-list { display: flex; align-items: center; gap: 2rem; list-style: none; margin: 0; padding: 0; } .ds-nav-list a { color: var(--dark-color, #1E1810); font-weight: 500; text-decoration: none; transition: all 0.3s ease; } .ds-nav-list a:hover { color: var(--primary-ink, #976115); } .ds-nav-list a:focus-visible { outline: 2px solid var(--primary-ink, #976115); outline-offset: 3px; } .ds-nav-list .ds-nav-donate { background: var(--primary-color, #FFB100); color: var(--on-primary, #1E1810); padding: 0.5rem 1rem; border-radius: 8px; font-weight: 600; } .ds-nav-list .ds-nav-donate:hover { background: var(--secondary-color, #FF8C00); color: var(--on-primary, #1E1810); }"
+    },
+    {
+      "name": "Cartão de Projeto",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Cartão flutuante com número circular âmbar, capa, objetivo, lista ✓ e 'Saiba Mais' ao fim.",
+      "html": "<article class=\"ds-project-card\"><span class=\"ds-project-number\">03</span><div class=\"ds-project-image\" role=\"img\" aria-label=\"Capa do projeto\"></div><h3>Jovem Falcão</h3><p><strong>Objetivo:</strong> Contribuir para a garantia dos direitos de adolescentes e jovens.</p><ul class=\"ds-project-goals\"><li>Qualificação técnica em tecnologia</li><li>Desenvolvimento técnico com robótica</li></ul><a class=\"ds-btn-more\" href=\"#\">Saiba Mais</a></article>",
+      "css": ".ds-project-card { position: relative; max-width: 420px; display: flex; flex-direction: column; gap: 1rem; padding: 2rem; background: #FFFFFF; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); color: var(--text-color, #62615C); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; transition: all 0.3s ease; } .ds-project-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); } .ds-project-number { position: absolute; top: -15px; right: 20px; width: 40px; height: 40px; border-radius: 50%; background: var(--primary-color, #FFB100); color: var(--on-primary, #1E1810); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.2rem; } .ds-project-image { height: 200px; border-radius: 8px; background: linear-gradient(rgba(30, 24, 16, 0.25), rgba(30, 24, 16, 0.25)), #D7971C; } .ds-project-card h3 { margin: 0; color: var(--dark-color, #1E1810); font-size: 1.5rem; line-height: 1.25; } .ds-project-card p { margin: 0; } .ds-project-goals { list-style: none; margin: 0; padding: 0; } .ds-project-goals li { position: relative; padding: 0.5rem 0 0.5rem 1.5rem; } .ds-project-goals li::before { content: '✓'; position: absolute; left: 0; color: var(--primary-ink, #976115); font-weight: bold; } .ds-btn-more { align-self: flex-end; padding: 0.6rem 1.2rem; background: var(--primary-color, #FFB100); color: var(--on-primary, #1E1810); font-weight: 600; text-decoration: none; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); transition: all 0.3s ease; } .ds-btn-more:hover { background: var(--secondary-color, #FF8C00); transform: translateY(-2px); } .ds-btn-more:focus-visible { outline: 3px solid #1E1810; outline-offset: 2px; }"
+    },
+    {
+      "name": "Cartão de Valor",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Cartão centralizado com ícone âmbar de 3rem e o nome do valor no papel Title. Sem borda lateral; sobe 5px no hover.",
+      "html": "<div class=\"ds-value-stage\"><div class=\"ds-value-item\"><svg class=\"ds-value-icon\" width=\"48\" height=\"48\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"M12 20.5s-7.5-4.6-9.6-9.2C.9 7.9 3 4 6.8 4c2.1 0 3.6 1.1 4.3 2.4h1.8C13.6 5.1 15.1 4 17.2 4 21 4 23.1 7.9 21.6 11.3 19.5 15.9 12 20.5 12 20.5z\"/></svg><h3>Amor</h3></div></div>",
+      "css": ".ds-value-stage { padding: 2rem; background: var(--light-bg, #F8F7F3); } .ds-value-item { max-width: 250px; text-align: center; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; background: #FFFFFF; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: all 0.3s ease; } .ds-value-item:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); } .ds-value-item:hover .ds-value-icon { transform: scale(1.1); } .ds-value-icon { color: var(--primary-color, #FFB100); transition: all 0.3s ease; } .ds-value-item h3 { margin: 0; color: var(--dark-color, #1E1810); font-size: 1.25rem; line-height: 1.25; font-weight: 600; }"
+    },
+    {
+      "name": "Bloco de Estatística (Faixa de Missão)",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Número âmbar grande (papel Stat) em bloco âmbar translúcido sobre foto velada em Terra Queimada; rótulo branco no papel Small.",
+      "html": "<div class=\"ds-stats\"><div class=\"ds-stat\"><span class=\"ds-stat-number\">60+</span><span class=\"ds-stat-label\">Projetos executados</span></div><div class=\"ds-stat\"><span class=\"ds-stat-number\">5K+</span><span class=\"ds-stat-label\">Crianças, adolescentes e jovens atendidos</span></div></div>",
+      "css": ".ds-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 3rem 2rem; background: linear-gradient(rgba(30, 24, 16, 0.7), rgba(30, 24, 16, 0.7)), #7B550E; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; } .ds-stat { text-align: center; padding: 1.5rem; background: rgba(255, 177, 0, 0.4); border-radius: 8px; } .ds-stat-number { display: block; font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem); line-height: 1.12; font-weight: 700; color: var(--primary-color, #FFB100); margin-bottom: 0.5rem; } .ds-stat-label { font-size: 0.9375rem; line-height: 1.45; color: #FFFFFF; }"
+    },
+    {
+      "name": "Campo de Formulário",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Campo arredondado (12px) com borda clara (--input-border) que vira âmbar no foco.",
+      "html": "<form class=\"ds-form\"><input class=\"ds-input\" type=\"email\" placeholder=\"E-mail (opcional)\"><textarea class=\"ds-input\" placeholder=\"Mensagem\"></textarea><button class=\"ds-btn-submit\" type=\"button\">Enviar</button></form>",
+      "css": ".ds-form { display: grid; gap: 1.5rem; max-width: 420px; padding: 2rem; background: #FFFFFF; border-radius: 8px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; } .ds-input { width: 100%; box-sizing: border-box; padding: 1rem; border: 1.5px solid var(--input-border, #DDDDDD); border-radius: 12px; background: #FDFDFD; font: inherit; font-size: 1rem; color: #1E1810; transition: all 0.3s ease, transform 0.2s ease; } textarea.ds-input { min-height: 120px; resize: vertical; } .ds-input:focus { outline: none; border-color: var(--primary-ink, #976115); box-shadow: 0 0 0 4px rgba(255, 177, 0, 0.35); transform: scale(1.02); } .ds-btn-submit { justify-self: start; padding: 1rem 2rem; background: var(--primary-color, #FFB100); color: var(--on-primary, #1E1810); border: none; border-radius: 12px; font: inherit; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease, transform 0.2s ease; } .ds-btn-submit:hover { background: var(--secondary-color, #FF8C00); transform: translateY(-3px) scale(1.03); box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); } .ds-btn-submit:focus-visible { outline: 3px solid #1E1810; outline-offset: 2px; }"
+    },
+    {
+      "name": "Mensagem de Status do Formulário",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Bloco de retorno anunciado por leitor de tela (role=status) abaixo do formulário; sucesso em verde, erro em vermelho, sempre com texto explicando o que aconteceu.",
+      "html": "<div class=\"ds-status-stack\"><p class=\"ds-form-status is-success\" role=\"status\">Mensagem enviada. Obrigado pelo contato!</p><p class=\"ds-form-status is-error\" role=\"status\">Não foi possível enviar agora. Tente de novo em instantes; o texto foi mantido.</p></div>",
+      "css": ".ds-status-stack { display: grid; gap: 1rem; max-width: 420px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; } .ds-form-status { margin: 0; padding: 0.875rem 1rem; border-radius: 8px; font-weight: 500; } .ds-form-status.is-success { background: #E8F3EA; color: #1E5B2C; } .ds-form-status.is-error { background: #FBEAE8; color: #8C1D18; }"
+    },
+    {
+      "name": "Cartão de Relatório (Transparência)",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Cartão por ano com glifo de documento em âmbar, ano em destaque e botão de download. Cartão branco do sistema: borda transparente de 2px que vira âmbar no hover, sobe 5px, sem vidro nem stripe. Governança e financeiro se distinguem só pela cor do botão.",
+      "html": "<div class=\"ds-report-card\"><svg class=\"ds-report-icon\" width=\"40\" height=\"40\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" aria-hidden=\"true\"><path d=\"M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z\"/><path d=\"M14 3v6h6M8 13h8M8 17h5\"/></svg><div class=\"ds-report-year\">2024</div><p class=\"ds-report-description\">Relatório de Atividades 2024</p><a class=\"ds-btn-governance\" href=\"#\">Baixar PDF</a></div>",
+      "css": ".ds-report-card { max-width: 280px; padding: 2rem; text-align: center; background: #FFFFFF; border: 2px solid transparent; border-radius: 8px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: all 0.3s ease; } .ds-report-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15); border-color: var(--primary-color, #FFB100); } .ds-report-icon { color: var(--primary-ink, #976115); margin-bottom: 1rem; } .ds-report-year { font-size: clamp(1.75rem, 1.3rem + 1.9vw, 2.5rem); line-height: 1.25; font-weight: 700; color: var(--dark-color, #1E1810); margin-bottom: 0.5rem; } .ds-report-description { margin: 0 0 1.5rem; color: var(--text-color, #62615C); } .ds-btn-governance { display: inline-flex; padding: 1rem 2rem; background: var(--dark-color, #1E1810); color: #FFFFFF; border-radius: 8px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; } .ds-btn-governance:hover { background: var(--gray, #4B4F58); } .ds-btn-governance:focus-visible { outline: 3px solid #FFB100; outline-offset: 2px; }"
+    },
+    {
+      "name": "Divisor Âmbar",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Barra âmbar curta e centrada (100px × 4px) que separa blocos na Transparência e nas páginas de projeto, no lugar de linhas divisórias de largura total.",
+      "html": "<div class=\"ds-sep\"></div>",
+      "css": ".ds-sep { width: 100px; height: 4px; margin: 4rem auto; border-radius: 2px; background: var(--primary-color, #FFB100); }"
+    },
+    {
+      "name": "Abas de Projeto",
+      "kind": "custom",
+      "refersTo": "button-primary",
+      "description": "Faixa de abas em âmbar com texto Terra Queimada; a ativa ganha fundo mais claro e sublinhado interno de 3px.",
+      "html": "<div class=\"ds-tabs\" role=\"tablist\"><button class=\"ds-tab is-active\" role=\"tab\" aria-selected=\"true\">O Projeto</button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\">Origem</button><button class=\"ds-tab\" role=\"tab\" aria-selected=\"false\">Objetivos</button></div>",
+      "css": ".ds-tabs { display: flex; max-width: 520px; background: var(--primary-color, #FFB100); border-radius: 8px 8px 0 0; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; } .ds-tab { flex: 1; padding: 1rem; background: none; border: none; color: var(--on-primary, #1E1810); font: inherit; font-weight: 600; cursor: pointer; transition: all 0.3s ease; } .ds-tab:hover, .ds-tab.is-active { background: rgba(255, 255, 255, 0.3); } .ds-tab.is-active { box-shadow: inset 0 -3px 0 var(--on-primary, #1E1810); } .ds-tab:focus-visible { outline: 2px solid var(--on-primary, #1E1810); outline-offset: -4px; }"
+    },
+    {
+      "name": "Botão de Pausa do Carrossel",
+      "kind": "custom",
+      "refersTo": "button-primary",
+      "description": "Criado por IGDS.autoplay (js/comum.js) no canto superior direito de cada carrossel automático; pausa/retoma a passagem.",
+      "html": "<div class=\"ds-carousel-stage\"><button class=\"ds-autoplay-toggle\" type=\"button\" aria-label=\"Pausar passagem automática\"><svg viewBox=\"0 0 24 24\" width=\"18\" height=\"18\" aria-hidden=\"true\"><rect x=\"6\" y=\"5\" width=\"4\" height=\"14\" rx=\"1\" fill=\"currentColor\"/><rect x=\"14\" y=\"5\" width=\"4\" height=\"14\" rx=\"1\" fill=\"currentColor\"/></svg></button></div>",
+      "css": ".ds-carousel-stage { position: relative; height: 120px; border-radius: 8px; background: linear-gradient(rgba(30,24,16,0.15), rgba(30,24,16,0.15)), #D7971C; } .ds-autoplay-toggle { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: rgba(255,255,255,0.92); color: #1E1810; box-shadow: 0 4px 20px rgba(0,0,0,0.1); cursor: pointer; transition: background-color 0.2s ease, color 0.2s ease; } .ds-autoplay-toggle:hover { background: var(--primary-color, #FFB100); color: #1E1810; } .ds-autoplay-toggle:focus-visible { outline: 3px solid var(--primary-color, #FFB100); outline-offset: 2px; box-shadow: 0 0 0 2px #1E1810; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "O Pátio do Instituto",
+    "overview": "O site é o pátio da sede em Boca da Mata aberto para quem chega: a primeira coisa que se vê é o lugar de verdade (a fachada pintada à mão, as turmas, os educadores), coberto por um véu escuro de terra para que o texto branco respire por cima. Dali para dentro, tudo é acolhimento em luz de fim de tarde: fundos palha clara, cartões brancos que flutuam levemente, e um único âmbar de girassol marcando tudo o que se pode tocar.\n\nO clima é **caloroso e comunitário, institucional e confiável, esperançoso e jovem** ao mesmo tempo. O calor vem da fotografia real e do âmbar; a confiança vem da ordem — conteúdo centralizado num contêiner de 1200px, seções com o mesmo ritmo de abertura (sobretítulo âmbar + título escuro), grades regulares. A juventude aparece no movimento: botões e cartões respondem ao cursor subindo e esquentando de cor.\n\nO momento de movimento com autoria é a **abertura do pátio** na home: o véu de terra começa mais fechado e clareia (`amanhecer`) enquanto a foto da sede assenta de um leve zoom (`assentar`), e o título, o subtítulo e os botões chegam em sequência curta (`fadeInUp`, atrasos 0.3s / 0.45s / 0.6s). Tudo termina em ~1.5s, com `cubic-bezier(0.16, 1, 0.3, 1)`. Fora daí, o movimento é serviço: revelação suave de cartões ao rolar, a resposta tátil de `0.3s` no hover, e o deslize de 0.5–0.6s dos carrosséis. Nada avança sozinho sem um controle de pausa visível, e `prefers-reduced-motion` troca todo deslocamento por só opacidade.\n\nA densidade é média e generosa: seções com 5–6rem de respiro vertical, cartões com 2rem de padding interno, uma ideia por bloco. O sistema não tem ilustrações, texturas ou gradientes decorativos no conteúdo; a única gradiente sistêmica é âmbar → laranja, usada como fundo de cabeçalho quando não há foto.",
+    "keyCharacteristics": [
+      "Fotografia real da comunidade sempre sob véu de Terra Queimada a 70%.",
+      "Um só acento (Amarelo Girassol) como preenchimento de ação e ornamento grande; Âmbar Tostado quando o âmbar precisa ser lido como texto; Laranja Poente só como estado de hover.",
+      "Cartões brancos flutuantes sobre fundo Palha Clara, que sobem ao passar o mouse.",
+      "Tipografia de sistema (Segoe UI), sem fonte de marca; hierarquia por peso e tamanho.",
+      "Cantos suavemente arredondados (8px) em quase tudo; círculos para ícones sociais e botões flutuantes.",
+      "Rodapé pesado em Terra Queimada fechando cada página."
+    ],
+    "rules": [
+      {
+        "name": "A Regra do Sol Único",
+        "body": "Amarelo Girassol é o único acento. Laranja Poente existe como resposta a ele (hover, pressionado, borda de destaque) e Âmbar Tostado como sua versão legível, nunca como cores independentes. Novos laranjas (como a família `#FF9800`/`#FFC107`/`#FF5722` que já foi removida da Transparência) são desvio, não vocabulário.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra do Âmbar que Se Lê",
+        "body": "O âmbar puro é superfície ou ornamento: preenche botões, abas e círculos, ou aparece em tamanho grande (≥2rem) e sobre fundo escuro. Quando o âmbar vira texto ou ícone pequeno sobre fundo claro, ele é Âmbar Tostado. Sobre preenchimento âmbar ou laranja, texto e ícone são Terra Queimada. Teste: nenhum texto do site fica abaixo de 4.5:1 (3:1 para títulos grandes).",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra da Terra por Baixo",
+        "body": "Toda fotografia usada como fundo de texto recebe o véu Terra Queimada a 70% (`rgba(30, 24, 16, 0.7)`), com Terra Queimada sólida por baixo como reserva para o texto continuar legível enquanto a foto carrega ou se ela falhar. Nunca texto direto sobre foto crua, nunca véu preto neutro.",
+        "section": "colors"
+      },
+      {
+        "name": "A Regra do Sobretítulo",
+        "body": "Toda seção abre com o mesmo par, centralizado: sobretítulo Label em âmbar (Tostado no claro, Girassol sobre véu escuro) e, logo abaixo, título Headline em Terra Queimada. É o ritmo que dá ordem institucional ao site; seções novas seguem o par.",
+        "section": "typography"
+      },
+      {
+        "name": "A Regra da Fonte de Verdade",
+        "body": "Todo tamanho de texto sai de um token `--fs-*` de `css/comum.css`. Uma página não escreve `font-size` literal para herói, título de seção, subtítulo, número de estatística nem sobretítulo; se um papel novo aparecer, ele entra na rampa do `:root`, não na folha da página. Glifos de ícone (Font Awesome) e o número \"01\" do cartão de projeto não são texto e ficam fora da rampa.",
+        "section": "typography"
+      },
+      {
+        "name": "A Regra do Cartão Flutuante",
+        "body": "Todo conteúdo agrupado vive num cartão branco com a sombra de repouso, sobre Palha Clara ou Branco. No hover, o cartão sobe (−5px) e a sombra aprofunda. Não existem cartões chapados com borda, cartões aninhados nem borda lateral colorida; a categoria (governança / financeiro) vem da cor do botão.",
+        "section": "elevation"
+      },
+      {
+        "name": "A Regra do Movimento a Serviço",
+        "body": "A única sequência com autoria é a abertura da home (amanhecer + assentar + fadeInUp escalonado, ~1.5s). Todo outro movimento confirma ação, estado ou relação: revelação de cartão ao rolar, resposta tátil de 0.3s no hover, deslize de 0.5–0.6s do carrossel. Nada avança sozinho sem um botão de pausa de 44px, e prefers-reduced-motion troca deslocamento por só opacidade e começa os carrosséis pausados.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do abrir cada seção com o par sobretítulo Âmbar Tostado (Label: --fs-label, 600, maiúsculas, tracking 0.08em) + título Terra Queimada (Headline: --fs-h2, 700), centralizados; sobre véu escuro o sobretítulo volta a Amarelo Girassol.",
+      "Do colocar conteúdo agrupado em cartões brancos de 8px com 0 4px 20px rgba(0, 0, 0, 0.1), que sobem 5px no hover.",
+      "Do usar fotografia real do IGDS (sede, turmas, educadores, midia/img/) com o véu Terra Queimada a 70% sempre que houver texto por cima.",
+      "Do dar a todo elemento interativo uma resposta tátil: aquecer para Laranja Poente e subir 2px em 0.3s ease.",
+      "Do alternar fundos de seção entre Branco e Palha Clara para marcar ritmo, em vez de linhas divisórias.",
+      "Do usar Terra Queimada (--on-primary) para todo texto e ícone sobre Amarelo Girassol (9.7:1) ou Laranja Poente (7.5:1), e Âmbar Tostado (--primary-ink) para todo âmbar que vira texto sobre fundo claro.",
+      "Do marcar estados também por forma: a aba ativa tem sublinhado interno de 3px em Terra Queimada, não só um fundo mais claro.",
+      "Do dar a todo carrossel automático um botão de pausa visível de 44px e pausá-lo com hover, foco, fora da tela e prefers-reduced-motion.",
+      "Do reservar a sequência mais longa para a abertura da home; nas outras seções, o movimento só confirma ação, estado ou relação.",
+      "Do manter o conteúdo visível no estado padrão (números finais já no HTML, cartões sem opacity:0 sem o JS) para que um script que falhe não esconda a página.",
+      "Do dar width/height (proporção real) a toda <img> e loading=\"lazy\" a tudo abaixo da dobra; a imagem do herói é a única com fetchpriority=\"high\".",
+      "Do usar um só listener de scroll por efeito, com throttle por requestAnimationFrame (IGDS.parallax faz isso para o herói)."
+    ],
+    "donts": [
+      "Don't usar texto branco sobre Amarelo Girassol (1.8:1) ou Laranja Poente (2.3:1), nem Amarelo Girassol como texto ou ícone pequeno sobre branco ou palha (1.8:1).",
+      "Don't introduzir laranjas fora da paleta (#FF9800, #FFC107, #FF5722, #F57C00, #F7B733) nem gradientes de três cores; o sistema tem um âmbar e um laranja.",
+      "Don't usar imagens de banco ou ilustrações genéricas de ONG; o sistema depende de pessoas e lugares reais de Boca da Mata.",
+      "Don't colocar texto direto sobre foto sem o véu Terra Queimada, nem trocar o véu por preto neutro.",
+      "Don't usar Verde WhatsApp fora do botão flutuante de WhatsApp.",
+      "Don't criar cartões chapados com borda, cartões dentro de cartões ou borda lateral colorida; a profundidade vem da sombra.",
+      "Don't usar vidro (backdrop-filter/blur) nem raio fora da escala (8px / 12px / círculo) nos cartões e blocos.",
+      "Don't deixar loop infinito (animation: ... infinite) como decoração, nem parallax de scroll ou background-attachment: fixed sem alternativa para prefers-reduced-motion.",
+      "Don't repetir a mesma entrada fadeInUp de 1s em toda seção rolada; a entrada com autoria é só a da home.",
+      "Don't deixar ArrowLeft/ArrowRight de um carrossel sequestrarem as setas da página inteira.",
+      "Don't carregar fonte do Google (ou qualquer web font) — o site é 100% pilha de sistema.",
+      "Don't pôr foto pesada como background-image de seção abaixo da dobra; use <img loading=\"lazy\"> com o véu no ::after.",
+      "Don't deixar <img> sem width/height nem carregar imagem abaixo da dobra sem loading=\"lazy\"."
+    ]
+  }
+}

@@ -1,5 +1,9 @@
 /* CSS Variables - Easy to customize colors */
 :root {
+    /* Papéis do âmbar (contraste AA) */
+    --primary-color-rgb: 255, 177, 0;
+    --primary-ink: #976115;   /* Âmbar Tostado: âmbar como texto ou ícone pequeno sobre fundo claro (5.2:1 no branco) */
+    --on-primary: #1E1810;    /* texto e ícones sobre preenchimento âmbar ou laranja (9.7:1 / 7.5:1) */
   --primary-color: #ffb100;
   --secondary-color: #ff8c00;
   --dark-color: #1e1810;
@@ -14,6 +18,18 @@
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   --border-radius: 8px;
 }
+
+/* Superfícies do navegador na paleta */
+::selection {
+    background: var(--primary-color);
+    color: var(--on-primary);
+}
+
+html {
+    accent-color: var(--primary-ink);
+    caret-color: var(--primary-ink);
+}
+
 
 /* Reset and Base Styles */
 * {
@@ -83,7 +99,7 @@ body {
 }
 
 .nav-link:hover {
-  color: var(--primary-color);
+  color: var(--primary-ink);
 }
 
 .dropdown {
@@ -126,12 +142,12 @@ body {
 
 .dropdown-menu a:hover {
   background: var(--light-bg);
-  color: var(--primary-color);
+  color: var(--primary-ink);
 }
 
 .btn-donate {
   background: var(--primary-color);
-  color: var(--white) !important;
+  color: var(--on-primary) !important;
   padding: 0.5rem 1rem;
   border-radius: var(--border-radius);
   font-weight: 600;
@@ -139,7 +155,7 @@ body {
 
 .btn-donate:hover {
   background: var(--secondary-color);
-  color: var(--white) !important;
+  color: var(--on-primary) !important;
 }
 
 .nav-toggle {
@@ -216,7 +232,6 @@ body {
 }
 
 .hero-title {
-  font-size: 3.5rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 1.5rem;
@@ -243,7 +258,7 @@ body {
 
 .publication-card {
   background: var(--white);
-  border-radius: 15px;
+  border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   overflow: hidden;
   transition: var(--transition);
@@ -262,7 +277,7 @@ body {
   top: 20px;
   right: 20px;
   background: var(--primary-color);
-  color: var(--white);
+  color: var(--on-primary);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -299,7 +314,8 @@ body {
 }
 
 .publication-title {
-  font-size: 1.4rem;
+  font-size: var(--fs-h3);
+  line-height: var(--lh-heading);
   font-weight: 600;
   color: var(--dark-color);
   margin-bottom: 1rem;
@@ -329,7 +345,7 @@ body {
 
 .btn-download {
   background: var(--primary-color);
-  color: var(--white);
+  color: var(--on-primary);
   width: 100%;
   justify-content: center;
   margin-top: auto;
@@ -359,7 +375,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.footer-section h4 {
+.footer-section h2 {
   color: var(--primary-color);
   font-size: 1.2rem;
   margin-bottom: 1rem;
@@ -396,7 +412,7 @@ body {
   width: 40px;
   height: 40px;
   background: var(--primary-color);
-  color: var(--white);
+  color: var(--on-primary);
   border-radius: 50%;
   text-decoration: none;
   transition: var(--transition);
@@ -423,7 +439,7 @@ body {
 
 .newsletter-form button {
   background: var(--primary-color);
-  color: var(--white);
+  color: var(--on-primary);
   border: none;
   padding: 0.8rem 1rem;
   border-radius: var(--border-radius);
@@ -475,7 +491,7 @@ body {
   width: 50px;
   height: 50px;
   background: var(--primary-color);
-  color: var(--white);
+  color: var(--on-primary);
   border: none;
   border-radius: 50%;
   cursor: pointer;
@@ -579,9 +595,6 @@ body {
     transform: translateY(-8px) rotate(-45deg);
   }
 
-  .hero-title {
-    font-size: 2.5rem;
-  }
 
   .publications-grid {
     grid-template-columns: 1fr;
@@ -605,9 +618,6 @@ body {
     min-height: 400px;
   }
 
-  .hero-title {
-    font-size: 2rem;
-  }
 
   .publications {
     padding: 4rem 0;
@@ -654,6 +664,6 @@ html {
 .social-link:focus,
 .whatsapp-btn:focus,
 .back-to-top:focus {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--primary-ink);
   outline-offset: 2px;
 }
