@@ -1,3 +1,6 @@
+// Cabeçalho, "voltar ao topo", links internos e imagens quebradas ficam
+// em js/comum.js, carregado antes deste arquivo.
+
 let currentSlide = 0;
 let currentTeamSlide = 0;
 let autoPlayMain, autoPlayTeam;
@@ -51,6 +54,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "midia/img/Sobre/Equipe4.webp"        // imagem do slide 4
     ];
     const teamImageElement = document.querySelector(".team-img");
+    let teamImageTimer;
+    // Baixa as fotos da equipe com antecedência: a troca não pisca em branco
+    teamImages.forEach(src => { new Image().src = src; });
 
     // ==== FUNÇÕES SLIDER EQUIPE ====
     function showTeamSlide(index, announce = false) {
@@ -63,11 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
         teamSlideVisibility.set(index);
         if (announce) IGDS.announce(`Depoimento ${index + 1} de ${teamSlides.length}`);
 
-        // troca a imagem de acordo com o slide
-        if (teamImageElement) {
+        // troca a imagem de acordo com o slide. Cliques rápidos cancelam a
+        // troca anterior (antes a foto podia terminar trocada pela errada).
+        if (teamImageElement && teamImageElement.getAttribute('src') !== teamImages[index]) {
+            clearTimeout(teamImageTimer);
             teamImageElement.classList.add("fade-out");
 
-            setTimeout(() => {
+            teamImageTimer = setTimeout(() => {
                 teamImageElement.src = teamImages[index];
                 teamImageElement.classList.remove("fade-out");
             }, 400); // metade do tempo da transição
@@ -141,18 +149,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const sliderContainer = document.querySelector('.slider-container');
     const teamSliderContainer = document.querySelector('.team-slider');
 
-    sliderContainer?.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    // Passivos: o navegador não espera este script para começar a rolar
+    sliderContainer?.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
     sliderContainer?.addEventListener('touchend', e => {
         endX = e.changedTouches[0].clientX;
         if (startX - endX > 50) { stopAutoPlayMain(); nextSlide(true); }
         else if (endX - startX > 50) { stopAutoPlayMain(); prevSlide(true); }
-    });
-    teamSliderContainer?.addEventListener('touchstart', e => startX = e.touches[0].clientX);
+    }, { passive: true });
+    teamSliderContainer?.addEventListener('touchstart', e => startX = e.touches[0].clientX, { passive: true });
     teamSliderContainer?.addEventListener('touchend', e => {
         endX = e.changedTouches[0].clientX;
         if (startX - endX > 50) { stopAutoPlayTeam(); nextTeamSlide(true); }
         else if (endX - startX > 50) { stopAutoPlayTeam(); prevTeamSlide(true); }
-    });
+    }, { passive: true });
 
     // Estado inicial de acessibilidade (sem isso só a 1ª troca escondia as demais fatias)
     showSlide(currentSlide);
@@ -177,34 +186,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==== ANIMAÇÕES DE SCROLL ====
     const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('loaded');
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('loaded');
+            observer.unobserve(entry.target);
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.mvv-card, .value-item, .team-content').forEach(el => {
         el.classList.add('loading');
         observer.observe(el);
-    });
-
-    // ==== LAZY LOADING ====
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        const lazyObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    img.src = img.dataset.src;
-                    lazyObserver.unobserve(img);
-                }
-            });
-        });
-        lazyObserver.observe(img);
-    });
-
-    // ==== SCROLL SUAVE PARA LINKS ====
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', e => {
-            e.preventDefault();
-            const target = document.querySelector(anchor.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
-        });
     });
 
     // ==== NAVEGAÇÃO POR TECLADO ====
@@ -214,37 +203,4 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'ArrowLeft') { stopAutoPlayMain(); prevSlide(true); }
         if (e.key === 'ArrowRight') { stopAutoPlayMain(); nextSlide(true); }
     });
-});
-
-// ==== BOTÃO VOLTAR AO TOPO ====
-const backToTopBtn = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-    backToTopBtn.classList.toggle('show', window.scrollY > 300);
-});
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ==== FORMULÁRIO NEWSLETTER ====
-const newsletterForm = document.querySelector('.newsletter-form');
-newsletterForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = newsletterForm.querySelector('input[type="email"]').value;
-    if (!email) return alert('Por favor, insira seu e-mail.');
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return alert('Por favor, insira um e-mail válido.');
-    alert('Obrigado por se inscrever em nossa newsletter!');
-    newsletterForm.reset();
-});
-
-// ==== HEADER TRANSPARENTE NO SCROLL ====
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.background = 'var(--white)';
-        header.style.backdropFilter = 'none';
-    }
 });

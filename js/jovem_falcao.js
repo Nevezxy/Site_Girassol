@@ -1,94 +1,44 @@
-// Mobile Navigation Toggle
+// Cabeçalho, "voltar ao topo", links internos e imagens quebradas ficam em
+// js/comum.js, carregado antes deste arquivo.
+
+// ======== Mobile Navigation Toggle ========
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
 
-navToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    navToggle.classList.toggle('active');
+navToggle?.addEventListener('click', () => {
+  navMenu.classList.toggle('active');
+  navToggle.classList.toggle('active');
 });
 
-// Close mobile menu when clicking on a link
+// Fecha menu ao clicar em links
 document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
-    });
+  link.addEventListener('click', () => {
+    navMenu.classList.remove('active');
+    navToggle.classList.remove('active');
+  });
 });
 
-// Header scroll effect (com debounce para performance)
-function debounce(func, wait) {
-    let timeout;
-    return (...args) => {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func(...args), wait);
-    };
-}
-
-const debouncedScrollHandler = debounce(() => {
-    const header = document.querySelector('.header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.background = 'var(--white)';
-        header.style.backdropFilter = 'none';
-    }
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
-
-// Back to top button
-const backToTopBtn = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-    backToTopBtn.classList.toggle('show', window.scrollY > 300);
-});
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Newsletter form handling
-const newsletterForm = document.querySelector('.newsletter-form');
-newsletterForm?.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = newsletterForm.querySelector('input[type="email"]').value;
-    if (!email) return alert('Por favor, insira seu e-mail.');
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) return alert('Por favor, insira um e-mail válido.');
-    alert('Obrigado por se inscrever em nossa newsletter!');
-    newsletterForm.reset();
-});
-
-// Smooth scrolling for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const targetPosition = target.offsetTop - headerHeight;
-            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-        }
-    });
-});
-
-// Parallax effect for hero section
-// Parallax do hero: um listener throttled em js/comum.js, respeita menos movimento
+// Parallax do hero (js/comum.js): CSS ligado à rolagem, respeita menos movimento
 IGDS.parallax('.hero-background', 0.5);
 
-// Tabs Functionality
+// ======== Tabs Functionality ========
 const tabButtons = document.querySelectorAll('.tab-btn');
 const tabPanels = document.querySelectorAll('.tab-panel');
+
 tabButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const targetTab = button.getAttribute('data-tab');
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        tabPanels.forEach(panel => panel.classList.remove('active'));
-        button.classList.add('active');
-        document.getElementById(targetTab).classList.add('active');
-    });
+  button.addEventListener('click', () => {
+    const targetTab = button.getAttribute('data-tab');
+    if (!targetTab) return;
+
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+    tabPanels.forEach(panel => panel.classList.remove('active'));
+
+    button.classList.add('active');
+    document.getElementById(targetTab)?.classList.add('active');
+  });
 });
 
-// Image Carousel com autoplay e pausa ao interagir
+// ======== Image Carousel Class ========
 class ImageCarousel {
     constructor(carouselId) {
         this.carousel = document.getElementById(carouselId);
@@ -100,8 +50,6 @@ class ImageCarousel {
 
         this.currentSlide = 0;
         this.totalSlides = this.slides.length;
-        this.autoPlayInterval = null;
-        this.autoPlayDelay = 5000; // 5s
         // Fatias fora de vista saem da leitura sequencial e do tab; o avanço
         // automático não anuncia, só a troca pedida por quem usa o site.
         this.slideVisibility = IGDS.slideVisibility(this.slides);
@@ -122,17 +70,19 @@ class ImageCarousel {
             indicator.classList.add('indicator');
             if (i === 0) indicator.classList.add('active');
             indicator.addEventListener('click', () => {
-                this.stopAutoPlay();
                 this.goToSlide(i, true);
+                this.stopAutoPlay();
             });
             this.indicatorsContainer.appendChild(indicator);
         }
     }
 
     updateCarousel(announce = false) {
+        const translateX = -this.currentSlide * 100;
         this.track.style.transition = IGDS.reduzirMovimento() ? 'none' : 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-        this.track.style.transform = `translateX(${-this.currentSlide * 100}%)`;
+        this.track.style.transform = `translateX(${translateX}%)`;
 
+        // Atualiza os indicadores
         const indicators = this.indicatorsContainer.querySelectorAll('.indicator');
         indicators.forEach((indicator, index) => {
             indicator.classList.toggle('active', index === this.currentSlide);
@@ -158,130 +108,99 @@ class ImageCarousel {
 
     bindEvents() {
         this.nextBtn.addEventListener('click', () => {
-            this.stopAutoPlay();
             this.nextSlide(true);
+            this.stopAutoPlay();
         });
         this.prevBtn.addEventListener('click', () => {
-            this.stopAutoPlay();
             this.prevSlide(true);
+            this.stopAutoPlay();
         });
 
+        // Suporte a toque/swipe. Passivo: o navegador não precisa esperar
+        // este script para começar a rolar a página quando o dedo passa aqui.
         let startX = 0;
-        this.carousel.addEventListener('touchstart', e => {
-            startX = e.touches[0].clientX;
-        });
-        this.carousel.addEventListener('touchend', e => {
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
-            if (Math.abs(diff) > 50) {
-                this.stopAutoPlay();
-                diff > 0 ? this.nextSlide(true) : this.prevSlide(true);
-            }
-        });
 
-        document.addEventListener('keydown', e => {
+        this.carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        }, { passive: true });
+
+        this.carousel.addEventListener('touchend', (e) => {
+            const diff = startX - e.changedTouches[0].clientX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    this.nextSlide(true);
+                } else {
+                    this.prevSlide(true);
+                }
+                this.stopAutoPlay();
+            }
+        }, { passive: true });
+
+        // Navegação por teclado
+        document.addEventListener('keydown', (e) => {
             if (!this.carousel.contains(document.activeElement)) return;
             if (e.key === 'ArrowLeft') {
-                this.stopAutoPlay();
                 this.prevSlide(true);
+                this.stopAutoPlay();
             }
             if (e.key === 'ArrowRight') {
-                this.stopAutoPlay();
                 this.nextSlide(true);
+                this.stopAutoPlay();
             }
         });
     }
 
+    // Controle compartilhado (js/comum.js): botão pausar/retomar e pausa
+    // com mouse, foco, fora da tela, aba oculta e menos movimento.
     startAutoPlay() {
-
-        // Controle compartilhado (js/comum.js): botão pausar/retomar e pausa
-
-        // com mouse, foco, fora da tela, aba oculta e menos movimento.
-
         if (this.autoplay) return;
-
         this.autoplay = IGDS.autoplay({
-
             region: this.carousel,
-
             next: () => this.nextSlide(),
-
             delay: 5000
-
         });
-
     }
 
     stopAutoPlay() {
-
         this.autoplay?.stop();
-
     }
 }
 
-// Inicializa carousel quando o DOM carregar
-document.addEventListener('DOMContentLoaded', () => {
-    new ImageCarousel('imageCarousel');
-});
+new ImageCarousel('imageCarousel');
 
-// Intersection Observer para animações
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// ======== Intersection Observer for Animations ========
+// Cada elemento é observado só até aparecer
 const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-        }
-    });
-}, observerOptions);
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.section-title, .tab-panel, .carousel-container').forEach(el => {
-        el.classList.add('fade-in');
-        observer.observe(el);
-    });
+document.querySelectorAll('.section-title, .tab-panel, .carousel-container').forEach(el => {
+  el.classList.add('fade-in');
+  observer.observe(el);
 });
 
-// Lazy loading para imagens
-const imageObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && entry.target.dataset.src) {
-            entry.target.src = entry.target.dataset.src;
-            entry.target.classList.remove('loading');
-            imageObserver.unobserve(entry.target);
-        }
-    });
-});
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('img[data-src]').forEach(img => {
-        img.classList.add('loading');
-        imageObserver.observe(img);
-    });
-});
-
-// Tratamento de erro para imagens
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('error', function () {
-            this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlbSBuXHUwMGUzbyBlbmNvbnRyYWRhPC90ZXh0Pjwvc3ZnPg==';
-            this.alt = 'Imagem não encontrada';
-        });
-    });
-});
-
-// AMPLIAR IMAGEM (Lightbox)
+// ======== Ampliar imagem (lightbox) ========
+// Chamadas pelo onclick das fotos das turmas no HTML. Esc também fecha.
 function openLightbox(imgElement) {
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImg = document.getElementById("lightbox-img");
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
 
-    lightbox.style.display = "flex";
-    lightboxImg.src = imgElement.src;
+    lightbox.style.display = 'flex';
+    lightboxImg.src = imgElement.currentSrc || imgElement.src;
     lightboxImg.alt = imgElement.alt;
 }
 
 function closeLightbox() {
-    const lightbox = document.getElementById("lightbox");
-    lightbox.style.display = "none";
+    document.getElementById('lightbox').style.display = 'none';
 }
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('lightbox')?.style.display === 'flex') {
+        closeLightbox();
+    }
+});

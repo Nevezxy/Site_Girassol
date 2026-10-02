@@ -26,33 +26,117 @@ window.IGDS = window.IGDS || {};
         return arguments.length ? nativeScrollIntoView.call(this, arg) : nativeScrollIntoView.call(this);
     };
 
+    // ---------- Rolagem ----------
+    // Um único listener passivo para a página inteira: cada tarefa recebe a
+    // posição uma vez por quadro, sem ler layout. Antes cada página somava
+    // 3 ou 4 listeners que reescreviam os estilos do cabeçalho a cada evento
+    // (dois deles com debounce brigando entre si), e isso travava a rolagem.
+    const scrollTasks = [];
+    let scrollTicking = false;
+    const scrollY = () => Math.max(0, window.pageYOffset); // ignora o "quique" do iOS
+    const runScrollTasks = () => {
+        scrollTicking = false;
+        const y = scrollY();
+        scrollTasks.forEach((task) => task(y));
+    };
+    window.addEventListener('scroll', () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        requestAnimationFrame(runScrollTasks);
+    }, { passive: true });
+
+    IGDS.onScroll = function (task) {
+        scrollTasks.push(task);
+        task(scrollY());
+    };
+
+    // Avisa só quando a LARGURA muda. No celular a barra de endereço some e
+    // volta durante a rolagem e dispara "resize" sem a largura mudar;
+    // refazer carrosséis nessa hora fazia a página engasgar.
+    IGDS.onResize = function (fn) {
+        let width = window.innerWidth;
+        let timer;
+        window.addEventListener('resize', () => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                if (window.innerWidth === width) return;
+                width = window.innerWidth;
+                fn();
+            }, 150);
+        }, { passive: true });
+    };
+
+    // ---------- Cabeçalho e "voltar ao topo" ----------
+    // Uma classe trocada só quando cruza o limite, em vez de estilos inline
+    // reescritos a cada evento. O desfoque (backdrop-filter) saiu: atrás de
+    // um fundo 95% branco ele não aparecia, mas obrigava o navegador a
+    // redesenhar o desfoque da foto do hero a cada quadro da rolagem.
+    const header = document.querySelector('.header');
+    if (header) {
+        let scrolled = null;
+        IGDS.onScroll((y) => {
+            const now = y > 100;
+            if (now === scrolled) return;
+            scrolled = now;
+            header.classList.toggle('is-scrolled', now);
+        });
+    }
+
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        let shown = null;
+        IGDS.onScroll((y) => {
+            const now = y > 300;
+            if (now === shown) return;
+            shown = now;
+            backToTop.classList.toggle('show', now);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
     // ---------- Parallax do hero ----------
-    // Um só listener de scroll passivo, com throttle por requestAnimationFrame.
-    // Não faz nada (e limpa o transform) para quem pediu menos movimento.
+    // Onde o navegador suporta animações ligadas à rolagem (Chrome, Edge,
+    // Safari recentes), quem move a foto é o CSS (.parallax-css em
+    // comum.css), na mesma thread que rola a página: a foto acompanha o
+    // dedo/trackpad sem atraso. Com JavaScript ela sempre chegava um quadro
+    // depois da rolagem, e isso aparecia como "travadinhas" ao descer devagar.
+    // O caminho em JS fica só como reserva para os demais navegadores.
+    const cssParallax = !!(window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()'));
+
     IGDS.parallax = function (selector, factor) {
         const el = document.querySelector(selector);
         if (!el) return;
+        // O CSS usa o mesmo fator 0.5 de todas as páginas
+        if (cssParallax && factor === 0.5) {
+            el.classList.add('parallax-css');
+            return;
+        }
+
+        // Reserva em JS: sem ler layout na rolagem; a visibilidade do hero
+        // vem de um IntersectionObserver.
         const section = el.closest('section') || el.parentElement;
-        let ticking = false;
-        const apply = () => {
-            ticking = false;
-            if (IGDS.reduzirMovimento()) { el.style.transform = ''; return; }
-            // Com o hero fora da tela não há o que mover.
-            if (section.getBoundingClientRect().bottom < 0) return;
-            // Math.max: o "quique" do iOS no topo (scroll negativo) não abre
-            // uma faixa vazia embaixo da foto.
-            const y = Math.max(0, window.pageYOffset) * factor;
-            el.style.transform = 'translate3d(0, ' + y.toFixed(1) + 'px, 0)';
+        let onScreen = true;
+        let last = null;
+        const apply = (y) => {
+            const offset = IGDS.reduzirMovimento() ? 0 : y * factor;
+            if (!onScreen || offset === last) return;
+            last = offset;
+            el.style.transform = offset ? 'translate3d(0, ' + offset + 'px, 0)' : '';
         };
-        const request = () => {
-            if (ticking) return;
-            ticking = true;
-            requestAnimationFrame(apply);
-        };
-        window.addEventListener('scroll', request, { passive: true });
-        window.addEventListener('resize', request, { passive: true });
-        if (reduceMotionQuery.addEventListener) reduceMotionQuery.addEventListener('change', request);
-        apply();
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver((entries) => {
+                onScreen = entries[0].isIntersecting;
+                // O observador avisa depois da rolagem: num salto grande
+                // ("voltar ao topo") a foto precisa ser reposicionada aqui.
+                if (onScreen) apply(scrollY());
+            }).observe(section);
+        }
+        IGDS.onScroll(apply);
+        if (reduceMotionQuery.addEventListener) {
+            reduceMotionQuery.addEventListener('change', () => apply(scrollY()));
+        }
     };
 
     // ---------- Autoplay com controle ----------
@@ -179,6 +263,31 @@ window.IGDS = window.IGDS || {};
         setTimeout(() => { liveRegion.textContent = text; }, 50);
     };
 
+    // ---------- Aparecer ao entrar na tela ----------
+    // Sobe 30px e aparece; com menos movimento, só aparece. Depois de
+    // aparecer, os estilos inline saem, para o :hover do CSS voltar a valer
+    // (antes o transform inline travava o efeito de hover dos cartões).
+    IGDS.reveal = function (elements) {
+        const els = Array.from(elements || []);
+        if (!els.length || !('IntersectionObserver' in window)) return;
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                io.unobserve(el);
+                el.style.opacity = '';
+                el.style.transform = '';
+                setTimeout(() => { el.style.transition = ''; }, 700);
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        els.forEach((el) => {
+            el.style.opacity = '0';
+            if (!IGDS.reduzirMovimento()) el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
+            io.observe(el);
+        });
+    };
+
     // ---------- Menu móvel ----------
     // O abrir/fechar continua no script de cada página; aqui só
     // sincronizamos o estado para leitores de tela e o teclado.
@@ -209,14 +318,50 @@ window.IGDS = window.IGDS || {};
         }, true);
     }
 
-    // ---------- Pular para o conteúdo ----------
-    // Leva o foco do teclado junto com a rolagem
-    document.querySelectorAll('.skip-link').forEach((link) => {
-        link.addEventListener('click', () => {
-            const target = document.querySelector(link.getAttribute('href'));
-            if (!target) return;
-            if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
-            setTimeout(() => target.focus({ preventScroll: true }), 0);
-        });
+    // ---------- Links internas (#âncora) e "Pular para o conteúdo" ----------
+    // Um só tratador para o site todo (cada página tinha o seu, com regras
+    // diferentes). Desconta a altura do cabeçalho fixo e leva o foco do
+    // teclado junto com a rolagem.
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest && e.target.closest('a[href^="#"]');
+        if (!link) return;
+        const id = link.getAttribute('href');
+        if (id.length < 2) return;
+        let target;
+        try { target = document.querySelector(id); } catch (err) { return; }
+        if (!target) return;
+
+        e.preventDefault();
+        const headerOffset = header && getComputedStyle(header).position === 'fixed' ? header.offsetHeight : 0;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+
+        if (target.tabIndex < 0 && !target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+    });
+
+    // ---------- Imagens quebradas ----------
+    // Uma imagem que não carrega fica oculta (sem ícone quebrado), mas o
+    // espaço dela continua reservado. Se depois ela carregar (ex.: a foto da
+    // ampliação, que começa vazia), volta a aparecer. Antes, duas páginas
+    // trocavam o src por um endereço inválido e a imagem falhava em loop.
+    document.addEventListener('error', (e) => {
+        const img = e.target;
+        if (img.tagName !== 'IMG' || !img.getAttribute('src')) return;
+        img.style.visibility = 'hidden';
+        img.dataset.igdsBroken = '';
+    }, true);
+    document.addEventListener('load', (e) => {
+        const img = e.target;
+        if (img.tagName !== 'IMG' || !('igdsBroken' in img.dataset)) return;
+        img.style.visibility = '';
+        delete img.dataset.igdsBroken;
+    }, true);
+    // As que já falharam antes deste script rodar
+    document.querySelectorAll('img[src]').forEach((img) => {
+        if (img.complete && img.naturalWidth === 0 && !/\.svg(\?|$)/i.test(img.src)) {
+            img.style.visibility = 'hidden';
+            img.dataset.igdsBroken = '';
+        }
     });
 })();

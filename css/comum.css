@@ -483,3 +483,31 @@ button[disabled] {
         padding: 5.5rem 0 3rem;
     }
 }
+
+/* Cabeçalho depois de rolar 100px (classe aplicada por js/comum.js).
+   Sem backdrop-filter: atrás de 95% de branco o desfoque não aparecia e
+   custava redesenhar a foto do hero a cada quadro da rolagem. */
+.header.is-scrolled {
+    background: rgba(255, 255, 255, 0.95);
+}
+
+/* Parallax do hero ligado à rolagem (classe aplicada por IGDS.parallax).
+   A foto desce metade do que a página rolou: nos primeiros 150vh de
+   rolagem ela anda 75vh, e o hero já saiu da tela antes disso. Roda na
+   thread de composição, junto com a rolagem, por isso não engasga. */
+@keyframes igds-parallax {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(0, 75vh, 0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .hero-background {
+        will-change: transform;
+    }
+
+    .hero-background.parallax-css {
+        animation: igds-parallax linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0 150vh;
+    }
+}

@@ -1,15 +1,5 @@
-// ======== Utils ========
-function debounce(func, wait) {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-  };
-}
+// Cabeçalho, "voltar ao topo", links internos e imagens quebradas ficam em
+// js/comum.js, carregado antes deste arquivo.
 
 // ======== Mobile Navigation Toggle ========
 const navToggle = document.getElementById('nav-toggle');
@@ -28,76 +18,7 @@ document.querySelectorAll('.nav-link').forEach(link => {
   });
 });
 
-// ======== Header Scroll Effect (com debounce) ========
-const header = document.querySelector('.header');
-
-const handleHeaderScroll = () => {
-  if (window.scrollY > 100) {
-    header.style.background = 'rgba(255, 255, 255, 0.95)';
-    header.style.backdropFilter = 'blur(10px)';
-  } else {
-    header.style.background = 'var(--white)';
-    header.style.backdropFilter = 'none';
-  }
-};
-
-window.addEventListener('scroll', debounce(handleHeaderScroll, 10));
-
-// ======== Back to Top Button ========
-const backToTopBtn = document.getElementById('backToTop');
-
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 300) backToTopBtn.classList.add('show');
-  else backToTopBtn.classList.remove('show');
-});
-
-backToTopBtn?.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ======== Newsletter Form Handling ========
-const newsletterForm = document.querySelector('.newsletter-form');
-
-newsletterForm?.addEventListener('submit', e => {
-  e.preventDefault();
-
-  const emailInput = newsletterForm.querySelector('input[type="email"]');
-  const email = emailInput?.value.trim();
-
-  if (!email) {
-    alert('Por favor, insira seu e-mail.');
-    return;
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    alert('Por favor, insira um e-mail válido.');
-    return;
-  }
-
-  alert('Obrigado por se inscrever em nossa newsletter!');
-  newsletterForm.reset();
-});
-
-// ======== Smooth Scrolling for Anchor Links (considerando header) ========
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', e => {
-    e.preventDefault();
-
-    const targetId = anchor.getAttribute('href');
-    if (!targetId) return;
-
-    const target = document.querySelector(targetId);
-    if (!target) return;
-
-    const headerHeight = header ? header.offsetHeight : 0;
-    const targetPosition = target.offsetTop - headerHeight;
-
-    window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-  });
-});
-
-// Parallax do hero: um listener throttled em js/comum.js, respeita menos movimento
+// Parallax do hero (js/comum.js): CSS ligado à rolagem, respeita menos movimento
 IGDS.parallax('.hero-background', 0.5);
 
 // ======== Tabs Functionality ========
@@ -129,8 +50,6 @@ class ImageCarousel {
 
         this.currentSlide = 0;
         this.totalSlides = this.slides.length;
-        this.autoPlayInterval = null;
-        this.autoPlayActive = true; // controla se o autoplay está ativo
         // Fatias fora de vista saem da leitura sequencial e do tab; o avanço
         // automático não anuncia, só a troca pedida por quem usa o site.
         this.slideVisibility = IGDS.slideVisibility(this.slides);
@@ -197,17 +116,16 @@ class ImageCarousel {
             this.stopAutoPlay();
         });
 
-        // Suporte a toque/swipe
+        // Suporte a toque/swipe. Passivo: o navegador não precisa esperar
+        // este script para começar a rolar a página quando o dedo passa aqui.
         let startX = 0;
-        let endX = 0;
 
         this.carousel.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
-        });
+        }, { passive: true });
 
         this.carousel.addEventListener('touchend', (e) => {
-            endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
+            const diff = startX - e.changedTouches[0].clientX;
 
             if (Math.abs(diff) > 50) {
                 if (diff > 0) {
@@ -217,7 +135,7 @@ class ImageCarousel {
                 }
                 this.stopAutoPlay();
             }
-        });
+        }, { passive: true });
 
         // Navegação por teclado
         document.addEventListener('keydown', (e) => {
@@ -233,83 +151,35 @@ class ImageCarousel {
         });
     }
 
+    // Controle compartilhado (js/comum.js): botão pausar/retomar e pausa
+    // com mouse, foco, fora da tela, aba oculta e menos movimento.
     startAutoPlay() {
-
-        // Controle compartilhado (js/comum.js): botão pausar/retomar e pausa
-
-        // com mouse, foco, fora da tela, aba oculta e menos movimento.
-
         if (this.autoplay) return;
-
         this.autoplay = IGDS.autoplay({
-
             region: this.carousel,
-
             next: () => this.nextSlide(),
-
             delay: 5000
-
         });
-
     }
 
     stopAutoPlay() {
-
         this.autoplay?.stop();
-
     }
 }
 
-// Inicializa carousel no DOMContentLoaded
-document.addEventListener('DOMContentLoaded', () => {
-  new ImageCarousel('imageCarousel');
-});
+new ImageCarousel('imageCarousel');
 
 // ======== Intersection Observer for Animations ========
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+// Cada elemento é observado só até aparecer
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('visible');
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    observer.unobserve(entry.target);
   });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const animatedElements = document.querySelectorAll('.section-title, .tab-panel, .carousel-container');
-  animatedElements.forEach(el => {
-    el.classList.add('fade-in');
-    observer.observe(el);
-  });
-});
-
-// ======== Lazy Loading Images ========
-const imageObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const img = entry.target;
-      if (img.dataset.src) {
-        img.src = img.dataset.src;
-        img.classList.remove('loading');
-        imageObserver.unobserve(img);
-      }
-    }
-  });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const lazyImages = document.querySelectorAll('img[data-src]');
-  lazyImages.forEach(img => {
-    img.classList.add('loading');
-    imageObserver.observe(img);
-  });
-});
-
-// ======== Error Handling for Images ========
-document.addEventListener('DOMContentLoaded', () => {
-  const images = document.querySelectorAll('img');
-  images.forEach(img => {
-    img.addEventListener('error', function () {
-      this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlbSBuXHUwMGUzbyBlbmNvbnRyYWRhPC90ZXh0Pjwvc3ZnPg==';
-      this.alt = 'Imagem não encontrada';
-    });
-  });
+document.querySelectorAll('.section-title, .tab-panel, .carousel-container').forEach(el => {
+  el.classList.add('fade-in');
+  observer.observe(el);
 });

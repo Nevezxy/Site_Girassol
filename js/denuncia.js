@@ -1,7 +1,6 @@
 // ================= CACHE DE ELEMENTOS =================
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
-const header = document.querySelector('.header');
 
 // ================= MOBILE NAV TOGGLE =================
 navToggle.addEventListener('click', () => {
@@ -31,10 +30,11 @@ form.addEventListener("submit", (e) => {
   const data = new FormData(form)
   const payload = new URLSearchParams()
 
-  payload.append("entry.1655741229", data.get("entry.1655741229"))
-  payload.append("entry.777068924", data.get("entry.777068924"))
-  payload.append("entry.429007067", data.get("entry.429007067"))
-  payload.append("entry.374350221", data.get("entry.374350221"))
+  // Campos opcionais vazios seguem como texto vazio, nunca como "null"
+  payload.append("entry.1655741229", data.get("entry.1655741229") || "")
+  payload.append("entry.777068924", data.get("entry.777068924") || "")
+  payload.append("entry.429007067", data.get("entry.429007067") || "")
+  payload.append("entry.374350221", data.get("entry.374350221") || "")
 
   const googleFormURL =
     "https://docs.google.com/forms/d/e/1FAIpQLSeyqQ9yL68Kcrg6FxqLm1DvMhurPQSsMapzum6f8IQuAGa4Cw/formResponse"

@@ -1,14 +1,11 @@
+// Cabeçalho, "voltar ao topo", links internos e imagens quebradas ficam em
+// js/comum.js, carregado antes deste arquivo.
+
 // ================= CACHE DE ELEMENTOS =================
 const navToggle = document.getElementById('nav-toggle');
 const navMenu = document.getElementById('nav-menu');
-const header = document.querySelector('.header');
-const backToTopBtn = document.getElementById('backToTop');
-const newsletterForm = document.querySelector('.newsletter-form');
-const heroContent = document.querySelector('.hero-content');
 const projectCards = document.querySelectorAll('.project-card');
 const valueItems = document.querySelectorAll('.value-item');
-const statsSection = document.querySelector('.stats');
-const counters = document.querySelectorAll('.stat-number');
 const carouselTrack = document.getElementById('carouselTrack');
 const nextButton = document.getElementById('nextBtn');
 const prevButton = document.getElementById('prevBtn');
@@ -26,113 +23,11 @@ document.querySelectorAll('.nav-link').forEach(link => {
 });
 
 // ================= PARALLAX DO HERO =================
-// Mesmo efeito das outras páginas: listener único em js/comum.js, respeita menos movimento
 IGDS.parallax('.hero-background', 0.5);
 
-// ================= SCROLL EFFECT & BACK TO TOP =================
-let ticking = false;
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            const scrollY = window.scrollY;
-
-            // Header
-            if (header) {
-                header.style.background = scrollY > 100 ? 'rgba(255, 255, 255, 0.95)' : 'var(--white)';
-                header.style.backdropFilter = scrollY > 100 ? 'blur(10px)' : 'none';
-            }
-
-            // Back to top button
-            if (backToTopBtn) {
-                if (scrollY > 300) backToTopBtn.classList.add('show');
-                else backToTopBtn.classList.remove('show');
-            }
-
-            ticking = false;
-        });
-        ticking = true;
-    }
-});
-
-backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// ================= NEWSLETTER FORM =================
-newsletterForm?.addEventListener('submit', e => {
-    e.preventDefault();
-    const email = newsletterForm.querySelector('input[type="email"]').value.trim();
-    if (!email) return alert('Por favor, insira seu e-mail.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return alert('Por favor, insira um e-mail válido.');
-    alert('Obrigado por se inscrever em nossa newsletter!');
-    newsletterForm.reset();
-});
-
-// ================= SMOOTH SCROLL =================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const targetPosition = target.offsetTop - header.offsetHeight;
-            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-        }
-    });
-});
-
-// ================= COUNTERS =================
-function animateCounters() {
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        if (isNaN(target)) return;
-
-        let startTime = null;
-        const duration = 2000;
-
-        function step(timestamp) {
-            if (!startTime) startTime = timestamp;
-            const progress = Math.min((timestamp - startTime) / duration, 1);
-            counter.textContent = Math.floor(progress * target).toLocaleString();
-            if (progress < 1) requestAnimationFrame(step);
-        }
-        requestAnimationFrame(step);
-    });
-}
-
-// ================= INTERSECTION OBSERVER =================
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            if (entry.target.classList.contains('stats')) animateCounters();
-        }
-    });
-}, observerOptions);
-
-// Cartões aparecem ao entrar na tela; com menos movimento, só por opacidade
-[...valueItems, ...projectCards].forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = IGDS.reduzirMovimento() ? 'none' : 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)';
-    observer.observe(el);
-});
-
-// ================= HERO LOADING =================
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-    if (heroContent) {
-        heroContent.style.opacity = '1';
-        heroContent.style.transform = 'translateY(0)';
-    }
-});
-
-// ================= PROJECT CARD HOVER =================
-projectCards.forEach(card => {
-    card.addEventListener('mouseenter', () => card.style.transform = 'translateY(-10px) scale(1.02)');
-    card.addEventListener('mouseleave', () => card.style.transform = 'translateY(0) scale(1)');
-});
+// ================= CARTÕES AO ENTRAR NA TELA =================
+// Com menos movimento, só por opacidade. O hover dos cartões é do CSS.
+IGDS.reveal([...valueItems, ...projectCards]);
 
 // ================= BUTTON RIPPLE EFFECT =================
 document.querySelectorAll('.btn').forEach(btn => {
@@ -252,11 +147,16 @@ function stopAutoPlay() {
 nextButton.addEventListener("click", () => { stopAutoPlay(); nextSlide(); });
 prevButton.addEventListener("click", () => { stopAutoPlay(); prevSlide(); });
 
-carouselTrack.addEventListener("transitionend", wrapCarousel);
+carouselTrack.addEventListener("transitionend", (e) => {
+    if (e.target === carouselTrack) wrapCarousel();
+});
 
-// Reconstrói o carrossel na nova largura sem desligar o autoplay
-window.addEventListener("resize", () => {
-    setupCarousel();
+// Largura nova: só reconstrói se mudou o número de logos por vez; senão
+// basta reposicionar. (Antes reconstruía a cada "resize", inclusive os
+// disparados pela barra de endereço do celular durante a rolagem.)
+IGDS.onResize(() => {
+    if (getSlidesPerPage() !== slidesPerPage) setupCarousel();
+    else updateCarousel(false);
 });
 
 // Inicialização
