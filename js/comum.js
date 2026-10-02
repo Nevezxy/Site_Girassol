@@ -32,17 +32,26 @@ window.IGDS = window.IGDS || {};
     IGDS.parallax = function (selector, factor) {
         const el = document.querySelector(selector);
         if (!el) return;
+        const section = el.closest('section') || el.parentElement;
         let ticking = false;
         const apply = () => {
             ticking = false;
             if (IGDS.reduzirMovimento()) { el.style.transform = ''; return; }
-            el.style.transform = 'translateY(' + (window.pageYOffset * factor) + 'px)';
+            // Com o hero fora da tela não há o que mover.
+            if (section.getBoundingClientRect().bottom < 0) return;
+            // Math.max: o "quique" do iOS no topo (scroll negativo) não abre
+            // uma faixa vazia embaixo da foto.
+            const y = Math.max(0, window.pageYOffset) * factor;
+            el.style.transform = 'translate3d(0, ' + y.toFixed(1) + 'px, 0)';
         };
-        window.addEventListener('scroll', () => {
+        const request = () => {
             if (ticking) return;
             ticking = true;
             requestAnimationFrame(apply);
-        }, { passive: true });
+        };
+        window.addEventListener('scroll', request, { passive: true });
+        window.addEventListener('resize', request, { passive: true });
+        if (reduceMotionQuery.addEventListener) reduceMotionQuery.addEventListener('change', request);
         apply();
     };
 

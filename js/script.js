@@ -4,7 +4,6 @@ const navMenu = document.getElementById('nav-menu');
 const header = document.querySelector('.header');
 const backToTopBtn = document.getElementById('backToTop');
 const newsletterForm = document.querySelector('.newsletter-form');
-const heroBackground = document.querySelector('.hero-background');
 const heroContent = document.querySelector('.hero-content');
 const projectCards = document.querySelectorAll('.project-card');
 const valueItems = document.querySelectorAll('.value-item');
@@ -26,6 +25,10 @@ document.querySelectorAll('.nav-link').forEach(link => {
     });
 });
 
+// ================= PARALLAX DO HERO =================
+// Mesmo efeito das outras páginas: listener único em js/comum.js, respeita menos movimento
+IGDS.parallax('.hero-background', 0.5);
+
 // ================= SCROLL EFFECT & BACK TO TOP =================
 let ticking = false;
 window.addEventListener('scroll', () => {
@@ -37,11 +40,6 @@ window.addEventListener('scroll', () => {
             if (header) {
                 header.style.background = scrollY > 100 ? 'rgba(255, 255, 255, 0.95)' : 'var(--white)';
                 header.style.backdropFilter = scrollY > 100 ? 'blur(10px)' : 'none';
-            }
-
-            // Hero Parallax (não roda com "menos movimento" ativo)
-            if (heroBackground) {
-                heroBackground.style.transform = IGDS.reduzirMovimento() ? '' : `translateY(${scrollY * 0.5}px)`;
             }
 
             // Back to top button

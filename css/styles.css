@@ -198,8 +198,17 @@ body {
     /* background-image: url('../midia/img/Entrada.webp'); */
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
     transition: background-image 1s ease-in-out;
+}
+
+/* A foto da sede cobre o hero inteiro em qualquer largura, centralizada.
+   Sem isso ela ficava no tamanho natural (1920×1080) presa no canto esquerdo. */
+.hero-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 .hero-overlay {
@@ -1000,10 +1009,6 @@ iframe {
 
     .contact-grid {
         grid-template-columns: 1fr;
-    }
-
-    .hero-background {
-        background-attachment: scroll;
     }
 
     .values-grid {
